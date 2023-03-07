@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from 'react'
-import { questions_easy, questions_medium, questions_hard } from '../utils'
+import React, { useState } from 'react'
+import { gameQuestions } from '../utils'
 import styles from '../styles'
 import { db } from '../firebase'
 import { collection, addDoc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 
-const Game = ({difficulty, name}) => {
+const Game = ({name}) => {
 
     const navigate = useNavigate()
 
     // const [gameDifficulty, setGameDifficulty] = useState('')
-    const [questions, setQuestions] = useState(questions_easy)
+    const [questions] = useState(gameQuestions)
     const [questionNumber, setQuestionNumber] = useState(0)
     const [Qanswer, setAnswer] = useState('')
     const [loading, setLoading] = useState(false)
-    // const [player, setPlayer] = useState({name: name, score: 0})
+    const [player, setPlayer] = useState({name: name, score: 0})
 
     const questionLength = questions.length
 
-    var score = 0;
+    // var score = 0;
 
     const submitScore = async () => {
         setLoading(true)
 
         try {
             await addDoc(collection(db, 'leaderboard'), {
-                playerName: name,
-                score: score,
+                playerName: player.name,
+                score: player.score,
                 date: new Date().toLocaleString()
             })
             alert('Game Over. See Leaderboard now.')
@@ -43,7 +43,7 @@ const Game = ({difficulty, name}) => {
 
 
         if(Qanswer === ''){
-            alert('Please type an answer!')
+            alert('Please select an answer!')
             return;
         }
 
@@ -51,8 +51,11 @@ const Game = ({difficulty, name}) => {
         const correctAnswer = currentQuestion.answer
 
         if(Qanswer.toLowerCase() === correctAnswer.toLowerCase()){
-            // setPlayer((player) => player.score + 1)
-            score += 1
+            setPlayer({
+                ...player,
+                score: player.score + 1
+            })
+            // score += 1
         }
 
         if(questionNumber === questionLength - 1){
@@ -64,28 +67,11 @@ const Game = ({difficulty, name}) => {
         setAnswer('')
     }
 
-    const getGameDifficulty = () => {
-
-        switch (difficulty) {
-            case 'medium':
-                setQuestions(questions_medium)
-                break;
-            case 'hard':
-                setQuestions(questions_hard)
-            default:
-                setQuestions(questions_easy)
-                break;
-        }
-    }
-
-    useEffect(() => {
-        getGameDifficulty()
-    },[difficulty, getGameDifficulty])
 
   return (
     <div className='w-full max-w-md p-3'>
         <h2 className={`${styles.heading2} text-center`}>
-            Gata-Quest
+            Web3 Quest Journey
         </h2>
         <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
             <div className='flex flex-row'>
@@ -93,10 +79,17 @@ const Game = ({difficulty, name}) => {
                 {questionNumber + 1}
             </div>
             <div className="flex-1 flex flex-col ml-3">
-                <h4 className="font-poppins font-semibold text-black text-[18px] leading-[23px] mb-1">
+                <h4 className="font-poppins font-semibold text-black text-[20px] leading-[23px] mb-1">
                     {questions[questionNumber].question}
                 </h4>
-                <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" value={Qanswer} onChange={(e) => setAnswer(e.target.value)}  />
+                {
+                    questions[questionNumber].options.map((option, index) => (
+                        <label key={index} className='inline-flex items-center'>
+                            <input type='radio' className='form-radio h-4 w-4' name='qOption' value={option} onClick={(e) => setAnswer(e.target.value)} />
+                            <span className={`${styles.paragraph} ml-5 mb-3`}>{option}</span>
+                        </label>
+                    ))
+                }
             </div>
             </div>
             <div className="flex justify-center items-center mt-5">

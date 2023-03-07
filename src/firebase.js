@@ -2,14 +2,15 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
-// Your web app's Firebase configuration
+//Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyC6_CT3bOzzp94tTTaEGtrIi3HxDkkjJW0',
-  authDomain: 'gata-quiz.firebaseapp.com',
-  projectId: 'gata-quiz',
-  storageBucket: 'gata-quiz.appspot.com',
-  messagingSenderId: '1030308143497',
-  appId: '1:1030308143497:web:01c018842711a09052c158',
+  apiKey: 'AIzaSyAx_1ZG2J5WWgc5OUtdqwWmWt8w78kZoNU',
+  authDomain: 'web3-quest-journey.firebaseapp.com',
+  projectId: 'web3-quest-journey',
+  storageBucket: 'web3-quest-journey.appspot.com',
+  messagingSenderId: '213342267048',
+  appId: '1:213342267048:web:d1ac5a80d69d4b4adc849d',
+  measurementId: 'G-CMGC112PPR',
 };
 
 // Initialize Firebase

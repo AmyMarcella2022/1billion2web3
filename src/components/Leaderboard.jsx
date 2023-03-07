@@ -52,7 +52,7 @@ const Leaderboard = ({}) => {
         Leaderboard
       </h2>
       <div className='flex justify-center items-center mt-10'>
-      <table className="border-collapse border border-slate-400 table-fixed">
+      <table className="border-collapse border border-slate-400 table-auto">
         <thead>
           <tr className='text-white'>
             <th className='border border-slate-300'>Name</th>
