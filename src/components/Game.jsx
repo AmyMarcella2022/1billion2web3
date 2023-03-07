@@ -85,7 +85,7 @@ const Game = ({name}) => {
                 {
                     questions[questionNumber].options.map((option, index) => (
                         <label key={index} className='inline-flex items-center'>
-                            <input type='radio' className='form-radio h-4 w-4' name='qOption' value={option} onClick={(e) => setAnswer(e.target.value)} />
+                            <input type='radio' className='form-radio h-4 w-4' name='qOption' checked={Qanswer === option} value={option} onClick={(e) => setAnswer(e.target.value)} />
                             <span className={`${styles.paragraph} ml-5 mb-3`}>{option}</span>
                         </label>
                     ))
