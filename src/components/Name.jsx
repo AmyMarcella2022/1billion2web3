@@ -15,6 +15,8 @@ const Name = () => {
       alert('Please input your name!')
       return;
     }
+
+    sessionStorage.setItem('name', name);
     
     setScreen(2)
   }
@@ -37,16 +39,7 @@ const Name = () => {
       </label>
       <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" value={name} onChange={(e) => setName(e.target.value)}  />
     </div>
-    {/* <div className="mb-6">
-      <label className="block text-gray-700 text-sm font-bold mb-2">
-        Select Difficulty
-      </label>
-      <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" value={difficulty} onChange={(e) => setDiffuculty(e.target.value)}>
-        <option value='easy'>Easy</option>
-        <option value='medium'>Medium</option>
-        <option value='hard'>Hard</option>
-      </select>
-    </div> */}
+    
     <div className="flex justify-center items-center">
       <button onClick={continueGame} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
         Continue

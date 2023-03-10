@@ -29,10 +29,10 @@ const Game = ({name}) => {
                 score: player.score,
                 date: new Date().toLocaleString()
             })
-            alert('Game Over. See Leaderboard now.')
-            navigate('/leaderboard')
+            alert('Game Over. Collect your rewards now.')
+            navigate('/rewards')
         } catch (error) {
-            
+            alert('Server Error. Try again Later')
         } finally {
             setLoading(false)
         }
@@ -49,6 +49,11 @@ const Game = ({name}) => {
 
         const currentQuestion = questions[questionNumber]
         const correctAnswer = currentQuestion.answer
+
+        if(Qanswer.toLowerCase() != correctAnswer.toLowerCase()){
+            alert('Option is incorrect. Try Again');
+            return;
+        }
 
         if(Qanswer.toLowerCase() === correctAnswer.toLowerCase()){
             setPlayer({

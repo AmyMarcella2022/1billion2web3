@@ -7,7 +7,7 @@ export const gameQuestions = [
       'Web 2 is more secure, while Web 3 is less secure',
     ],
     answer:
-      'Web 2 is based on a centralized architecture, while Web 3 is based on a decentralized architecture.',
+      'Web 2 is based on a centralized architecture, while Web 3 is based on a decentralized architecture',
   },
 
   {
@@ -88,6 +88,6 @@ export const gameQuestions = [
       'The network is not safe for personal data',
     ],
     answer:
-      " The central authorities collect and monetize users' personal data without their consent",
+      "The central authorities collect and monetize users' personal data without their consent",
   },
 ];

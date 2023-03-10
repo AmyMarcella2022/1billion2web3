@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Leaderboard from './components/Leaderboard'
+import Rewards from './components/Rewards'
 import Name from './components/Name'
 
 
@@ -11,7 +11,7 @@ function App() {
         <div className='flex justify-center items-center h-screen'>
           <Routes>
             <Route path='/' element={<Name />} />
-            <Route path='/leaderboard' element={<Leaderboard />} />
+            <Route path='/rewards' element={<Rewards />} />
           </Routes>
         </div>
       </div>
