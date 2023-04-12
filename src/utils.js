@@ -1,4 +1,4 @@
-export const gameQuestions = [
+export const module1 = [
   {
     question: 'What is the main difference between Web 2 and Web 3?',
     options: [
@@ -24,11 +24,7 @@ export const gameQuestions = [
 
   {
     question: 'What are the companies that own servers in Web 2?',
-    options: [
-      'Google and Facebook',
-      'Microsoft and Amazon',
-      'Apple and Netflix',
-    ],
+    options: ['Google and Facebook', 'Microsoft and Amazon', 'Apple and Netflix'],
     answer: 'Google and Facebook',
   },
 
@@ -45,8 +41,7 @@ export const gameQuestions = [
       'To have more censorship on the internet',
       'To have more control over the flow of information and transactions',
     ],
-    answer:
-      'To enable users to have more control over their own data and how it is used',
+    answer: 'To enable users to have more control over their own data and how it is used',
   },
 
   {
@@ -60,8 +55,7 @@ export const gameQuestions = [
   },
 
   {
-    question:
-      'What is required for a user to fully realize the potential of Web 3?',
+    question: 'What is required for a user to fully realize the potential of Web 3?',
     options: [
       'To rely on central authorities',
       'To adopt a more analytical and proactive approach to the web',
@@ -112,8 +106,7 @@ export const module2 = [
     answer: 'It makes the system highly secure',
   },
   {
-    question:
-      'How is the record of transactions maintained in blockchain technology?',
+    question: 'How is the record of transactions maintained in blockchain technology?',
     options: [
       'By a central authority',
       'By duplicating and distributing the ledger across the network',
@@ -127,8 +120,7 @@ export const module2 = [
     answer: 'Chronological',
   },
   {
-    question:
-      'What is the role of peer-to-peer nodes in blockchain technology?',
+    question: 'What is the role of peer-to-peer nodes in blockchain technology?',
     options: [
       'To control the flow of information and transactions',
       'To validate transactions',
@@ -137,8 +129,7 @@ export const module2 = [
     answer: 'To validate transactions',
   },
   {
-    question:
-      'What makes blockchain technology secure and resistant to tampering?',
+    question: 'What makes blockchain technology secure and resistant to tampering?',
     options: [
       'Centralization of the system',
       'The decentralized nature of the network',
@@ -147,8 +138,7 @@ export const module2 = [
     answer: 'The decentralized nature of the network',
   },
   {
-    question:
-      'What are some of the potential use cases of blockchain technology?',
+    question: 'What are some of the potential use cases of blockchain technology?',
     options: [
       'Secure financial transactions and digital identities',
       'Tampering of records',
@@ -157,8 +147,7 @@ export const module2 = [
     answer: 'Secure financial transactions and digital identities',
   },
   {
-    question:
-      'What is the most well-known application of blockchain technology?',
+    question: 'What is the most well-known application of blockchain technology?',
     options: [
       'Supply chain management',
       'Cryptocurrencies like Bitcoin and Ethereum',
@@ -167,8 +156,7 @@ export const module2 = [
     answer: 'Cryptocurrencies like Bitcoin and Ethereum',
   },
   {
-    question:
-      'How does blockchain technology ensure transparency in financial transactions?',
+    question: 'How does blockchain technology ensure transparency in financial transactions?',
     options: [
       'By having a central authority validate transactions',
       'By having a decentralized network validate transactions',
@@ -177,8 +165,7 @@ export const module2 = [
     answer: 'By having a decentralized network validate transactions',
   },
   {
-    question:
-      'How does blockchain technology enhance security in financial transactions?',
+    question: 'How does blockchain technology enhance security in financial transactions?',
     options: [
       'By having a centralized system',
       'By having a decentralized network validate transactions',
