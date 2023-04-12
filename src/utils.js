@@ -91,3 +91,99 @@ export const gameQuestions = [
       "The central authorities collect and monetize users' personal data without their consent",
   },
 ];
+
+export const module2 = [
+  {
+    question: 'What is blockchain technology?',
+    options: [
+      'A centralized ledger system',
+      'A decentralized, distributed ledger system',
+      'A paper-based ledger system',
+    ],
+    answer: 'A decentralized, distributed ledger system',
+  },
+  {
+    question: 'What does cryptography do in blockchain technology?',
+    options: [
+      'It makes the system highly secure',
+      'It makes the system highly vulnerable',
+      'It has no effect on the system',
+    ],
+    answer: 'It makes the system highly secure',
+  },
+  {
+    question:
+      'How is the record of transactions maintained in blockchain technology?',
+    options: [
+      'By a central authority',
+      'By duplicating and distributing the ledger across the network',
+    ],
+    answer: 'By duplicating and distributing the ledger across the network',
+  },
+  {
+    question:
+      'By maintaining a single ledger on one computer system What is the order of transactions in the blockchain?',
+    options: ['Random', 'Chronological', 'Alphabetical'],
+    answer: 'Chronological',
+  },
+  {
+    question:
+      'What is the role of peer-to-peer nodes in blockchain technology?',
+    options: [
+      'To control the flow of information and transactions',
+      'To validate transactions',
+      'To manipulate the transactions',
+    ],
+    answer: 'To validate transactions',
+  },
+  {
+    question:
+      'What makes blockchain technology secure and resistant to tampering?',
+    options: [
+      'Centralization of the system',
+      'The decentralized nature of the network',
+      'Weak cryptography',
+    ],
+    answer: 'The decentralized nature of the network',
+  },
+  {
+    question:
+      'What are some of the potential use cases of blockchain technology?',
+    options: [
+      'Secure financial transactions and digital identities',
+      'Tampering of records',
+      'Tracking the supply chain of goods',
+    ],
+    answer: 'Secure financial transactions and digital identities',
+  },
+  {
+    question:
+      'What is the most well-known application of blockchain technology?',
+    options: [
+      'Supply chain management',
+      'Cryptocurrencies like Bitcoin and Ethereum',
+      'Digital signature technology',
+    ],
+    answer: 'Cryptocurrencies like Bitcoin and Ethereum',
+  },
+  {
+    question:
+      'How does blockchain technology ensure transparency in financial transactions?',
+    options: [
+      'By having a central authority validate transactions',
+      'By having a decentralized network validate transactions',
+      'By having no validation process',
+    ],
+    answer: 'By having a decentralized network validate transactions',
+  },
+  {
+    question:
+      'How does blockchain technology enhance security in financial transactions?',
+    options: [
+      'By having a centralized system',
+      'By having a decentralized network validate transactions',
+      'By having no validation process',
+    ],
+    answer: 'By having a decentralized network validate transactions',
+  },
+];
