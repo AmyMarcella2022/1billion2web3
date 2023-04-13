@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { module1, module2, module3, module4 } from '../utils';
+import { module1, module2, module3, module4, module5, module6, module7, module8, module9 } from '../utils';
 import styles from '../styles';
 import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';

@@ -285,70 +285,64 @@ export const module4 = [
     options: [
       'A type of digital or virtual currency that uses cryptography for security',
       'A centralized currency',
-      'A traditional currency'
+      'A traditional currency',
     ],
-    answer: 'A type of digital or virtual currency that uses cryptography for security'
+    answer: 'A type of digital or virtual currency that uses cryptography for security',
   },
   {
     question: 'What makes cryptocurrency different from other traditional currencies?',
     options: [
       "It is decentralized, meaning it isn't controlled by any government or institution",
       'It is controlled by a government or institution',
-      'It uses cryptography for security'
+      'It uses cryptography for security',
     ],
-    answer: "It is decentralized, meaning it isn't controlled by any government or institution"
+    answer: "It is decentralized, meaning it isn't controlled by any government or institution",
   },
   {
     question: 'What is a coin in the context of cryptocurrency?',
     options: [
       'A digital asset that operates on its own blockchain',
       'A digital asset that operates on an existing blockchain',
-      'A type of token'
+      'A type of token',
     ],
-    answer: 'A digital asset that operates on its own blockchain'
+    answer: 'A digital asset that operates on its own blockchain',
   },
   {
     question: 'What determines the value of a token?',
-    options: [
-      'Government regulations',
-      'Supply and demand in the market',
-      'Hype and speculation'
-    ],
-    answer: 'Supply and demand in the market'
+    options: ['Government regulations', 'Supply and demand in the market', 'Hype and speculation'],
+    answer: 'Supply and demand in the market',
   },
   {
     question: 'What can affect the value of a token?',
     options: [
       'The performance and adoption of the underlying project or platform',
       'The number of users and partners',
-      'All of the above'
+      'All of the above',
     ],
-    answer: 'All of the above'
+    answer: 'All of the above',
   },
   {
     question: 'Are all tokens designed to have a limited supply?',
-    options: [
-      'Yes',
-      'No'
-    ],
-    answer: 'Yes'
+    options: ['Yes', 'No'],
+    answer: 'Yes',
   },
   {
     question: 'Are all tokens primarily used as digital currencies?',
     options: [
       'Yes, all tokens are digital currencies',
-      'No, some tokens have a wide range of functionality and utility beyond that of a digital currency'
+      'No, some tokens have a wide range of functionality and utility beyond that of a digital currency',
     ],
-    answer: 'No, some tokens have a wide range of functionality and utility beyond that of a digital currency'
+    answer:
+      'No, some tokens have a wide range of functionality and utility beyond that of a digital currency',
   },
   {
     question: 'What are some uses of coins in cryptocurrency?',
     options: [
       'To facilitate transactions and transfer value',
       'To buy goods and services',
-      'All of the above'
+      'All of the above',
     ],
-    answer: 'All of the above'
+    answer: 'All of the above',
   },
   {
     question: 'What are some uses of tokens in cryptocurrency?',
@@ -356,17 +350,118 @@ export const module4 = [
       'To represent digital assets',
       'To access specific services and products',
       'To have voting rights in a decentralized autonomous organization',
-      'All of the above'
+      'All of the above',
     ],
-    answer: 'All of the above'
+    answer: 'All of the above',
   },
   {
     question: 'What should you be cautious of when investing in tokens?',
     options: [
       'Do not do your own research',
       'Invest blindly',
-      'Always always do your own research and be cautious'
+      'Always always do your own research and be cautious',
     ],
-    answer: 'Always always do your own research and be cautious'
+    answer: 'Always always do your own research and be cautious',
   },
-]
+];
+
+export const module5 = [
+  {
+    question: 'What is a DAO?',
+    options: [
+      'A decentralized autonomous organization',
+      'A centralized autonomous organization',
+      'A digital asset organization',
+      'A traditional organizational structure',
+    ],
+    answer: 'A decentralized autonomous organization',
+  },
+  {
+    question: 'What is the main feature of a DAO?',
+    options: [
+      'Centralized authority',
+      'Decentralized and autonomous operations',
+      'Intermediaries',
+      'Traditional decision-making process',
+    ],
+    answer: 'Decentralized and autonomous operations',
+  },
+  {
+    question: 'How are decisions made in a DAO?',
+    options: [
+      'Through central authority',
+      'Through intermediaries',
+      'Through consensus among members',
+      'Through traditional methods',
+    ],
+    answer: 'Through consensus among members',
+  },
+  {
+    question: 'What are the benefits of a DAO?',
+    options: [
+      'Transparency, decentralization, autonomy, and cost-effectiveness',
+      'Opacity, centralization, dependence, and high cost',
+      'Intermediaries, centralization, traditional methods, and high cost',
+      'Dependence, centralization, intermediaries, and low cost',
+    ],
+    answer: 'Transparency, decentralization, autonomy, and cost-effectiveness',
+  },
+  {
+    question: 'What is recorded on the blockchain in a DAO?',
+    options: [
+      'All transactions and decisions',
+      'Only transactions',
+      'Only decisions',
+      'None of the above',
+    ],
+    answer: 'All transactions and decisions',
+  },
+  {
+    question: 'Can a DAO operate independently?',
+    options: ['Yes', 'No'],
+    answer: 'Yes',
+  },
+  {
+    question: 'What is the purpose of smart contracts in a DAO?',
+    options: [
+      'To encode rules and decision-making power',
+      'To encode transactions only',
+      'To encode intermediaries',
+      'To encode traditional methods',
+    ],
+    answer: 'To encode rules and decision-making power',
+  },
+  {
+    question: 'Can a DAO reduce costs associated with traditional organizational structures?',
+    options: ['Yes', 'No'],
+    answer: 'Yes',
+  },
+  {
+    question: 'What are some industries that can use DAOs?',
+    options: [
+      'Decentralized finance, supply chain management, and digital marketplaces',
+      'Traditional finance, centralized supply chain management, and physical marketplaces',
+      'Centralized finance, decentralized supply chain management, and digital marketplaces',
+      'Traditional finance, centralized supply chain management, and digital marketplaces',
+    ],
+    answer: 'Decentralized finance, supply chain management, and digital marketplaces',
+  },
+  {
+    question: 'What is an example of how a DAO can be used in decentralized finance?',
+    options: [
+      'To create decentralized lending and borrowing platforms',
+      'To create centralized lending and borrowing platforms',
+      'To create traditional lending and borrowing platforms',
+      'To create physical lending and borrowing platforms',
+    ],
+    answer: 'What is an example of how a DAO can be used in decentralized finance?',
+  },
+];
+
+export const module6 = [];
+
+export const module7 = [];
+
+export const module8 = [];
+
+export const module9 = [];
