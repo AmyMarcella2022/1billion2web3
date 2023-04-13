@@ -174,3 +174,109 @@ export const module2 = [
     answer: 'By having a decentralized network validate transactions',
   },
 ];
+
+export const module3 = [
+  {
+    question: 'What is Web 3 designed to do?',
+    options: [
+      'Work with a focus on privacy and security',
+      'Control the flow of information',
+      'Centralize the flow of information',
+      'None of the above',
+    ],
+    answer: 'Work with a focus on privacy and security',
+  },
+  {
+    question: 'What are some benefits of using Web 3?',
+    options: [
+      'Privacy and security',
+      'More control over data',
+      'Transparency and accountability in handling personal data',
+      'All of the above',
+    ],
+    answer: 'All of the above',
+  },
+  {
+    question: 'What is the nature of the technology used in Web 3?',
+    options: [
+      'Centralized',
+      'Decentralized',
+      'Controlled by a central authority',
+      'None of the Above',
+    ],
+    answer: 'Decentralized',
+  },
+  {
+    question: 'How does Web 3 ensure the security of data and transactions?',
+    options: [
+      'By using centralized technologies',
+      'By using advanced encryption techniques',
+      'By having a central authority control the flow of information',
+      'None of the Above',
+    ],
+    answer: 'By using advanced encryption techniques',
+  },
+  {
+    question: 'What are the different types of web3 wallets?',
+    options: [
+      'Desktop, mobile, hardware, web, paper and brain wallets',
+      'Mobile, desktop and hardware wallets',
+      'Web, hardware and desktop wallets',
+      'Mobile, web and hardware wallets',
+    ],
+    answer: 'Desktop, mobile, hardware, web, paper and brain wallets',
+  },
+  {
+    question: 'What are some popular desktop wallets for web3?',
+    options: [
+      'Trust Wallet, MetaMask Wallet',
+      'Exodus, MyEtherWallet (MEW), Mist',
+      'Ledger Nano S, Trezor, KeepKey',
+      'Bitaddress, Walletgenerator',
+    ],
+    answer: 'Exodus, MyEtherWallet (MEW), Mist',
+  },
+  {
+    question: 'What is a seed phrase in the context of web3 wallets?',
+    options: [
+      'A series of words that are used to generate private keys',
+      'A software program used to manage cryptocurrency assets',
+      'A password used to access a web wallet',
+      'None of the above',
+    ],
+    answer: 'A series of words that are used to generate private keys',
+  },
+  {
+    question: 'What is a phishing scam?',
+    options: [
+      'A scam used to steal private keys',
+      'A scam used to steal personal information',
+      'A scam used to steal sensitive information',
+      'All of the above',
+    ],
+    answer: 'All of the above',
+  },
+  {
+    question: 'What should you do before participating in an investment opportunity in web3?',
+    options: [
+      'Do your own research (DYOR)',
+      'Give your seed phrase to someone',
+      'Trust any investment opportunity that promises high returns with little or no risk',
+      'None of the above',
+    ],
+    answer: 'Do your own research (DYOR)',
+  },
+  {
+    question:
+      'What should you do to stay informed about the latest security trends and threats in the crypto world?',
+    options: [
+      'Keep yourself informed',
+      'Use 2FA and other security measures on your accounts',
+      'Do your own research (DYOR)',
+      'All of the above',
+    ],
+    answer: 'All of the above',
+  },
+];
+
+export const module4 = []
