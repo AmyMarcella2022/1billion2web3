@@ -279,4 +279,94 @@ export const module3 = [
   },
 ];
 
-export const module4 = []
+export const module4 = [
+  {
+    question: 'What is cryptocurrency?',
+    options: [
+      'A type of digital or virtual currency that uses cryptography for security',
+      'A centralized currency',
+      'A traditional currency'
+    ],
+    answer: 'A type of digital or virtual currency that uses cryptography for security'
+  },
+  {
+    question: 'What makes cryptocurrency different from other traditional currencies?',
+    options: [
+      "It is decentralized, meaning it isn't controlled by any government or institution",
+      'It is controlled by a government or institution',
+      'It uses cryptography for security'
+    ],
+    answer: "It is decentralized, meaning it isn't controlled by any government or institution"
+  },
+  {
+    question: 'What is a coin in the context of cryptocurrency?',
+    options: [
+      'A digital asset that operates on its own blockchain',
+      'A digital asset that operates on an existing blockchain',
+      'A type of token'
+    ],
+    answer: 'A digital asset that operates on its own blockchain'
+  },
+  {
+    question: 'What determines the value of a token?',
+    options: [
+      'Government regulations',
+      'Supply and demand in the market',
+      'Hype and speculation'
+    ],
+    answer: 'Supply and demand in the market'
+  },
+  {
+    question: 'What can affect the value of a token?',
+    options: [
+      'The performance and adoption of the underlying project or platform',
+      'The number of users and partners',
+      'All of the above'
+    ],
+    answer: 'All of the above'
+  },
+  {
+    question: 'Are all tokens designed to have a limited supply?',
+    options: [
+      'Yes',
+      'No'
+    ],
+    answer: 'Yes'
+  },
+  {
+    question: 'Are all tokens primarily used as digital currencies?',
+    options: [
+      'Yes, all tokens are digital currencies',
+      'No, some tokens have a wide range of functionality and utility beyond that of a digital currency'
+    ],
+    answer: 'No, some tokens have a wide range of functionality and utility beyond that of a digital currency'
+  },
+  {
+    question: 'What are some uses of coins in cryptocurrency?',
+    options: [
+      'To facilitate transactions and transfer value',
+      'To buy goods and services',
+      'All of the above'
+    ],
+    answer: 'All of the above'
+  },
+  {
+    question: 'What are some uses of tokens in cryptocurrency?',
+    options: [
+      'To represent digital assets',
+      'To access specific services and products',
+      'To have voting rights in a decentralized autonomous organization',
+      'All of the above'
+    ],
+    answer: 'All of the above'
+  },
+  {
+    question: 'What should you be cautious of when investing in tokens?',
+    options: [
+      'Do not do your own research',
+      'Invest blindly',
+      'Always always do your own research and be cautious'
+    ],
+    answer: 'Always always do your own research and be cautious'
+  },
+]
