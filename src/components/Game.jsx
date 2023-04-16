@@ -1,14 +1,30 @@
-import React, { useState } from 'react';
-import { module1, module2, module3, module4, module5, module6, module7, module8, module9 } from '../utils';
+import React, { useState, useEffect } from 'react';
+import {
+  module1,
+  module2,
+  module3,
+  module4,
+  module5,
+  module6,
+  module7,
+  module8,
+  module9,
+} from '../utils';
 import styles from '../styles';
 import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const Game = ({ name }) => {
-  const { moduleNumber } = useParams();
+
+const Game = () => {
+  
+  const { id } = useParams();
+
+  const moduleNumber = parseInt(id)
 
   const navigate = useNavigate();
+
+  const name = sessionStorage.getItem('name')
 
   const [questions, setQuestions] = useState([]);
   const [questionNumber, setQuestionNumber] = useState(0);
@@ -18,38 +34,6 @@ const Game = ({ name }) => {
 
   const questionLength = questions.length;
 
-  switch (moduleNumber) {
-    case '1':
-      setQuestions(module1);
-      break;
-    case '2':
-      setQuestions(module2);
-      break;
-    case '3':
-      setQuestions(module3);
-      break;
-    case '4':
-      setQuestions(module4);
-      break;
-    case '5':
-      setQuestions(module5);
-      break;
-    case '6':
-      setQuestions(module6);
-      break;
-    case '7':
-      setQuestions(module7);
-      break;
-    case '8':
-      setQuestions(module8);
-      break;
-    case '9':
-      setQuestions(module9);
-      break;
-    default:
-      setQuestions(module1);
-      break;
-  }
 
   const submitScore = async () => {
     setLoading(true);
@@ -60,10 +44,12 @@ const Game = ({ name }) => {
         score: player.score,
         date: new Date().toLocaleString(),
       });
-      alert('Game Over. Collect your rewards now.');
+      alert('Congratulations! You have finished this series of our educational session. We hope you learned something today. Please proceed through the quiz to receive your POAP and $Lotus token.');
+      console.log(moduleNumber)
       navigate(`/rewards/module/${moduleNumber}`);
     } catch (error) {
       alert('Server Error. Try again Later');
+      console.log(error)
     } finally {
       setLoading(false);
     }
@@ -102,6 +88,41 @@ const Game = ({ name }) => {
     setAnswer('');
   };
 
+  useEffect(() => {
+    switch (moduleNumber) {
+      case 1:
+        setQuestions(module1);
+        break;
+      case 2:
+        setQuestions(module2);
+        break;
+      case 3:
+        setQuestions(module3);
+        break;
+      case 4:
+        setQuestions(module4);
+        break;
+      case 5:
+        setQuestions(module5);
+        break;
+      case 6:
+        setQuestions(module6);
+        break;
+      case 7:
+        setQuestions(module7);
+        break;
+      case 8:
+        setQuestions(module8);
+        break;
+      case 9:
+        setQuestions(module9);
+        break;
+      default:
+        setQuestions(module1);
+        break;
+    }
+  },[])
+
   return (
     <div className='w-full max-w-md p-3'>
       <h2 className={`${styles.heading2} text-center`}>Web3 Quest Journey</h2>
@@ -112,9 +133,9 @@ const Game = ({ name }) => {
           </div>
           <div className='flex-1 flex flex-col ml-3'>
             <h4 className='font-poppins font-semibold text-black text-[20px] leading-[23px] mb-1'>
-              {questions[questionNumber].question}
+              {questions[questionNumber]?.question}
             </h4>
-            {questions[questionNumber].options.map((option, index) => (
+            {questions[questionNumber]?.options.map((option, index) => (
               <label key={index} className='inline-flex items-center'>
                 <input
                   type='radio'

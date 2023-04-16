@@ -7,8 +7,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 const Rewards = ({}) => {
   const navigate = useNavigate();
 
-  const { moduleNumber } = useParams();
-  const module = parseInt(moduleNumber);
+  const { id } = useParams();
+  const module = parseInt(id);
 
   const [email, setEmail] = useState('');
   const [walletAddress, SetWalletAddress] = useState('');
@@ -25,7 +25,7 @@ const Rewards = ({}) => {
     setLoading(true);
 
     try {
-      await addDoc(collection(db, `module${moduleNumber}Rewards`), {
+      await addDoc(collection(db, `module${module}Rewards`), {
         name: sessionStorage.getItem('name'),
         email: email,
         evmAddress: walletAddress,
@@ -38,6 +38,10 @@ const Rewards = ({}) => {
       setLoading(false);
     }
   };
+
+  const exit = () => {
+    navigate('/')
+  }
 
   return (
     <div>
