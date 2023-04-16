@@ -662,6 +662,107 @@ export const module7 = [
   },
 ];
 
-export const module8 = [];
+export const module8 = [
+  {
+    question: 'What is the Metaverse?',
+    options: [
+      'A virtual space where people can interact, communicate, share, and create different kinds of experiences',
+      'A physical space where people can interact with each other',
+      'A virtual space where people can interact with virtual objects',
+      'A physical space where people can interact with digital objects',
+    ],
+    answer:
+      'A virtual space where people can interact, communicate, share, and create different kinds of experiences',
+  },
+  {
+    question:
+      'What is the difference between Virtual Reality Metaverse and Augmented Reality Metaverse?',
+    options: [
+      'Virtual Reality Metaverse is a physical space while Augmented Reality Metaverse is a virtual space',
+      'Virtual Reality Metaverse is a computer-generated environment while Augmented Reality Metaverse is a real environment',
+      'Virtual Reality Metaverse is an immersive environment while Augmented Reality Metaverse is an environment that overlays digital elements onto the real world',
+      'Virtual Reality Metaverse is a real environment while Augmented Reality Metaverse is a computer-generated environment',
+    ],
+    answer:
+      'Virtual Reality Metaverse is an immersive environment while Augmented Reality Metaverse is an environment that overlays digital elements onto the real world',
+  },
+  {
+    question: 'What are Social Metaverse used for?',
+    options: [
+      'Virtual worlds primarily used for gaming',
+      'Virtual worlds primarily used for education and training',
+      'Virtual worlds where users can interact with each other',
+      'Virtual worlds primarily used for enterprise and corporate applications',
+    ],
+    answer: 'Virtual worlds where users can interact with each other',
+  },
+  {
+    question: 'What are Game Metaverse used for?',
+    options: [
+      'Virtual worlds where users can interact with each other',
+      'Virtual worlds primarily used for education and training',
+      'Virtual worlds primarily used for gaming',
+      'Virtual worlds primarily used for enterprise and corporate applications',
+    ],
+    answer: 'Virtual worlds primarily used for gaming',
+  },
+  {
+    question: 'What are Educational Metaverse used for?',
+    options: [
+      'Virtual worlds primarily used for gaming',
+      'Virtual worlds where users can interact with each other',
+      'Virtual worlds primarily used for education and training',
+      'Virtual worlds primarily used for enterprise and corporate applications',
+    ],
+    answer: 'Virtual worlds primarily used for education and training',
+  },
+  {
+    question: 'What are Corporate Metaverse used for?',
+    options: [
+      'Virtual worlds primarily used for gaming',
+      'Virtual worlds where users can interact with each other',
+      'Virtual worlds primarily used for education and training',
+      'Virtual worlds primarily used for enterprise and corporate applications',
+    ],
+    answer: 'Virtual worlds primarily used for enterprise and corporate applications',
+  },
+  {
+    question: 'What are Hybrid Metaverse?',
+    options: [
+      'Virtual worlds that combine elements of multiple types of metaverses',
+      'Virtual worlds primarily used for gaming',
+      'Virtual worlds where users can interact with each other',
+      'Virtual worlds primarily used for education and training',
+    ],
+    answer: 'Virtual worlds that combine elements of multiple types of metaverses',
+  },
+  {
+    question: 'What are avatars?',
+    options: [
+      'Digital representation of a user in the form of a three-dimensional character',
+      'Physical representation of a user in the form of a three-dimensional character',
+      'Real representation of a user in the form of a three-dimensional character',
+      'Imaginary representation of a user in the form of a three-dimensional character',
+    ],
+    answer: 'Digital representation of a user in the form of a three-dimensional character',
+  },
+  {
+    question:
+      'What is the difference between avatars in centralized metaverses and decentralized metaverses?',
+    options: [
+      'Avatars in centralized metaverses are owned and controlled by individual users while avatars in decentralized metaverses are controlled by the company or organization',
+      'Avatars in centralized metaverses are stored on a blockchain while avatars in decentralized metaverses are not stored on a blockchain',
+      'Avatars in centralized metaverses are controlled by the government while avatars in decentralized metaverses are controlled by individual users',
+      'Avatars in centralized metaverses are not stored on a blockchain while avatars in decentralized metaverses are stored on a blockchain and owned and managed by the users',
+    ],
+    answer:
+      'Avatars in centralized metaverses are not stored on a blockchain while avatars in decentralized metaverses are stored on a blockchain and owned and managed by the users',
+  },
+  {
+    question: 'Can avatars in be bought, sold, and traded in decentralized metaverses?',
+    options: ['Yes', 'No'],
+    answer: 'Yes',
+  },
+];
 
 export const module9 = [];
