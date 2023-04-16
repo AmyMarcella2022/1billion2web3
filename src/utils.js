@@ -458,9 +458,209 @@ export const module5 = [
   },
 ];
 
-export const module6 = [];
+export const module6 = [
+  {
+    question: 'What does NFT stand for?',
+    options: [
+      'Non-Fungible Token',
+      'Non-Financial Transaction',
+      'Non-Fee Transaction',
+      'None of the above',
+    ],
+    answer: 'Non-Fungible Token',
+  },
+  {
+    question: 'How are NFTs created?',
+    options: [
+      'Using blockchain technology',
+      'Using traditional digital files',
+      'Using physical assets',
+      'None of the above',
+    ],
+    answer: 'Using blockchain technology',
+  },
+  {
+    question: 'What is the main benefit of using NFTs?',
+    options: [
+      'They can be easily replicated and shared',
+      'They can be verified and authenticated as original, one-of-a-kind digital assets',
+      'They can be used to represent physical assets only',
+      'None of the above',
+    ],
+    answer: 'They can be verified and authenticated as original, one-of-a-kind digital assets',
+  },
+  {
+    question: 'What kind of digital content can NFTs represent?',
+    options: ['Digital art', 'Collectible items', 'Virtual real estate', 'All of the above'],
+    answer: 'All of the above',
+  },
+  {
+    question: 'How can creators monetize their digital content using NFTs?',
+    options: [
+      'By creating a digital marketplace',
+      'By selling their content as physical assets',
+      'By creating and selling NFTs representing their digital content',
+      'None of the above',
+    ],
+    answer: 'By creating and selling NFTs representing their digital content',
+  },
+  {
+    question: 'How is the ownership of an NFT recorded?',
+    options: [
+      'On a physical ledger',
+      'On a digital ledger known as blockchain',
+      'On a database stored in a cloud server',
+      'None of the above',
+    ],
+    answer: 'On a digital ledger known as blockchain',
+  },
+  {
+    question: 'What are membership NFTs?',
+    options: [
+      'NFTs used to represent voting rights in an organization',
+      'NFTs used to represent membership in an organization',
+      'FTs used to represent virtual real estate',
+      'None of the above',
+    ],
+    answer: 'NFTs used to represent membership in an organization',
+  },
+  {
+    question: 'What are Phygital NFTs?',
+    options: [
+      'NFTs that can be considered a bridge between the physical and digital worlds',
+      'NFTs that can only represent physical assets',
+      'NFTs that are created using traditional digital files',
+      'None of the baove',
+    ],
+    answer: 'NFTs that can only represent physical assets',
+  },
+  {
+    question: 'What is a POAP?',
+    options: [
+      'A type of non-fungible token (NFT) used as a proof of attendance or participation in an event or community',
+      'A type of non-fungible token (NFT) used as a proof of attendance or participation in an event or community',
+      'A type of NFT used to represent virtual real estate',
+      'None of the above',
+    ],
+    answer:
+      'A type of non-fungible token (NFT) used as a proof of attendance or participation in an event or community',
+  },
+  {
+    question: 'What is the main purpose of POAPs?',
+    options: [
+      'To incentivize and reward people for participating in events and online communities',
+      'To create a sense of exclusivity and community',
+      'To verify and authenticate digital content',
+      'All of the above',
+    ],
+    answer: 'To incentivize and reward people for participating in events and online communities',
+  },
+];
 
-export const module7 = [];
+export const module7 = [
+  {
+    question: 'What is a smart contract?',
+    options: [
+      'A self-executing contract written in code',
+      'A traditional contract written in paper',
+      'A contract managed by intermediaries',
+      'A contract validated by a central authority',
+    ],
+    answer: 'A self-executing contract written in code',
+  },
+  {
+    question: 'What is the main benefit of a smart contract?',
+    options: [
+      'Reduced costs associated with traditional contract execution',
+      'Increased reliance on intermediaries',
+      'Opacity and lack of transparency',
+      'Dependence on a central authority',
+    ],
+    answer: 'Reduced costs associated with traditional contract execution',
+  },
+  {
+    question: 'What industries can use smart contracts?',
+    options: [
+      'Finance, supply chain management, and real estate',
+      'Physical marketplaces, traditional finance, and centralized supply chain management',
+      'Digital marketplaces, centralized finance, and decentralized supply chain management',
+      'Physical marketplaces, traditional finance, and centralized supply chain management',
+    ],
+    answer: 'Finance, supply chain management, and real estate',
+  },
+  {
+    question: 'How does blockchain technology enhance smart contracts?',
+    options: [
+      'By providing a high level of security and trust',
+      'By increasing the likelihood of errors or disputes',
+      'By requiring intermediaries',
+      'By providing a centralized validation process',
+    ],
+    answer: 'By providing a high level of security and trust',
+  },
+  {
+    question: 'What is the result of automating contract terms with a smart contract?',
+    options: [
+      'Increased likelihood of errors or disputes',
+      'Elimination of intermediaries',
+      'Dependence on a central authority',
+      'Increased cost associated with contract execution',
+    ],
+    answer: 'Elimination of intermediaries',
+  },
+  {
+    question: 'How does transparency affect smart contracts?',
+    options: [
+      'All parties have access to the terms and conditions of the contract',
+      'Only some parties have access to the terms and conditions of the contract',
+      'No parties have access to the terms and conditions of the contract',
+      'The terms and conditions of the contract are hidden from parties',
+    ],
+    answer: 'All parties have access to the terms and conditions of the contract',
+  },
+  {
+    question: 'What is the main difference between smart contracts and traditional contracts?',
+    options: [
+      'Smart contracts are self-executing and written in code, while traditional contracts are not',
+      'Smart contracts are managed by intermediaries, while traditional contracts are not',
+      'Smart contracts are validated by a central authority, while traditional contracts are not',
+      'Smart contracts are built on blockchain technology, while traditional contracts are not',
+    ],
+    answer:
+      'Smart contracts are self-executing and written in code, while traditional contracts are not',
+  },
+  {
+    question: 'How does blockchain technology provide security for smart contracts?',
+    options: [
+      'Transactions on the blockchain are recorded in a public ledger and can be verified by anyone',
+      'Transactions on the blockchain are recorded in a private ledger and can only be verified by intermediaries',
+      'Transactions on the blockchain are recorded in a private ledger and cannot be verified by anyone',
+      'Transactions on the blockchain are not recorded and cannot be verified',
+    ],
+    answer:
+      'Transactions on the blockchain are recorded in a public ledger and can be verified by anyone',
+  },
+  {
+    question: 'What is the purpose of smart contracts in the real estate industry?',
+    options: [
+      'To automate the process of buying and selling property',
+      'To increase the costs associated with buying and selling property',
+      'To add intermediaries to the process of buying and selling property',
+      'To reduce the transparency of the process of buying and selling property',
+    ],
+    answer: 'To automate the process of buying and selling property',
+  },
+  {
+    question: 'What is the overall impact of smart contracts on the contract execution process?',
+    options: [
+      'Automation, transparency, security, and cost-effectiveness',
+      'Opacity, centralization, dependence, and high cost',
+      'Intermediaries, centralization, traditional methods, and high cost',
+      'Dependence, centralization, intermediaries, and low cost',
+    ],
+    answer: 'Automation, transparency, security, and cost-effectiveness',
+  },
+];
 
 export const module8 = [];
 
