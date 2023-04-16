@@ -765,4 +765,101 @@ export const module8 = [
   },
 ];
 
-export const module9 = [];
+export const module9 = [
+  {
+    question: 'What is the main goal of Web3 gaming?',
+    options: [
+      'To create centralized gaming experiences',
+      'To create more secure gaming environments',
+      'To create more open, transparent and secure gaming environments',
+      'To create more restrictive gaming environments',
+    ],
+    answer: 'To create more open, transparent and secure gaming environments',
+  },
+  {
+    question: 'What type of virtual assets can be owned and controlled by players in Web3 gaming?',
+    options: ['Virtual currencies', 'Virtual characters', 'Virtual items', 'All of the above'],
+    answer: 'All of the above',
+  },
+  {
+    question: 'How are virtual assets stored in Web3 gaming?',
+    options: [
+      'In a centralized database',
+      'In a decentralized network of computer nodes',
+      'On a blockchain-based ledger',
+      'On a cloud-based server',
+    ],
+    answer: 'On a blockchain-based ledger',
+  },
+  {
+    question: 'What makes virtual assets in Web3 gaming tamper-proof?',
+    options: [
+      'The use of a decentralized network of computer nodes',
+      'The use of a centralized database',
+      'The use of a blockchain-based ledger',
+      'The use of a cloud-based server',
+    ],
+    answer: 'The use of a blockchain-based ledger',
+  },
+  {
+    question: 'How does Web3 technology change the way gaming works?',
+    options: [
+      'By providing new opportunities for players, developers, and the wider gaming industry',
+      'By restricting ownership, security and autonomy',
+      'By creating more centralized gaming experiences',
+      'By creating more restrictive gaming environments',
+    ],
+    answer: 'By providing new opportunities for players, developers, and the wider gaming industry',
+  },
+  {
+    question: 'What type of gaming experiences are enabled by Web3 technology?',
+    options: [
+      'Decentralized gaming experiences',
+      'Centralized gaming experiences',
+      'Hybrid gaming experiences',
+      'None of the above',
+    ],
+    answer: 'Decentralized gaming experiences',
+  },
+  {
+    question: 'What makes the gaming experience in Web3 more engaging and community-driven?',
+    options: [
+      'The ability for players to own and control their virtual assets',
+      'The ability for players to participate in decentralized gaming experiences',
+      'The use of a centralized database',
+      'The use of a decentralized network of computer nodes',
+    ],
+    answer: 'The ability for players to participate in decentralized gaming experiences',
+  },
+  {
+    question: 'How are game rules automated in Web3 gaming?',
+    options: [
+      'Through the use of a centralized database',
+      'Through the use of smart contracts',
+      'Through the use of a blockchain-based ledger',
+      'Through the use of a cloud-based server',
+    ],
+    answer: 'Through the use of smart contracts',
+  },
+  {
+    question: 'What type of transactions are enabled in Web3 gaming?',
+    options: [
+      'Peer-to-peer transactions',
+      'Centralized transactions',
+      'Hybrid transactions',
+      'None of the above',
+    ],
+    answer: 'Peer-to-peer transactions',
+  },
+  {
+    question:
+      'What type of ledger is used in Web3 gaming to record ownership and transfers of virtual assets?',
+    options: [
+      'A decentralized ledger',
+      'A centralized ledger',
+      'A blockchain-based ledger',
+      'A cloud-based ledger',
+    ],
+    answer: 'A blockchain-based ledger',
+  },
+];
