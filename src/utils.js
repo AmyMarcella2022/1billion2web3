@@ -24,8 +24,8 @@ export const module1 = [
 
   {
     question: 'What are the companies that own servers in Web 2?',
-    options: ['Google and Facebook', 'Microsoft and Amazon', 'Apple and Netflix'],
-    answer: 'Google and Facebook',
+    options: ['Google and Amazon', 'Uber and Airbnb', 'Apple and Netflix'],
+    answer: 'Google and Amazon',
   },
 
   {
