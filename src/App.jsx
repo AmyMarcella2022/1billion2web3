@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className='bg-primary'>
-        <div className='flex justify-center items-center h-screen'>
+        <div className='flex justify-center items-center'>
           <Routes>
             <Route path='/' element={<Name />} />
             <Route path='/module/:id' element={<Game />} />
