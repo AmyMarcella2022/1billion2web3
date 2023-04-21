@@ -124,7 +124,7 @@ const Game = () => {
   },[])
 
   return (
-    <div className='w-full max-w-md p-3'>
+    <div className='w-full max-w-md p-6'>
       <h2 className={`${styles.heading2} text-center`}>Web3 Quest Journey</h2>
       <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
         <div className='flex flex-row'>
@@ -136,7 +136,7 @@ const Game = () => {
               {questions[questionNumber]?.question}
             </h4>
             {questions[questionNumber]?.options.map((option, index) => (
-              <label key={index} className='inline-flex items-center'>
+              <label key={index} className='inline-flex items-center overflow-y-scroll'>
                 <input
                   type='radio'
                   className='form-radio h-4 w-4'
