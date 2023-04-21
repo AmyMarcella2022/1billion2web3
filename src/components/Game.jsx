@@ -126,7 +126,7 @@ const Game = () => {
   return (
     <div className='w-full max-w-md p-6'>
       <h2 className={`${styles.heading2} text-center`}>Web3 Quest Journey</h2>
-      <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 overflow-y-scroll'>
+      <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 h-[450px] overflow-y-scroll'>
         <div className='flex flex-row'>
           <div className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-dimBlue`}>
             {questionNumber + 1}
