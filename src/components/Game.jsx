@@ -14,17 +14,18 @@ import styles from '../styles';
 import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import useAlertModal from '../hooks/useAlertModal';
 
 const Game = () => {
-  
+  const alertModal = useAlertModal();
+
   const { id } = useParams();
 
-  const moduleNumber = parseInt(id)
+  const moduleNumber = parseInt(id);
 
   const navigate = useNavigate();
 
-  const name = sessionStorage.getItem('name')
+  const name = sessionStorage.getItem('name');
 
   const [questions, setQuestions] = useState([]);
   const [questionNumber, setQuestionNumber] = useState(0);
@@ -33,7 +34,6 @@ const Game = () => {
   const [player, setPlayer] = useState({ name: name, score: 0 });
 
   const questionLength = questions.length;
-
 
   const submitScore = async () => {
     setLoading(true);
@@ -44,12 +44,18 @@ const Game = () => {
         score: player.score,
         date: new Date().toLocaleString(),
       });
-      alert('Congratulations! You have finished this series of our educational session. We hope you learned something today. Please proceed through the quiz to receive your POAP and $Lotus token.');
-      console.log(moduleNumber)
+      alertModal.setTitle('Module Finished');
+      alertModal.setContent(
+        'Congratulations! You have finished this series of our educational session. We hope you learned something today. Please proceed through the quiz to receive your POAP and $Lotus token.'
+      );
+      alertModal.open();
+
       navigate(`/rewards/module/${moduleNumber}`);
     } catch (error) {
-      alert('Server Error. Try again Later');
-      console.log(error)
+      alertModal.setTitle('Server Error');
+      alertModal.setContent('Please try again later');
+      alertModal.open();
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -59,7 +65,9 @@ const Game = () => {
     e.preventDefault();
 
     if (Qanswer === '') {
-      alert('Please select an answer!');
+      alertModal.setTitle('Invalid Option');
+      alertModal.setContent('Please select an answer');
+      alertModal.open();
       return;
     }
 
@@ -67,7 +75,9 @@ const Game = () => {
     const correctAnswer = currentQuestion.answer;
 
     if (Qanswer.toLowerCase() != correctAnswer.toLowerCase()) {
-      alert('Option is incorrect. Try Again');
+      alertModal.setTitle('Incorrect Option');
+      alertModal.setContent('Option chosen is incorrect. Try Again');
+      alertModal.open();
       return;
     }
 
@@ -121,7 +131,7 @@ const Game = () => {
         setQuestions(module1);
         break;
     }
-  },[])
+  }, []);
 
   return (
     <div className='w-full max-w-md p-6'>

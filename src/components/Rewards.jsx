@@ -40,8 +40,8 @@ const Rewards = ({}) => {
   };
 
   const exit = () => {
-    navigate('/')
-  }
+    navigate('/');
+  };
 
   return (
     <div>

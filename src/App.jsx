@@ -2,10 +2,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Rewards from './components/Rewards';
 import Name from './components/Name';
 import Game from './components/Game';
+import AlertModal from './components/common/AlertModal';
 
 function App() {
   return (
     <BrowserRouter>
+      <AlertModal />
       <div className='bg-primary'>
         <div className='flex justify-center items-center h-screen'>
           <Routes>

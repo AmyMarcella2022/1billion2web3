@@ -110,6 +110,7 @@ export const module2 = [
     options: [
       'By a central authority',
       'By duplicating and distributing the ledger across the network',
+      'By saving all transactions data at a single point.',
     ],
     answer: 'By duplicating and distributing the ledger across the network',
   },
