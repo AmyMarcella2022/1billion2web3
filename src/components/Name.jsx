@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import styles from '../styles';
 import { useNavigate } from 'react-router-dom';
+import useAlertModal from '../hooks/useAlertModal';
 
 const Name = () => {
+  const alertModal = useAlertModal();
+
   const navigate = useNavigate();
 
   const [name, setName] = useState('');
@@ -11,7 +14,9 @@ const Name = () => {
     e.preventDefault();
 
     if (name.trim() === '') {
-      alert('Please input your name!');
+      alertModal.setTitle('Name missing');
+      alertModal.setContent('Please input your name!');
+      alertModal.open();
       return;
     }
 

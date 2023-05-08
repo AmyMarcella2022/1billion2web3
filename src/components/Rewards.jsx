@@ -3,8 +3,11 @@ import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import styles from '../styles';
 import { useNavigate, useParams } from 'react-router-dom';
+import useAlertModal from '../hooks/useAlertModal';
 
 const Rewards = ({}) => {
+  const alertModal = useAlertModal();
+
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -18,7 +21,9 @@ const Rewards = ({}) => {
     e.preventDefault();
 
     if (email.trim() === '') {
-      alert('Please fill in your email');
+      alertModal.setTitle('Email missing');
+      alertModal.setContent('Please fill in your email');
+      alertModal.open();
       return;
     }
 
@@ -30,10 +35,14 @@ const Rewards = ({}) => {
         email: email,
         evmAddress: walletAddress,
       });
-      alert('Details Submitted successfully');
+      alertModal.setTitle('Success');
+      alertModal.setContent('Details submitted successfully');
+      alertModal.open();
       navigate(`/module/${module + 1}`);
     } catch (error) {
-      alert('Server Error. Try again Later');
+      alertModal.setTitle('Server Error');
+      alertModal.setContent('Error submitting details. Try again later');
+      alertModal.open();
     } finally {
       setLoading(false);
     }
