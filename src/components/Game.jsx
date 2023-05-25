@@ -198,7 +198,7 @@ const Game = () => {
                   value={option}
                   onClick={(e) => setAnswer(e.target.value)}
                 />
-                <span className={`${styles.paragraph} ml-5 mb-3`}>{option}</span>
+                <span className='ml-5 mb-3 font-poppins font-normal text-black text-[18px] leading-[30.8px]'>{option}</span>
               </label>
             ))}
           </div>
