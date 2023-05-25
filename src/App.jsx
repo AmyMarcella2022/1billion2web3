@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Rewards from './components/Rewards';
-import Name from './components/Name';
+import Home from './components/Home';
 import Game from './components/Game';
 import AlertModal from './components/common/AlertModal';
 
@@ -11,7 +11,7 @@ function App() {
       <div className='bg-primary'>
         <div className='flex justify-center items-center h-screen'>
           <Routes>
-            <Route path='/' element={<Name />} />
+            <Route path='/' element={<Home />} />
             <Route path='/module/:id' element={<Game />} />
             <Route path='/rewards/module/:id' element={<Rewards />} />
           </Routes>
