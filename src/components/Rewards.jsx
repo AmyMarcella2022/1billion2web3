@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import styles from '../styles';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useAlertModal from '../hooks/useAlertModal';
 
 const Rewards = ({}) => {
@@ -10,8 +10,8 @@ const Rewards = ({}) => {
 
   const navigate = useNavigate();
 
-  const { id } = useParams();
-  const module = parseInt(id);
+  // const { id } = useParams();
+  // const module = parseInt(id);
 
   const [email, setEmail] = useState('');
   const [walletAddress, SetWalletAddress] = useState('');
@@ -30,15 +30,14 @@ const Rewards = ({}) => {
     setLoading(true);
 
     try {
-      await addDoc(collection(db, `module${module}Rewards`), {
-        name: sessionStorage.getItem('name'),
+      await addDoc(collection(db, `Rewards`), {
         email: email,
         evmAddress: walletAddress,
       });
       alertModal.setTitle('Success');
-      alertModal.setContent('Details submitted successfully');
+      alertModal.setContent('Details submitted successfully. We will contact you by email.');
       alertModal.open();
-      navigate(`/module/${module + 1}`);
+      navigate('/');
     } catch (error) {
       alertModal.setTitle('Server Error');
       alertModal.setContent('Error submitting details. Try again later');
@@ -108,7 +107,7 @@ const Rewards = ({}) => {
                   onClick={submitDetails}
                   className='bg-white hover:bg-slate-300 text-black font-bold py-2 px-4 ml-3 rounded focus:outline-none focus:shadow-outline'
                 >
-                  Go to Next Module
+                  Submit
                 </button>
               </div>
             </div>

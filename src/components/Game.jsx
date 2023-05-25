@@ -44,13 +44,49 @@ const Game = () => {
         score: player.score,
         date: new Date().toLocaleString(),
       });
+      if(moduleNumber === 2){
+        navigate(`/module/${moduleNumber + 1}`);
+        return;
+      }
+      if(moduleNumber === 4){
+        navigate(`/module/${moduleNumber + 1}`);
+        return;
+      }
+      if(moduleNumber === 6){
+        navigate(`/module/${moduleNumber + 1}`);
+        return;
+      }
+      if(moduleNumber === 8){
+        navigate(`/module/${moduleNumber + 1}`);
+        return;
+      }
       alertModal.setTitle('Module Finished');
       alertModal.setContent(
-        'Congratulations! You have finished this series of our educational session. We hope you learned something today. Please proceed through the quiz to receive your POAP and $Lotus token.'
+        'Congratulations! You have finished this series of our educational session. We hope you learned something today. Proceed to the next stage.'
       );
       alertModal.open();
 
-      navigate(`/rewards/module/${moduleNumber}`);
+      if(moduleNumber === 1){
+        window.open('https://www.voxels.com/spaces/e4de4917-6a2c-4312-bb52-340c02c328d2/play', '_blank');
+        return;
+      }
+      if(moduleNumber === 3){
+        window.open('https://www.voxels.com/spaces/1af3ad5b-6d3e-458d-b8e6-19ee1d984fb0/play', '_blank');
+        return;
+      }
+      if(moduleNumber === 5){
+        window.open('https://www.voxels.com/spaces/d2adfb7c-8059-4e22-aff4-794b48d6283e/play', '_blank');
+        return;
+      }
+      if(moduleNumber === 7){
+        window.open('https://www.voxels.com/spaces/e8baf729-786c-4a35-98d6-19d0fe7429d2/play', '_blank');
+        return;
+      }
+      if(moduleNumber === 9){
+        navigate('/reward');
+        return;
+      }
+
     } catch (error) {
       alertModal.setTitle('Server Error');
       alertModal.setContent('Please try again later');
@@ -137,7 +173,14 @@ const Game = () => {
     <div className='w-full max-w-md p-6'>
       <h2 className={`${styles.heading2} text-center`}>Web3 Quest Journey</h2>
       <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 h-[450px] overflow-y-scroll'>
-        <div className='flex flex-row'>
+        {
+          loading ? (
+            <div className='flex flex-col items-center justify-center h-full'>
+              <div className='loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24 mb-4'></div>
+              <h3 className='text-center'>Loading...</h3>
+            </div>
+          ) : (
+            <div className='flex flex-row'>
           <div className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-dimBlue`}>
             {questionNumber + 1}
           </div>
@@ -160,6 +203,8 @@ const Game = () => {
             ))}
           </div>
         </div>
+          )
+        }
         <div className='flex justify-center items-center mt-5'>
           {loading ? (
             <div class='flex items-center justify-center'>
