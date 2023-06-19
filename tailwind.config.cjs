@@ -13,6 +13,9 @@ module.exports = {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },
+      backgroundImage: {
+        'question': "url('./gata-quiz-backdrop.png')"
+      }
     },
     screens: {
       xs: "480px",

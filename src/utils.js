@@ -455,7 +455,7 @@ export const module5 = [
       'To create traditional lending and borrowing platforms',
       'To create physical lending and borrowing platforms',
     ],
-    answer: 'What is an example of how a DAO can be used in decentralized finance?',
+    answer: 'To create decentralized lending and borrowing platforms',
   },
 ];
 

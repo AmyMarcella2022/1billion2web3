@@ -8,8 +8,8 @@ function App() {
   return (
     <BrowserRouter>
       <AlertModal />
-      <div className='bg-primary'>
-        <div className='flex justify-center items-center h-screen'>
+      <div className='bg-[url("/gata-quiz-backdrop.png")] h-screen'>
+        <div className='flex justify-center items-center max-h-full'>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/module/:id' element={<Game />} />
