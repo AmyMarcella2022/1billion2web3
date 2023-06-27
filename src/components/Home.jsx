@@ -5,7 +5,7 @@ const Home = () => {
   
   return (
     <>
-      <div className={`w-full max-w-md p-3`}>
+      <div className={`max-w-md p-3`}>
         <h2 className={`${styles.flexCenter} ${styles.heading2}`}>Welcome to</h2>
         <h4 className={`${styles.flexCenter} ${styles.paragraph}`}>1Billion2Web3Initiative</h4>
         <div className={`${styles.flexCenter} my-5`}>

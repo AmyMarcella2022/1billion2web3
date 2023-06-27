@@ -533,12 +533,12 @@ export const module6 = [
       'NFTs that are created using traditional digital files',
       'None of the baove',
     ],
-    answer: 'NFTs that can only represent physical assets',
+    answer: 'NFTs that can be considered a bridge between the physical and digital worlds',
   },
   {
     question: 'What is a POAP?',
     options: [
-      'A type of non-fungible token (NFT) used as a proof of attendance or participation in an event or community',
+      'A type of fungible token (NFT) used as a proof of attendance or participation in an event or community',
       'A type of non-fungible token (NFT) used as a proof of attendance or participation in an event or community',
       'A type of NFT used to represent virtual real estate',
       'None of the above',
