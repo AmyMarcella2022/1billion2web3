@@ -35,6 +35,17 @@ const Game = () => {
 
   const questionLength = questions.length;
 
+  const saveProgress = async (module) => {
+    try {
+      await addDoc(collection(db, 'progress'), {
+        username: sessionStorage.getItem('username'),
+        module: module
+      })
+    } catch (error) {
+      alert('Error saving progress')
+    }
+  }
+
   const submitScore = async () => {
     setLoading(true);
 
@@ -67,22 +78,27 @@ const Game = () => {
       alertModal.open();
 
       if(moduleNumber === 1){
+        saveProgress(1)
         window.open('https://www.voxels.com/spaces/e4de4917-6a2c-4312-bb52-340c02c328d2/play', '_blank');
         return;
       }
       if(moduleNumber === 3){
+        saveProgress(3)
         window.open('https://www.voxels.com/spaces/1af3ad5b-6d3e-458d-b8e6-19ee1d984fb0/play', '_blank');
         return;
       }
       if(moduleNumber === 5){
+        saveProgress(5)
         window.open('https://www.voxels.com/spaces/d2adfb7c-8059-4e22-aff4-794b48d6283e/play', '_blank');
         return;
       }
       if(moduleNumber === 7){
+        saveProgress(7)
         window.open('https://www.voxels.com/spaces/e8baf729-786c-4a35-98d6-19d0fe7429d2/play', '_blank');
         return;
       }
       if(moduleNumber === 9){
+        saveProgress(9)
         navigate('/reward');
         return;
       }
@@ -172,7 +188,7 @@ const Game = () => {
   return (
     <div className='w-full max-w-md p-6'>
       <h2 className={`${styles.heading2} text-center`}>Web3 Quest Journey</h2>
-      <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 h-[450px] overflow-y-scroll'>
+      <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 h-[450px] md:w-[450px] overflow-y-scroll'>
         {
           loading ? (
             <div className='flex flex-col items-center justify-center h-full'>
