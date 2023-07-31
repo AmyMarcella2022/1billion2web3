@@ -56,19 +56,23 @@ const Game = () => {
         date: new Date().toLocaleString(),
       });
       if(moduleNumber === 2){
-        navigate(`/module/${moduleNumber + 1}`);
+        // navigate(`/module/${moduleNumber + 1}`);
+        window.open('https://www.voxels.com/spaces/e4de4917-6a2c-4312-bb52-340c02c328d2/play', '_blank');
         return;
       }
       if(moduleNumber === 4){
-        navigate(`/module/${moduleNumber + 1}`);
+        // navigate(`/module/${moduleNumber + 1}`);
+        window.open('https://www.voxels.com/spaces/1af3ad5b-6d3e-458d-b8e6-19ee1d984fb0/play', '_blank');
         return;
       }
       if(moduleNumber === 6){
-        navigate(`/module/${moduleNumber + 1}`);
+        // navigate(`/module/${moduleNumber + 1}`);
+        window.open('https://www.voxels.com/spaces/d2adfb7c-8059-4e22-aff4-794b48d6283e/play', '_blank');
         return;
       }
       if(moduleNumber === 8){
-        navigate(`/module/${moduleNumber + 1}`);
+        // navigate(`/module/${moduleNumber + 1}`);
+        window.open('https://www.voxels.com/spaces/e8baf729-786c-4a35-98d6-19d0fe7429d2/play', '_blank');
         return;
       }
       alertModal.setTitle('Module Finished');
