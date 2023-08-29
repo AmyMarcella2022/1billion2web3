@@ -1,36 +1,116 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styles from '../styles';
+import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../firebase';
+import { AppContext } from '../context/AppContext';
+import Navbar from './common/Navbar';
 
 const Home = () => {
-  const [username, setUsername] = useState('')
+  const navigate = useNavigate();
 
-  const start = () => {
-    if(username.trim() === '') {
-      alert('Please enter your username')
+  const { setToastOpen, setToastContent, setToastVariant, setUserEmail } = useContext(AppContext);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const signin = async (e) => {
+    e.preventDefault();
+
+    if (email.trim() === '' || password.trim() === '') {
+      setToastVariant('alert-error');
+      setToastContent('Email/Password incorrect');
+      setToastOpen(true);
       return;
     }
 
-    sessionStorage.setItem('username', username)
+    setLoading(true);
 
-    window.open('https://www.voxels.com/spaces/21012e4a-4c02-491e-b71a-13481a56eb66/play', '_blank')
-  }
-  
+    login(email, password)
+      .then((user) => {
+        // setUserEmail(user.email)
+        console.log(user);
+        navigate('/dashboard');
+      })
+      .catch((error) => {
+        setToastVariant('alert-error');
+        setToastContent(`${error}`);
+        setToastOpen(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   return (
-    <>
-      <div className={`max-w-md p-3`}>
-        <h2 className={`${styles.flexCenter} ${styles.heading2}`}>Welcome to</h2>
-        <h4 className={`${styles.flexCenter} ${styles.paragraph}`}>1Billion2Web3Initiative</h4>
-        <div className={`${styles.flexCenter} flex-col items-center my-5`}>
-        <div className="join">
-          <input className="input input-bordered rounded-l-full join-item" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter your username"/>
-          <button className="btn btn-accent join-item rounded-r-full" onClick={start}>Click to start</button>
+    <div className='bg-black'>
+      <Navbar />
+      <section id='home' className='hero min-h-screen'>
+        <div className={`flex md:flex-row-reverse flex-col ${styles.paddingY}`}>
+          <div className={`flex-1 ${styles.flexStart} flex-col xl:px-0 sm:px-16 px-6`}>
+            <h1 className='flex-1 font-poppins font-semibold ss:text-[69px] text-[50px] text-white ss:leading-[100px] leading-[75px]'>
+              <br className='sm:block hidden' /> <span className='text-gradient'>Web3 Quest</span>{' '}
+            </h1>
+            <p className={`${styles.paragraph} mb-5`}>
+              Welcome to the 1Billion2Web3Initiative quiz. Watch short videos in the metaverse and
+              answer questions. Get a free token at the end.
+            </p>
+          </div>
+
+          <div className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10`}>
+            <div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
+              <div className='card-body'>
+                <form onSubmit={signin}>
+                  <fieldset disabled={loading}>
+                    <div className='form-control'>
+                      <label className='label'>
+                        <span className='label-text'>Email</span>
+                      </label>
+                      <input
+                        type='email'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className='input input-bordered'
+                        required
+                      />
+                    </div>
+                    <div className='form-control'>
+                      <label className='label'>
+                        <span className='label-text'>Password</span>
+                      </label>
+                      <input
+                        type='password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className='input input-bordered'
+                        required
+                      />
+                      <label className='label'>
+                        <span className='label-text-alt font-semibold'>Don't have an account?</span>
+                        <Link
+                          to='/register'
+                          className='label-text-alt link link-hover font-semibold'
+                        >
+                          Register
+                        </Link>
+                      </label>
+                    </div>
+                    <div className='form-control mt-6'>
+                      <button
+                        type='submit'
+                        className='rounded-full py-4 px-6 bg-blue-gradient font-poppins font-medium text-[18px] text-primary outline-none duration-200 hover:scale-105 btn-block'
+                      >
+                        LOGIN
+                      </button>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-          {/* <a href='' target='_blank' className='bg-white hover:bg-slate-100 text-black font-bold py-2 px-4 rounded-full'>
-            Start Your Web3 Journey
-          </a> */}
-        </div>
-      </div>
-    </>
+      </section>
+    </div>
   );
 };
 
