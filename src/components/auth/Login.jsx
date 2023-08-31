@@ -17,13 +17,6 @@ const Login = () => {
   const signin = useCallback(async (e) => {
     e.preventDefault();
 
-    if (email === '' || password === '') {
-      setToastVariant('alert-error');
-      setToastContent('Email/Password incorrect');
-      setToastOpen(true);
-      return;
-    }
-
     setLoading(true);
 
     login(email, password)

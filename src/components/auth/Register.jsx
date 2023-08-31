@@ -18,13 +18,6 @@ const Register = () => {
   const createUser = useCallback(async (e) => {
     e.preventDefault();
 
-    if (email === '' || password === '' || name === '') {
-      setToastVariant('alert-error');
-      setToastContent('Email/Password incorrect');
-      setToastOpen(true);
-      return;
-    }
-
     const userData = {
       name,
       email,
