@@ -1,9 +1,10 @@
-import React, { useState, useCallback, useContext } from 'react';
-import { register, addDocumentWithID } from '../../firebase';
+import React, { useState, useContext } from 'react';
+import { addDocumentWithID, auth } from '../../firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext';
 import Loader from '../common/Loader';
 import Navbar from '../common/Navbar';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const Register = () => {
   const { setToastContent, setToastOpen, setToastVariant } = useContext(AppContext);
@@ -15,7 +16,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const createUser = useCallback(async (e) => {
+  const createUser = async (e) => {
     e.preventDefault();
 
     const userData = {
@@ -25,9 +26,11 @@ const Register = () => {
 
     setLoading(true);
 
-    register(email, password)
-      .then(async (user) => {
-        await addDocumentWithID('users', user.uid, userData);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((user) => {
+        addDocumentWithID('users', user.uid, userData);
+      })
+      .then(() => {
         navigate('/login');
       })
       .catch((error) => {
@@ -38,7 +41,7 @@ const Register = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  };
 
   return (
     <>

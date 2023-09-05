@@ -1,9 +1,10 @@
-import React, { useState, useCallback, useContext } from 'react';
-import { login } from '../../firebase';
+import React, { useState, useContext } from 'react';
+import { auth } from '../../firebase';
 import { useNavigate, Link } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext';
 import Loader from '../common/Loader';
 import Navbar from '../common/Navbar';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const Login = () => {
   const { setToastContent, setToastOpen, setToastVariant } = useContext(AppContext);
@@ -14,14 +15,13 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const signin = useCallback(async (e) => {
+  const signin = async (e) => {
     e.preventDefault();
 
     setLoading(true);
 
-    login(email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        // setUserEmail(user.email)
         console.log(user);
         navigate('/dashboard');
       })
@@ -33,7 +33,7 @@ const Login = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  };
 
   return (
     <>

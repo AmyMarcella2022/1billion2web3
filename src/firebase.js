@@ -81,4 +81,4 @@ const addNewDocument = async (collectionName, data) => {
   return docData.id;
 };
 
-export { db, getCurrentUser, logout, register, login, addNewDocument, addDocumentWithID };
+export { db, getCurrentUser, logout, register, login, addNewDocument, addDocumentWithID, auth };
