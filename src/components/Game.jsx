@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   module1,
   module2,
@@ -11,13 +11,20 @@ import {
   module9,
 } from '../utils';
 import styles from '../styles';
-import { db } from '../firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { db, getCurrentUser } from '../firebase';
+import { setDoc, doc } from 'firebase/firestore';
 import { useNavigate, useParams } from 'react-router-dom';
 import useAlertModal from '../hooks/useAlertModal';
+import Loader from './common/Loader';
+import { AppContext } from '../context/AppContext';
 
 const Game = () => {
+  const { setToastContent, setToastOpen, setToastVariant, setModuleNumber, setMetaLink } =
+    useContext(AppContext);
+
   const alertModal = useAlertModal();
+
+  const user = getCurrentUser();
 
   const { id } = useParams();
 
@@ -37,8 +44,8 @@ const Game = () => {
 
   const saveProgress = async (module) => {
     try {
-      await addDoc(collection(db, 'progress'), {
-        username: sessionStorage.getItem('username'),
+      await setDoc(doc(db, 'progress', `${user.email}`), {
+        username: user.email,
         module: module,
       });
     } catch (error) {
@@ -50,91 +57,69 @@ const Game = () => {
     setLoading(true);
 
     try {
-      await addDoc(collection(db, `module${moduleNumber}Scoreboard`), {
-        playerName: player.name,
-        score: player.score,
-        date: new Date().toLocaleString(),
-      });
-      if (moduleNumber === 2) {
-        // navigate(`/module/${moduleNumber + 1}`);
-        window.open(
-          'https://www.voxels.com/spaces/e4de4917-6a2c-4312-bb52-340c02c328d2/play',
-          '_blank'
-        );
-        return;
-      }
-      if (moduleNumber === 4) {
-        // navigate(`/module/${moduleNumber + 1}`);
-        window.open(
-          'https://www.voxels.com/spaces/1af3ad5b-6d3e-458d-b8e6-19ee1d984fb0/play',
-          '_blank'
-        );
-        return;
-      }
-      if (moduleNumber === 6) {
-        // navigate(`/module/${moduleNumber + 1}`);
-        window.open(
-          'https://www.voxels.com/spaces/d2adfb7c-8059-4e22-aff4-794b48d6283e/play',
-          '_blank'
-        );
-        return;
-      }
-      if (moduleNumber === 8) {
-        // navigate(`/module/${moduleNumber + 1}`);
-        window.open(
-          'https://www.voxels.com/spaces/e8baf729-786c-4a35-98d6-19d0fe7429d2/play',
-          '_blank'
-        );
-        return;
-      }
-      alertModal.setTitle('Module Finished');
-      alertModal.setContent(
-        'Congratulations! You have finished this series of our educational session. We hope you learned something today. Proceed to the next stage.'
-      );
-      alertModal.open();
-
-      if (moduleNumber === 1) {
-        saveProgress(1);
-        window.open(
-          'https://www.voxels.com/spaces/e4de4917-6a2c-4312-bb52-340c02c328d2/play',
-          '_blank'
-        );
-        return;
-      }
-      if (moduleNumber === 3) {
-        saveProgress(3);
-        window.open(
-          'https://www.voxels.com/spaces/1af3ad5b-6d3e-458d-b8e6-19ee1d984fb0/play',
-          '_blank'
-        );
-        return;
-      }
-      if (moduleNumber === 5) {
-        saveProgress(5);
-        window.open(
-          'https://www.voxels.com/spaces/d2adfb7c-8059-4e22-aff4-794b48d6283e/play',
-          '_blank'
-        );
-        return;
-      }
-      if (moduleNumber === 7) {
-        saveProgress(7);
-        window.open(
-          'https://www.voxels.com/spaces/e8baf729-786c-4a35-98d6-19d0fe7429d2/play',
-          '_blank'
-        );
-        return;
-      }
-      if (moduleNumber === 9) {
-        saveProgress(9);
-        navigate('/reward');
-        return;
+      switch (moduleNumber) {
+        case 1:
+          saveProgress(1);
+          setModuleNumber(1);
+          setMetaLink('https://www.voxels.com/spaces/e4de4917-6a2c-4312-bb52-340c02c328d2/play');
+          navigate('/success');
+          return;
+        case 2:
+          saveProgress(2);
+          setModuleNumber(2);
+          setMetaLink('https://www.voxels.com/spaces/e4de4917-6a2c-4312-bb52-340c02c328d2/play');
+          navigate('/success');
+          return;
+        case 3:
+          saveProgress(3);
+          setModuleNumber(3);
+          setMetaLink('https://www.voxels.com/spaces/1af3ad5b-6d3e-458d-b8e6-19ee1d984fb0/play');
+          navigate('/success');
+          return;
+        case 4:
+          saveProgress(4);
+          setModuleNumber(4);
+          setMetaLink('https://www.voxels.com/spaces/1af3ad5b-6d3e-458d-b8e6-19ee1d984fb0/play');
+          navigate('/success');
+          return;
+        case 5:
+          saveProgress(5);
+          setModuleNumber(5);
+          setMetaLink('https://www.voxels.com/spaces/d2adfb7c-8059-4e22-aff4-794b48d6283e/play');
+          navigate('/success');
+          return;
+        case 6:
+          saveProgress(6);
+          setModuleNumber(6);
+          setMetaLink('https://www.voxels.com/spaces/d2adfb7c-8059-4e22-aff4-794b48d6283e/play');
+          navigate('/success');
+          return;
+        case 7:
+          saveProgress(7);
+          setModuleNumber(7);
+          setMetaLink('https://www.voxels.com/spaces/e8baf729-786c-4a35-98d6-19d0fe7429d2/play');
+          navigate('/success');
+          return;
+        case 8:
+          saveProgress(8);
+          setModuleNumber(8);
+          setMetaLink('https://www.voxels.com/spaces/e8baf729-786c-4a35-98d6-19d0fe7429d2/play');
+          navigate('/success');
+          return;
+        case 9:
+          saveProgress(9);
+          setModuleNumber(9);
+          setMetaLink('');
+          navigate('/success');
+          return;
+        default:
+          console.log(moduleNumber);
+          return;
       }
     } catch (error) {
-      alertModal.setTitle('Server Error');
-      alertModal.setContent('Please try again later');
-      alertModal.open();
-      console.log(error);
+      setToastContent('Server error. Try again later.');
+      setToastVariant('alert-error');
+      setToastOpen(true);
     } finally {
       setLoading(false);
     }
@@ -144,9 +129,9 @@ const Game = () => {
     e.preventDefault();
 
     if (Qanswer === '') {
-      alertModal.setTitle('Invalid Option');
-      alertModal.setContent('Please select an answer');
-      alertModal.open();
+      setToastContent('Please select a valid option.');
+      setToastVariant('alert-info');
+      setToastOpen(true);
       return;
     }
 
@@ -154,9 +139,9 @@ const Game = () => {
     const correctAnswer = currentQuestion.answer;
 
     if (Qanswer.toLowerCase() != correctAnswer.toLowerCase()) {
-      alertModal.setTitle('Incorrect Option');
-      alertModal.setContent('Option chosen is incorrect. Try Again');
-      alertModal.open();
+      setToastContent('Incorrect option. Try again');
+      setToastVariant('alert-error');
+      setToastOpen(true);
       return;
     }
 
@@ -165,7 +150,7 @@ const Game = () => {
         ...player,
         score: player.score + 1,
       });
-      // score += 1
+      // setScore((score) => score + 1);
     }
 
     if (questionNumber === questionLength - 1) {
@@ -213,16 +198,16 @@ const Game = () => {
   }, []);
 
   return (
-    <div className='w-full max-w-md p-6'>
-      <h2 className={`${styles.heading2} text-center`}>Web3 Quest Journey</h2>
-      <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 h-[450px] md:w-[450px] overflow-y-scroll'>
+    <div className='w-full max-w-md p-10'>
+      <h2 className='my-10 font-bold text-lg'>Module {moduleNumber}</h2>
+      <div className='bg-white shadow-2xl rounded px-8 py-6 mb-4 h-full w-full md:h-[350px] md:w-[950px] overflow-y-scroll'>
         {loading ? (
           <div className='flex flex-col items-center justify-center h-full'>
             <div className='loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24 mb-4'></div>
             <h3 className='text-center'>Loading...</h3>
           </div>
         ) : (
-          <div className='flex flex-row'>
+          <div className='flex flex-row justify-start'>
             <div className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-dimBlue`}>
               {questionNumber + 1}
             </div>
@@ -250,16 +235,7 @@ const Game = () => {
         )}
         <div className='flex justify-center items-center mt-5'>
           {loading ? (
-            <div class='flex items-center justify-center'>
-              <div
-                className='inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]'
-                role='status'
-              >
-                <span className='!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]'>
-                  Loading...
-                </span>
-              </div>
-            </div>
+            <Loader />
           ) : (
             <button
               onClick={checkScore}

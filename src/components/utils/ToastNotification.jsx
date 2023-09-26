@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context/AppContext';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 const ToastNotification = () => {
   const { toastOpen, toastContent, setToastOpen, toastVariant } = useContext(AppContext);
@@ -14,6 +15,9 @@ const ToastNotification = () => {
       onClick={() => setToastOpen(false)}
     >
       <div className={`alert ${toastVariant}`}>
+        <span>
+          <AiOutlineCloseCircle />
+        </span>
         <span>{toastContent}</span>
       </div>
     </div>

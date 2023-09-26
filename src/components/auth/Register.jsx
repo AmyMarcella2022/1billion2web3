@@ -19,6 +19,13 @@ const Register = () => {
   const createUser = async (e) => {
     e.preventDefault();
 
+    if (password.length < 6) {
+      setToastContent('Please enter a password with at least six characters.');
+      setToastVariant('alert-info');
+      setToastOpen(true);
+      return;
+    }
+
     const userData = {
       name,
       email,

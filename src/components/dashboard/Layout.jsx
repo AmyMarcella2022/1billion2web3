@@ -11,20 +11,16 @@ const Layout = ({ children }) => {
 
   const navigate = useNavigate();
 
-  if (!user) {
+  if (user === null) {
     navigate('/login');
   }
 
   return (
     <div className='drawer md:drawer-open bg-base-200 min-h-screen'>
       <input id='my-drawer-2' type='checkbox' className='drawer-toggle' />
-      <div className='drawer-content flex flex-col items-center justify-start bg-white'>
+      <div className='drawer-content flex flex-col items-start justify-start bg-white'>
         {/* Page content here */}
-
-        <div>
-          {/* <h1 className='font-poppins font-semibold xs:text-[48px] text-[40px] text-black xs:leading-[76.8px] leading-[66.8px] w-full'>1Billion2Web3Initiative Quiz</h1> */}
-        </div>
-        <div className='p-5'>{children}</div>
+        <div className='py-5'>{children}</div>
       </div>
       <div className='lg:hidden'>
         <label htmlFor='my-drawer-2' className='btn btn-square btn-ghost'>
@@ -63,7 +59,7 @@ const Layout = ({ children }) => {
             </li>
           ))}
           <li className='mt-10'>
-            <hr />
+            <hr className='h-4' />
           </li>
           <li>
             <LogoutButton />

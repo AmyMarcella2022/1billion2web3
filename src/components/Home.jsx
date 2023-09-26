@@ -1,23 +1,27 @@
 import React, { useState, useContext } from 'react';
 import styles from '../styles';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from '../firebase';
+import { auth } from '../firebase';
 import { AppContext } from '../context/AppContext';
 import Navbar from './common/Navbar';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import Loader from './common/Loader';
+import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 
 const Home = () => {
   const navigate = useNavigate();
 
-  const { setToastOpen, setToastContent, setToastVariant, setUserEmail } = useContext(AppContext);
+  const { setToastOpen, setToastContent, setToastVariant } = useContext(AppContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
 
   const signin = async (e) => {
     e.preventDefault();
 
-    if (email.trim() === '' || password.trim() === '') {
+    if (email === '' || password === '') {
       setToastVariant('alert-error');
       setToastContent('Email/Password incorrect');
       setToastOpen(true);
@@ -26,20 +30,21 @@ const Home = () => {
 
     setLoading(true);
 
-    login(email, password)
-      .then((user) => {
-        // setUserEmail(user.email)
-        console.log(user);
-        navigate('/dashboard');
-      })
-      .catch((error) => {
-        setToastVariant('alert-error');
-        setToastContent(`${error}`);
-        setToastOpen(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    setTimeout(() => {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((user) => {
+          console.log(user);
+          navigate('/dashboard');
+        })
+        .catch((error) => {
+          setToastVariant('alert-error');
+          setToastContent(`${error.message}`);
+          setToastOpen(true);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }, 1000);
   };
 
   return (
@@ -78,30 +83,40 @@ const Home = () => {
                       <label className='label'>
                         <span className='label-text'>Password</span>
                       </label>
-                      <input
-                        type='password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className='input input-bordered'
-                        required
-                      />
-                      <label className='label'>
-                        <span className='label-text-alt font-semibold'>Don't have an account?</span>
+                      <div className='input-group'>
+                        <input
+                          type={show ? 'text' : 'password'}
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          className='input input-bordered w-full'
+                          required
+                        />
+                        <span className='rounded-r cursor-pointer' onClick={() => setShow(!show)}>
+                          {show ? <BsEyeFill /> : <BsEyeSlashFill />}
+                        </span>
+                      </div>
+                      <label className='label mt-5 justify-center'>
                         <Link
                           to='/register'
                           className='label-text-alt link link-hover font-semibold'
                         >
-                          Register
+                          Don't have an account? Register
                         </Link>
                       </label>
                     </div>
                     <div className='form-control mt-6'>
-                      <button
-                        type='submit'
-                        className='rounded-full py-4 px-6 bg-blue-gradient font-poppins font-medium text-[18px] text-primary outline-none duration-200 hover:scale-105 btn-block'
-                      >
-                        LOGIN
-                      </button>
+                      {loading ? (
+                        <div className='text-center'>
+                          <Loader />
+                        </div>
+                      ) : (
+                        <button
+                          type='submit'
+                          className='rounded-full py-4 px-6 bg-blue-gradient font-poppins font-medium text-[18px] text-primary outline-none duration-200 hover:scale-105 btn-block'
+                        >
+                          LOGIN
+                        </button>
+                      )}
                     </div>
                   </fieldset>
                 </form>
