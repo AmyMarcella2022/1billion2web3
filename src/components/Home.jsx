@@ -50,7 +50,7 @@ const Home = () => {
   return (
     <div className='bg-black'>
       <Navbar />
-      <section id='home' className='hero min-h-screen'>
+      <section id='home' className='mt-5 hero min-h-screen'>
         <div className={`flex md:flex-row-reverse flex-col ${styles.paddingY}`}>
           <div className={`flex-1 ${styles.flexStart} flex-col xl:px-0 sm:px-16 px-6`}>
             <h1 className='flex-1 font-poppins font-semibold ss:text-[69px] text-[50px] text-white ss:leading-[100px] leading-[75px]'>
