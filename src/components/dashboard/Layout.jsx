@@ -11,7 +11,9 @@ const Layout = ({ children }) => {
 
   const navigate = useNavigate();
 
-  if (user === null) {
+  const auth = sessionStorage.getItem('authenticated');
+
+  if (auth != 'true') {
     navigate('/login');
   }
 

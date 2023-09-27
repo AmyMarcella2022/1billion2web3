@@ -22,7 +22,7 @@ const Login = () => {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        console.log(user);
+        sessionStorage.setItem('authenticated', 'true');
         navigate('/dashboard');
       })
       .catch((error) => {

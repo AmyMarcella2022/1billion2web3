@@ -1,34 +1,47 @@
 import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { dashboardAccordionList } from '../utils/constants';
 import { Link } from 'react-router-dom';
-import { getDoc, doc } from 'firebase/firestore'
+import { getDoc, doc } from 'firebase/firestore';
 import { AppContext } from '../../context/AppContext';
 import { getCurrentUser, db } from '../../firebase';
+import { BsLockFill } from 'react-icons/bs';
 
 const DashboardHome = () => {
-  const { setToastContent, setToastVariant, setToastOpen } = useContext(AppContext)
+  const { setToastContent, setToastVariant, setToastOpen } = useContext(AppContext);
 
-  const user = getCurrentUser()
+  const user = getCurrentUser();
 
-  const [progress, setProgress] = useState(1)
+  const [metaProgress, setMetaProgress] = useState(0);
+  const [classProgress, setClassProgress] = useState(0);
+  const [moduleNumber, setModuleNumber] = useState(0);
+
+  const openMetaverse = (link) => {
+    setMetaProgress((prev) => prev + 1);
+    setClassProgress((prev) => prev + 1);
+    window.open(link, '_blank');
+  };
 
   const getProgress = useCallback(async () => {
-      const docRef = doc(db, 'progress', `${user.email}`)
-      const docSnap = await getDoc(docRef)
-
-      if(docSnap.exists()){
-        const progressData = docSnap.data()
-        setProgress(progressData.module)
+    const docRef = doc(db, 'progress', `${user.email}`);
+    const docSnap = await getDoc(docRef);
+    console.log(docSnap.data());
+    if (docSnap.exists()) {
+      const progressData = docSnap.data();
+      if (progressData != null) {
+        setModuleNumber(progressData.module);
       } else {
-        setToastContent('Error getting progress')
-        setToastVariant('alert-error')
-        setToastOpen(true)
+        setModuleNumber(0);
       }
-  }, [])
+    } else {
+      setToastContent('Error getting progress');
+      setToastVariant('alert-error');
+      setToastOpen(true);
+    }
+  }, []);
 
   useEffect(() => {
-    getProgress()
-  }, [getProgress])
+    getProgress();
+  }, [getProgress]);
 
   return (
     <div className='p-5'>
@@ -38,15 +51,50 @@ const DashboardHome = () => {
           <div className='collapse-title text-xl font-medium'>{module.title}</div>
           <div className='collapse-content bg-white'>
             <ul>
-              <li className='m-2 rounded-lg p-2 hover:bg-base-300 flex justify-between'>
-                <a href={module.content.metaverse} target='_blank'>
+              <li
+                className={`m-2 rounded-lg p-2 hover:bg-base-300 flex justify-between ${
+                  metaProgress < index ? 'pointer-events-none opacity-70' : ''
+                }`}
+              >
+                <p
+                  className='cursor-pointer'
+                  onClick={() => openMetaverse(module.content.metaverse)}
+                >
                   Take Metaverse Class
-                </a>
-                <input className='checkbox checkbox-md' checked={progress > index ? true : false} type='checkbox' />
+                </p>
+                {metaProgress < index ? (
+                  <BsLockFill />
+                ) : (
+                  <input
+                    className='checkbox checkbox-md'
+                    checked={metaProgress > index ? true : false}
+                    type='checkbox'
+                    onChange={() => {}}
+                  />
+                )}
               </li>
-              <li className='m-2 rounded-lg p-2 hover:bg-base-300 flex justify-between'>
-                <Link to={module.content.path}>Take module quiz</Link>
-                <input className='checkbox checkbox-md' checked={progress > index ? true : false} type='checkbox' />
+              <li
+                className={`m-2 rounded-lg p-2 hover:bg-base-300 flex justify-between ${
+                  classProgress < index
+                    ? 'pointer-events-none opacity-70'
+                    : classProgress === index
+                    ? 'pointer-events-none opacity-70'
+                    : ''
+                }`}
+              >
+                <Link to={module.content.path}>Take Module Quiz</Link>
+                {classProgress < index ? (
+                  <BsLockFill />
+                ) : classProgress === index ? (
+                  <BsLockFill />
+                ) : (
+                  <input
+                    className='checkbox checkbox-md'
+                    checked={moduleNumber > index ? true : false}
+                    type='checkbox'
+                    onChange={() => {}}
+                  />
+                )}
               </li>
             </ul>
           </div>
