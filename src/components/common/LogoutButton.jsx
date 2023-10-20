@@ -6,6 +6,7 @@ const LogoutButton = () => {
 
   const signout = () => {
     logout().then(() => {
+      sessionStorage.setItem('authenticated', 'false')
       navigate('/');
     });
   };
