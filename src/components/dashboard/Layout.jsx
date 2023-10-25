@@ -53,7 +53,7 @@ const Layout = ({ children }) => {
                 <ul>
                   {item.modules.map((module) => (
                     <li key={module.name}>
-                      <Link to={module.path}>{module.name}</Link>
+                      <Link to='/dashboard'>{module.name}</Link>
                     </li>
                   ))}
                 </ul>

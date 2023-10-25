@@ -5,6 +5,7 @@ import { AppContext } from '../../context/AppContext';
 import Loader from '../common/Loader';
 import Navbar from '../common/Navbar';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import lotus from '../../assets/lotus-small.jpeg';
 
 const Register = () => {
   const { setToastContent, setToastOpen, setToastVariant } = useContext(AppContext);
@@ -59,6 +60,13 @@ const Register = () => {
           <div className='card flex-shrink-0 w-96 h-full shadow-2xl bg-base-100 mb-12'>
             <div className='card-body'>
               <form onSubmit={createUser}>
+              <div className='flex justify-center'>
+                    <div className="avatar">
+                      <div className="w-24 rounded-full">
+                        <img src={lotus} alt='Lotus' />
+                      </div>
+                    </div>
+                  </div>
                 <fieldset disabled={loading}>
                   <div className='form-control'>
                     <label className='label'>

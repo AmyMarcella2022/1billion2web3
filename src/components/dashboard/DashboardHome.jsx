@@ -32,11 +32,11 @@ const DashboardHome = () => {
     }
   };
 
-  const openMetaverse = async (link) => {
+  const openMetaverse = (link) => {
     setMetaProgress((prev) => prev + 1);
     setClassProgress((prev) => prev + 1);
-    await saveProgress(1)
     window.open(link, '_blank');
+    saveProgress(1)
   };
 
   const getProgress = useCallback(async () => {
@@ -47,6 +47,8 @@ const DashboardHome = () => {
       const progressData = docSnap.data();
       if (progressData != null) {
         setModuleNumber(progressData.module);
+        setClassProgress(progressData.module)
+        setMetaProgress(progressData.module)
       } else {
         setModuleNumber(0);
       }
