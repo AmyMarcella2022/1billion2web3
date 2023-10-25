@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { dashboardAccordionList } from '../utils/constants';
 import { Link } from 'react-router-dom';
-import { getDoc, doc } from 'firebase/firestore';
+import { getDoc, doc, setDoc } from 'firebase/firestore';
 import { AppContext } from '../../context/AppContext';
 import { getCurrentUser, db } from '../../firebase';
 import { BsLockFill } from 'react-icons/bs';
+import Loader from '../common/Loader';
 
 const DashboardHome = () => {
   const { setToastContent, setToastVariant, setToastOpen } = useContext(AppContext);
@@ -14,10 +15,27 @@ const DashboardHome = () => {
   const [metaProgress, setMetaProgress] = useState(0);
   const [classProgress, setClassProgress] = useState(0);
   const [moduleNumber, setModuleNumber] = useState(0);
+  const [loading, setLoading] = useState(false)
 
-  const openMetaverse = (link) => {
+  const saveProgress = async (module) => {
+    setLoading(true)
+
+    try {
+      await setDoc(doc(db, 'progress', `${user.email}`), {
+        username: user.email,
+        module: module,
+      });
+    } catch (error) {
+      alert('Error saving progress');
+    } finally {
+      setLoading(false)
+    }
+  };
+
+  const openMetaverse = async (link) => {
     setMetaProgress((prev) => prev + 1);
     setClassProgress((prev) => prev + 1);
+    await saveProgress(1)
     window.open(link, '_blank');
   };
 
@@ -45,6 +63,7 @@ const DashboardHome = () => {
 
   return (
     <div className='p-5'>
+      {loading ? <Loader /> : <div></div>}
       {dashboardAccordionList.map((module, index) => (
         <div key={module.id} className='collapse collapse-arrow bg-base-200 my-2 md:w-[500px]'>
           <input type='radio' name='my-accordion-3' />

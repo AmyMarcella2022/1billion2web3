@@ -7,6 +7,7 @@ import Navbar from './common/Navbar';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import Loader from './common/Loader';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
+import lotus from '../assets/lotus-small.jpeg'
 
 const Home = () => {
   const navigate = useNavigate();
@@ -66,6 +67,13 @@ const Home = () => {
             <div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
               <div className='card-body'>
                 <form onSubmit={signin}>
+                  <div className='flex justify-center'>
+                    <div className="avatar">
+                      <div className="w-24 rounded-full">
+                        <img src={lotus} alt='Lotus' />
+                      </div>
+                    </div>
+                  </div>
                   <fieldset disabled={loading}>
                     <div className='form-control'>
                       <label className='label'>

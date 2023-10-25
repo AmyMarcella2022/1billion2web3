@@ -14,7 +14,7 @@ import styles from '../styles';
 import { db, getCurrentUser } from '../firebase';
 import { setDoc, doc } from 'firebase/firestore';
 import { useNavigate, useParams } from 'react-router-dom';
-import useAlertModal from '../hooks/useAlertModal';
+// import useAlertModal from '../hooks/useAlertModal';
 import Loader from './common/Loader';
 import { AppContext } from '../context/AppContext';
 
@@ -22,7 +22,7 @@ const Game = () => {
   const { setToastContent, setToastOpen, setToastVariant, setModuleNumber, setMetaLink } =
     useContext(AppContext);
 
-  const alertModal = useAlertModal();
+  // const alertModal = useAlertModal();
 
   const user = getCurrentUser();
 

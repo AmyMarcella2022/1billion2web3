@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../../context/AppContext';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
@@ -8,6 +8,14 @@ const ToastNotification = () => {
   if (!toastOpen) {
     return null;
   }
+
+  useEffect(() => {
+    if(toastOpen){
+      setTimeout(()=>{
+        setToastOpen(!toastOpen);
+      },2500)
+    }
+  }, [toastOpen, setToastOpen])
 
   return (
     <div
