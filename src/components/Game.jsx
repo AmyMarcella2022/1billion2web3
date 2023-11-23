@@ -17,7 +17,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 // import useAlertModal from '../hooks/useAlertModal';
 import Loader from './common/Loader';
 import { AppContext } from '../context/AppContext';
-import logo from '../assets/1billweb3logo.png'
+import logo from '../assets/1billweb3logo.png';
 // import logo from '../assets/e2a3xr01.svg'
 
 const Game = () => {
@@ -200,62 +200,59 @@ const Game = () => {
   }, []);
 
   return (
-    <div className='w-full max-w-md p-10'>
+    <div className='pt-20'>
       <div className='flex justify-center lg:hidden'>
-          <img src={logo} className='h-20 w-20 rounded-full' alt='1Bill2Web3' />
-        </div>
-      
+        <img src={logo} className='h-20 w-20 rounded-full' alt='1Bill2Web3' />
+      </div>
+
       <h2 className='text-center font-bold text-2xl my-4'>Module {moduleNumber}</h2>
-      
-      
-      
-      <div className='bg-white shadow-2xl rounded-md px-4 py-6 mb-4 h-full w-full md:h-[350px] md:w-[950px] overflow-y-scroll'>
-        {loading ? (
-          <div className='flex flex-col items-center justify-center h-full'>
-            <div className='loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24 mb-4'></div>
-            <h3 className='text-center'>Loading...</h3>
+      <div className='card card-compact text-black overflow-y-scroll'>
+        <div className='card-body'>
+          <div className='card-title'>
+            {loading ? (
+              <div className='flex flex-col items-center justify-center h-full'>
+                <div className='loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24 mb-4'></div>
+                <h3 className='text-center'>Loading...</h3>
+              </div>
+            ) : (
+              <div className='flex flex-row justify-start gap-2'>
+                <div className={`w-10 h-10 rounded-full ${styles.flexCenter} bg-dimBlue`}>
+                  {questionNumber + 1}
+                </div>
+                <h4 className='font-poppins font-semibold text-black text-[20px] leading-[23px]'>
+                  {questions[questionNumber]?.question}
+                </h4>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className='flex flex-row justify-start gap-2'>
-            <div className={`w-10 h-10 rounded-full ${styles.flexCenter} bg-dimBlue`}>
-              {questionNumber + 1}
-            </div>
-            <div className='flex-1 flex flex-col'>
-              <h4 className='font-poppins font-semibold text-black text-[20px] leading-[23px]'>
-                {questions[questionNumber]?.question}
-              </h4>
-              {questions[questionNumber]?.options.map((option, index) => (
-                <label key={index} className='inline-flex items-center'>
-                  <input
-                    type='radio'
-                    className='form-radio h-4 w-4'
-                    name='qOption'
-                    checked={Qanswer === option}
-                    value={option}
-                    onClick={(e) => setAnswer(e.target.value)}
-                  />
-                  <span className='ml-3 mb-2 font-poppins font-normal text-black text-[18px]'>
-                    {option}
-                  </span>
-                </label>
-              ))}
-            </div>
+          {questions[questionNumber]?.options.map((option, index) => (
+            <label key={index} className='inline-flex items-center'>
+              <input
+                type='radio'
+                className='form-radio h-4 w-4'
+                name='qOption'
+                checked={Qanswer === option}
+                value={option}
+                onClick={(e) => setAnswer(e.target.value)}
+              />
+              <span className='ml-3 mb-2 font-poppins font-normal text-black text-[18px]'>
+                {option}
+              </span>
+            </label>
+          ))}
+          <div className='card-actions justify-end'>
+            {loading ? (
+              <Loader />
+            ) : (
+              <button
+                onClick={checkScore}
+                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                type='button'
+              >
+                {questionNumber === questionLength - 1 ? 'Mark Module As Done' : 'Next'}
+              </button>
+            )}
           </div>
-        )}
-        <div className='flex justify-center items-center mt-5'>
-          {loading ? (
-            <Loader />
-          ) : (
-            <button
-              onClick={checkScore}
-              className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-              type='button'
-            >
-              {
-                questionNumber === questionLength - 1 ? 'Mark Module As Done' : 'Next'
-              }
-            </button>
-          )}
         </div>
       </div>
     </div>

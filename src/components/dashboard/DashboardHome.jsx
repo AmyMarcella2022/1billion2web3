@@ -15,10 +15,10 @@ const DashboardHome = () => {
   const [metaProgress, setMetaProgress] = useState(0);
   const [classProgress, setClassProgress] = useState(0);
   const [moduleNumber, setModuleNumber] = useState(0);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const saveProgress = async (module) => {
-    setLoading(true)
+    setLoading(true);
 
     try {
       await setDoc(doc(db, 'progress', `${user.email}`), {
@@ -28,7 +28,7 @@ const DashboardHome = () => {
     } catch (error) {
       alert('Error saving progress');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -36,7 +36,7 @@ const DashboardHome = () => {
     setMetaProgress((prev) => prev + 1);
     setClassProgress((prev) => prev + 1);
     window.open(link, '_blank');
-    saveProgress(index + 1)
+    saveProgress(index + 1);
   };
 
   const getProgress = useCallback(async () => {
@@ -47,8 +47,8 @@ const DashboardHome = () => {
       const progressData = docSnap.data();
       if (progressData != null) {
         setModuleNumber(progressData.module);
-        setClassProgress(progressData.module)
-        setMetaProgress(progressData.module)
+        setClassProgress(progressData.module);
+        setMetaProgress(progressData.module);
       } else {
         setModuleNumber(0);
       }
@@ -122,7 +122,9 @@ const DashboardHome = () => {
         </div>
       ))}
       <div className='mt-4'>
-        <button className='btn btn-success btn-disabled btn-block'>Request Completion Certificate</button>
+        <button className={`btn btn-success ${moduleNumber === 9 ? '' : 'btn-disabled'} btn-block`}>
+          Request Completion Certificate
+        </button>
       </div>
     </div>
   );

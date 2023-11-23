@@ -10,12 +10,12 @@ const ToastNotification = () => {
   }
 
   useEffect(() => {
-    if(toastOpen){
-      setTimeout(()=>{
+    if (toastOpen) {
+      setTimeout(() => {
         setToastOpen(!toastOpen);
-      },2500)
+      }, 2500);
     }
-  }, [toastOpen, setToastOpen])
+  }, [toastOpen, setToastOpen]);
 
   return (
     <div

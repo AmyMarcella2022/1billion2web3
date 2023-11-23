@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import DashboardHeader from './DashboardHeader';
 import { LogoutButton } from '../common/LogoutButton';
 import { sideMenuItems } from '../utils/constants';
-import logo from '../../assets/1billweb3logo.png'
+import logo from '../../assets/1billweb3logo.png';
 // import styles from '../../styles';
 
 const Layout = ({ children }) => {
@@ -74,11 +74,10 @@ const Layout = ({ children }) => {
             <DashboardHeader user={user} />
           </li>
           <li className='hidden lg:flex justify-center items-center'>
-          <img src={logo} className='h-32 w-32 rounded-full' alt='1Bill2Web3' />
+            <img src={logo} className='h-32 w-32 rounded-full' alt='1Bill2Web3' />
           </li>
         </ul>
         <br />
-        
       </div>
     </div>
   );

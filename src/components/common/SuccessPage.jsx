@@ -2,15 +2,14 @@ import React, { useContext } from 'react';
 import { AppContext } from '../../context/AppContext';
 // import { getCurrentUser, db } from '../../firebase';
 // import { setDoc, doc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 const SuccessPage = () => {
-  const { moduleNumber } =
-    useContext(AppContext);
+  const { moduleNumber } = useContext(AppContext);
 
   // const user = getCurrentUser();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // const [walletAddress, setWalletAddress] = useState('');
 
@@ -28,18 +27,18 @@ const SuccessPage = () => {
     //     setToastOpen(true);
     //   });
 
-    navigate('/dashboard')
+    navigate('/dashboard');
   };
 
   const proceed = (e) => {
     e.preventDefault();
 
-    submit()
+    submit();
   };
 
   return (
     <div className=''>
-      <div className='card w-[500px] bg-base-100 shadow-xl'>
+      <div className='card card-normal lg:w-[500px] bg-base-100 shadow-xl'>
         <div className='card-body items-center text-center'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -54,8 +53,10 @@ const SuccessPage = () => {
               d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
             />
           </svg>
-          <h5 className='text-lg font-bold font-poppins uppercase'>Congratulations on finishing module {moduleNumber}</h5>
-          
+          <h5 className='text-lg font-bold font-poppins uppercase'>
+            Congratulations on finishing module {moduleNumber}
+          </h5>
+
           <div className='card-actions'>
             <button className='btn btn-success' onClick={proceed}>
               Proceed to Next Module

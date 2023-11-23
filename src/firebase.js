@@ -32,9 +32,9 @@ const getCurrentUser = () => {
   // var photo = user.photoURL
   // var email = user.email
   if (user) {
-    return user
+    return user;
   } else {
-    return null
+    return null;
   }
 };
 

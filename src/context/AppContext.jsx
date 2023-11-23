@@ -12,7 +12,7 @@ export const AppProvider = ({ children }) => {
   const [metaLink, setMetaLink] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [moduleNumber, setModuleNumber] = useState(0);
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
 
   const providerValues = {
     toastOpen,
@@ -34,7 +34,7 @@ export const AppProvider = ({ children }) => {
     moduleNumber,
     setModuleNumber,
     user,
-    setUser
+    setUser,
   };
 
   return <AppContext.Provider value={providerValues}>{children}</AppContext.Provider>;

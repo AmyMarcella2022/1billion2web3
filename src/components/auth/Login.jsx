@@ -4,7 +4,11 @@ import { useNavigate, Link } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext';
 import Loader from '../common/Loader';
 import Navbar from '../common/Navbar';
-import { signInWithEmailAndPassword, setPersistence, browserSessionPersistence } from 'firebase/auth';
+import {
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserSessionPersistence,
+} from 'firebase/auth';
 import lotus from '../../assets/lotus-small.jpeg';
 
 const Login = () => {
@@ -21,20 +25,22 @@ const Login = () => {
 
     setLoading(true);
 
-    setPersistence(auth, browserSessionPersistence).then(() => {
-      return signInWithEmailAndPassword(auth, email, password)
-    }).then(() => {
-      // sessionStorage.setItem('authenticated', 'true');
-      navigate('/dashboard');
-    }).catch((error) => {
-      setToastVariant('alert-error');
-      setToastContent(`${error}`);
-      setToastOpen(true);
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-  
+    setPersistence(auth, browserSessionPersistence)
+      .then(() => {
+        return signInWithEmailAndPassword(auth, email, password);
+      })
+      .then(() => {
+        // sessionStorage.setItem('authenticated', 'true');
+        navigate('/dashboard');
+      })
+      .catch((error) => {
+        setToastVariant('alert-error');
+        setToastContent(`${error}`);
+        setToastOpen(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -46,13 +52,13 @@ const Login = () => {
           <div className='card flex-shrink-0 w-96 shadow-2xl bg-base-100'>
             <div className='card-body'>
               <form onSubmit={signin}>
-              <div className='flex justify-center'>
-                    <div className="avatar">
-                      <div className="w-24 rounded-full">
-                        <img src={lotus} alt='Lotus' />
-                      </div>
+                <div className='flex justify-center'>
+                  <div className='avatar'>
+                    <div className='w-24 rounded-full'>
+                      <img src={lotus} alt='Lotus' />
                     </div>
                   </div>
+                </div>
                 <fieldset disabled={loading}>
                   <div className='form-control'>
                     <label className='label'>
