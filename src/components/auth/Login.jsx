@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext';
 import Loader from '../common/Loader';
 import Navbar from '../common/Navbar';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, setPersistence, browserSessionPersistence } from 'firebase/auth';
 import lotus from '../../assets/lotus-small.jpeg';
 
 const Login = () => {
@@ -21,19 +21,20 @@ const Login = () => {
 
     setLoading(true);
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((user) => {
-        sessionStorage.setItem('authenticated', 'true');
-        navigate('/dashboard');
-      })
-      .catch((error) => {
-        setToastVariant('alert-error');
-        setToastContent(`${error}`);
-        setToastOpen(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    setPersistence(auth, browserSessionPersistence).then(() => {
+      return signInWithEmailAndPassword(auth, email, password)
+    }).then(() => {
+      // sessionStorage.setItem('authenticated', 'true');
+      navigate('/dashboard');
+    }).catch((error) => {
+      setToastVariant('alert-error');
+      setToastContent(`${error}`);
+      setToastOpen(true);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+  
   };
 
   return (

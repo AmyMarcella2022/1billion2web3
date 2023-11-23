@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import DashboardHeader from './DashboardHeader';
 import { LogoutButton } from '../common/LogoutButton';
 import { sideMenuItems } from '../utils/constants';
+import logo from '../../assets/1billweb3logo.png'
 // import styles from '../../styles';
 
 const Layout = ({ children }) => {
@@ -11,9 +12,11 @@ const Layout = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const auth = sessionStorage.getItem('authenticated');
+  // const auth = sessionStorage.getItem('authenticated');
 
-  if (auth != 'true') {
+  // console.log(user)
+
+  if (user === null) {
     navigate('/login');
   }
 
@@ -70,8 +73,12 @@ const Layout = ({ children }) => {
           <li className='md:hidden'>
             <DashboardHeader user={user} />
           </li>
+          <li className='hidden lg:flex justify-center items-center'>
+          <img src={logo} className='h-32 w-32 rounded-full' alt='1Bill2Web3' />
+          </li>
         </ul>
         <br />
+        
       </div>
     </div>
   );

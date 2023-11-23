@@ -15,6 +15,7 @@ const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [walletAddress, setWalletAddress] = useState('')
   const [loading, setLoading] = useState(false);
 
   const createUser = async (e) => {
@@ -30,6 +31,7 @@ const Register = () => {
     const userData = {
       name,
       email,
+      walletAddress
     };
 
     setLoading(true);
@@ -54,20 +56,20 @@ const Register = () => {
   return (
     <>
       <Navbar />
-      <div className='bg-black h-screen'>
-        <div className='flex flex-col flex-1 items-center'>
-          <h1 className='font-poppins text-3xl text-white text-center h-[20px] py-24'>REGISTER</h1>
-          <div className='card flex-shrink-0 w-96 h-full shadow-2xl bg-base-100 mb-12'>
-            <div className='card-body'>
-              <form onSubmit={createUser}>
+      <div className='flex items-center justify-center bg-black h-screen overflow-y-scroll'>
+          <div className='card bg-base-200 mt-80 lg:mt-36'>
+            <div className='card-body text-center'>
+            <h1 className='card-title font-poppins text-2xl text-white'>REGISTER</h1>
               <div className='flex justify-center'>
-                    <div className="avatar">
-                      <div className="w-24 rounded-full">
-                        <img src={lotus} alt='Lotus' />
-                      </div>
-                    </div>
+                <div className="avatar">
+                  <div className="w-24 rounded-full">
+                    <img src={lotus} alt='Lotus' />
                   </div>
+                </div>
+              </div>
+              <form onSubmit={createUser}>
                 <fieldset disabled={loading}>
+                  <div className='flex flex-col md:flex-row gap-3'>
                   <div className='form-control'>
                     <label className='label'>
                       <span className='label-text'>Full Name</span>
@@ -92,6 +94,13 @@ const Register = () => {
                       required
                     />
                   </div>
+                  </div>
+                  <div className='form-control'>
+                    <label className='label'>
+                      <span className='label-text'>Wallet Address</span>
+                    </label>
+                    <input type='text' value={walletAddress} onChange={(e) => setWalletAddress(e.target.value)} className='input input-bordered'  />
+                  </div>
                   <div className='form-control'>
                     <label className='label'>
                       <span className='label-text'>Password</span>
@@ -103,6 +112,8 @@ const Register = () => {
                       className='input input-bordered'
                       required
                     />
+                    </div>
+                    <div>
                     <label className='label'>
                       <span className='label-text-alt font-semibold'>Already have an account?</span>
                       <Link to='/login' className='label-text-alt link link-hover font-semibold'>
@@ -110,7 +121,7 @@ const Register = () => {
                       </Link>
                     </label>
                   </div>
-                  <div className='form-control mt-6'>
+                  <div className='card-actions mt-6'>
                     {loading ? (
                       <div className='text-center'>
                         <Loader />
@@ -129,7 +140,6 @@ const Register = () => {
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 };

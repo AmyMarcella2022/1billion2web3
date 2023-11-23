@@ -53,8 +53,8 @@ const Home = () => {
       <Navbar />
       <section id='home' className='mt-5 hero min-h-screen'>
         <div className={`flex md:flex-row-reverse flex-col ${styles.paddingY}`}>
-          <div className={`flex-1 ${styles.flexStart} flex-col xl:px-0 sm:px-16 px-6`}>
-            <h1 className='flex-1 font-poppins font-semibold ss:text-[69px] text-[50px] text-white ss:leading-[100px] leading-[75px]'>
+          <div className={`flex-1 ${styles.flexStart} flex-col xl:px-0 sm:px-16 px-6 py-3`}>
+            <h1 className='flex-1 font-poppins font-semibold ss:text-[69px] text-[50px] text-white ss:leading-[100px] leading-[75px] mt-16 md:pt-0'>
               <br className='sm:block hidden' /> <span className='text-gradient'>Web3 Quest</span>{' '}
             </h1>
             <p className={`${styles.paragraph} mb-5`}>

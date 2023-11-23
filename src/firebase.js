@@ -6,6 +6,7 @@ import {
   signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  // onAuthStateChanged
 } from 'firebase/auth';
 
 //Firebase configuration
@@ -30,7 +31,11 @@ const getCurrentUser = () => {
   // var phone = user.phoneNumber
   // var photo = user.photoURL
   // var email = user.email
-  return user;
+  if (user) {
+    return user
+  } else {
+    return null
+  }
 };
 
 const register = (email, password) => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BiUserCircle } from 'react-icons/bi';
 
+
 const DashboardHeader = ({ user }) => {
   return (
     <div className='flex flex-col justify-center items-center'>

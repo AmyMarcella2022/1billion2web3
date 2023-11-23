@@ -32,11 +32,11 @@ const DashboardHome = () => {
     }
   };
 
-  const openMetaverse = (link) => {
+  const openMetaverse = (link, progress) => {
     setMetaProgress((prev) => prev + 1);
     setClassProgress((prev) => prev + 1);
     window.open(link, '_blank');
-    saveProgress(1)
+    saveProgress(index + 1)
   };
 
   const getProgress = useCallback(async () => {
@@ -79,7 +79,7 @@ const DashboardHome = () => {
               >
                 <p
                   className='cursor-pointer'
-                  onClick={() => openMetaverse(module.content.metaverse)}
+                  onClick={() => openMetaverse(module.content.metaverse, index)}
                 >
                   Take Metaverse Class
                 </p>
@@ -121,6 +121,9 @@ const DashboardHome = () => {
           </div>
         </div>
       ))}
+      <div className='mt-4'>
+        <button className='btn btn-success btn-disabled btn-block'>Request Completion Certificate</button>
+      </div>
     </div>
   );
 };

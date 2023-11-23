@@ -17,6 +17,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 // import useAlertModal from '../hooks/useAlertModal';
 import Loader from './common/Loader';
 import { AppContext } from '../context/AppContext';
+import logo from '../assets/1billweb3logo.png'
+// import logo from '../assets/e2a3xr01.svg'
 
 const Game = () => {
   const { setToastContent, setToastOpen, setToastVariant, setModuleNumber, setMetaLink } =
@@ -199,20 +201,27 @@ const Game = () => {
 
   return (
     <div className='w-full max-w-md p-10'>
-      <h2 className='my-10 font-bold text-lg'>Module {moduleNumber}</h2>
-      <div className='bg-white shadow-2xl rounded px-8 py-6 mb-4 h-full w-full md:h-[350px] md:w-[950px] overflow-y-scroll'>
+      <div className='flex justify-center lg:hidden'>
+          <img src={logo} className='h-20 w-20 rounded-full' alt='1Bill2Web3' />
+        </div>
+      
+      <h2 className='text-center font-bold text-2xl my-4'>Module {moduleNumber}</h2>
+      
+      
+      
+      <div className='bg-white shadow-2xl rounded-md px-4 py-6 mb-4 h-full w-full md:h-[350px] md:w-[950px] overflow-y-scroll'>
         {loading ? (
           <div className='flex flex-col items-center justify-center h-full'>
             <div className='loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24 mb-4'></div>
             <h3 className='text-center'>Loading...</h3>
           </div>
         ) : (
-          <div className='flex flex-row justify-start'>
-            <div className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-dimBlue`}>
+          <div className='flex flex-row justify-start gap-2'>
+            <div className={`w-10 h-10 rounded-full ${styles.flexCenter} bg-dimBlue`}>
               {questionNumber + 1}
             </div>
-            <div className='flex-1 flex flex-col ml-3'>
-              <h4 className='font-poppins font-semibold text-black text-[20px] leading-[23px] mb-1'>
+            <div className='flex-1 flex flex-col'>
+              <h4 className='font-poppins font-semibold text-black text-[20px] leading-[23px]'>
                 {questions[questionNumber]?.question}
               </h4>
               {questions[questionNumber]?.options.map((option, index) => (
@@ -225,7 +234,7 @@ const Game = () => {
                     value={option}
                     onClick={(e) => setAnswer(e.target.value)}
                   />
-                  <span className='ml-5 mb-3 font-poppins font-normal text-black text-[18px] leading-[30.8px]'>
+                  <span className='ml-3 mb-2 font-poppins font-normal text-black text-[18px]'>
                     {option}
                   </span>
                 </label>
@@ -242,7 +251,9 @@ const Game = () => {
               className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
               type='button'
             >
-              Submit
+              {
+                questionNumber === questionLength - 1 ? 'Mark Module As Done' : 'Next'
+              }
             </button>
           )}
         </div>
