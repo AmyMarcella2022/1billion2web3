@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, setDoc, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, collection, addDoc, getDoc } from 'firebase/firestore';
 import {
   getAuth,
   signOut,
@@ -10,7 +10,7 @@ import {
 } from 'firebase/auth';
 
 //Firebase configuration
-const firebaseConfig = {
+const firebaseProdConfig = {
   apiKey: 'AIzaSyAx_1ZG2J5WWgc5OUtdqwWmWt8w78kZoNU',
   authDomain: 'web3-quest-journey.firebaseapp.com',
   projectId: 'web3-quest-journey',
@@ -19,6 +19,17 @@ const firebaseConfig = {
   appId: '1:213342267048:web:d1ac5a80d69d4b4adc849d',
   measurementId: 'G-CMGC112PPR',
 };
+
+const firebaseDevConfig = {
+  apiKey: 'AIzaSyB2COw9wQzW-qwst6NG7ashaktVcVMt5yk',
+  authDomain: 'gata-protocol-quiz.firebaseapp.com',
+  projectId: 'gata-protocol-quiz',
+  storageBucket: 'gata-protocol-quiz.appspot.com',
+  messagingSenderId: '772515033498',
+  appId: '1:772515033498:web:fc790f4ca750384fa94a23',
+};
+
+const firebaseConfig = import.meta.env.PROD ? firebaseProdConfig : firebaseDevConfig;
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -86,4 +97,32 @@ const addNewDocument = async (collectionName, data) => {
   return docData.id;
 };
 
-export { db, getCurrentUser, logout, register, login, addNewDocument, addDocumentWithID, auth };
+const addProgress = async (email, progressData) => {
+  await setDoc(doc(db, 'progress', email), progressData);
+};
+
+const getProgress = async (email) => {
+  const docRef = doc(db, 'progress', email);
+  const docSnap = await getDoc(docRef);
+  if (!docSnap.exists()) {
+    const progress = docSnap.data();
+    const moduleNumber = progress.module;
+    return moduleNumber;
+  } else {
+    const moduleNumber = 0;
+    return moduleNumber;
+  }
+};
+
+export {
+  db,
+  getCurrentUser,
+  logout,
+  register,
+  login,
+  addNewDocument,
+  addDocumentWithID,
+  auth,
+  addProgress,
+  getProgress,
+};

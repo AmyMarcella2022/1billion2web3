@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { addDocumentWithID, auth } from '../../firebase';
+import { auth, addNewDocument } from '../../firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext';
 import Loader from '../common/Loader';
@@ -37,8 +37,8 @@ const Register = () => {
     setLoading(true);
 
     createUserWithEmailAndPassword(auth, email, password)
-      .then((user) => {
-        addDocumentWithID('users', user.uid, userData);
+      .then(() => {
+        addNewDocument('users', userData);
       })
       .then(() => {
         navigate('/login');

@@ -6,8 +6,8 @@ import Loader from '../common/Loader';
 import Navbar from '../common/Navbar';
 import {
   signInWithEmailAndPassword,
-  setPersistence,
-  browserSessionPersistence,
+  // setPersistence,
+  // browserSessionPersistence,
 } from 'firebase/auth';
 import lotus from '../../assets/lotus-small.jpeg';
 
@@ -25,12 +25,13 @@ const Login = () => {
 
     setLoading(true);
 
-    setPersistence(auth, browserSessionPersistence)
-      .then(() => {
-        return signInWithEmailAndPassword(auth, email, password);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Add user to local storage and update state
+        localStorage.setItem('userEmail', userCredential.user.email);
+        localStorage.setItem('authenticated', true);
       })
       .then(() => {
-        // sessionStorage.setItem('authenticated', 'true');
         navigate('/dashboard');
       })
       .catch((error) => {

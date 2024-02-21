@@ -11,14 +11,14 @@ import {
   module9,
 } from '../utils';
 import styles from '../styles';
-import { db, getCurrentUser } from '../firebase';
-import { setDoc, doc } from 'firebase/firestore';
+// import { getCurrentUser } from '../firebase';
+// import { setDoc, doc } from 'firebase/firestore';
 import { useNavigate, useParams } from 'react-router-dom';
 // import useAlertModal from '../hooks/useAlertModal';
 import Loader from './common/Loader';
 import { AppContext } from '../context/AppContext';
 import logo from '../assets/1billweb3logo.png';
-// import logo from '../assets/e2a3xr01.svg'
+import { addProgress } from '../firebase';
 
 const Game = () => {
   const { setToastContent, setToastOpen, setToastVariant, setModuleNumber, setMetaLink } =
@@ -26,7 +26,7 @@ const Game = () => {
 
   // const alertModal = useAlertModal();
 
-  const user = getCurrentUser();
+  // const user = getCurrentUser();
 
   const { id } = useParams();
 
@@ -34,7 +34,7 @@ const Game = () => {
 
   const navigate = useNavigate();
 
-  const name = sessionStorage.getItem('name');
+  const name = localStorage.getItem('userName');
 
   const [questions, setQuestions] = useState([]);
   const [questionNumber, setQuestionNumber] = useState(0);
@@ -45,13 +45,24 @@ const Game = () => {
   const questionLength = questions.length;
 
   const saveProgress = async (module) => {
+    setLoading(true);
+
+    var email = localStorage.getItem('userEmail');
+
+    const progress = {
+      email,
+      moduleNumber: module,
+    };
+
     try {
-      await setDoc(doc(db, 'progress', `${user.email}`), {
-        username: user.email,
-        module: module,
-      });
+      await addProgress(email, progress);
+      setToastContent('Progress updated');
+      setToastVariant('alert-success');
+      setToastOpen(true);
     } catch (error) {
-      alert('Error saving progress');
+      setToastContent('Error updating progress');
+      setToastVariant('alert-error');
+      setToastOpen(true);
     }
   };
 

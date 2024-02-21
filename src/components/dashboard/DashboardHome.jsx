@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { dashboardAccordionList } from '../utils/constants';
 import { Link } from 'react-router-dom';
-import { getDoc, doc, setDoc } from 'firebase/firestore';
+// import { getDoc, doc, setDoc } from 'firebase/firestore';
 import { AppContext } from '../../context/AppContext';
-import { getCurrentUser, db } from '../../firebase';
+import { addProgress, getProgress } from '../../firebase';
 import { BsLockFill } from 'react-icons/bs';
 import Loader from '../common/Loader';
 
 const DashboardHome = () => {
   const { setToastContent, setToastVariant, setToastOpen } = useContext(AppContext);
 
-  const user = getCurrentUser();
+  // const user = getCurrentUser();
 
   const [metaProgress, setMetaProgress] = useState(0);
   const [classProgress, setClassProgress] = useState(0);
@@ -20,15 +20,22 @@ const DashboardHome = () => {
   const saveProgress = async (module) => {
     setLoading(true);
 
+    var email = localStorage.getItem('userEmail');
+
+    const progress = {
+      email,
+      moduleNumber: module,
+    };
+
     try {
-      await setDoc(doc(db, 'progress', `${user.email}`), {
-        username: user.email,
-        module: module,
-      });
+      await addProgress(email, progress);
+      setToastContent('Progress updated');
+      setToastVariant('alert-success');
+      setToastOpen(true);
     } catch (error) {
-      alert('Error saving progress');
-    } finally {
-      setLoading(false);
+      setToastContent('Error updating progress');
+      setToastVariant('alert-error');
+      setToastOpen(true);
     }
   };
 
@@ -39,29 +46,19 @@ const DashboardHome = () => {
     saveProgress(index + 1);
   };
 
-  const getProgress = useCallback(async () => {
-    const docRef = doc(db, 'progress', `${user.email}`);
-    const docSnap = await getDoc(docRef);
-    console.log(docSnap.data());
-    if (docSnap.exists()) {
-      const progressData = docSnap.data();
-      if (progressData != null) {
-        setModuleNumber(progressData.module);
-        setClassProgress(progressData.module);
-        setMetaProgress(progressData.module);
-      } else {
-        setModuleNumber(0);
-      }
-    } else {
-      setToastContent('Error getting progress');
-      setToastVariant('alert-error');
-      setToastOpen(true);
-    }
+  const getPlayerProgress = useCallback(async () => {
+    var email = localStorage.getItem('userEmail');
+
+    const moduleNumber = await getProgress(email);
+
+    setModuleNumber(moduleNumber);
+    setClassProgress(moduleNumber);
+    setMetaProgress(moduleNumber);
   }, []);
 
   useEffect(() => {
-    getProgress();
-  }, [getProgress]);
+    getPlayerProgress();
+  }, [getPlayerProgress]);
 
   return (
     <div className='p-5'>
