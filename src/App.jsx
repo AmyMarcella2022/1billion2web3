@@ -1,17 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Rewards from './components/Rewards';
-import Home from './components/Home';
-import Game from './components/Game';
-// import AlertModal from './components/common/AlertModal';
-// import Navbar from './components/common/Navbar';
-import Login from './components/auth/Login';
-import Register from './components/auth/Register';
 
 import { AppProvider } from './context/AppContext';
 import ToastNotification from './components/utils/ToastNotification';
-import Layout from './components/dashboard/Layout';
-import DashboardHome from './components/dashboard/DashboardHome';
-import { SuccessPage } from './components/common/SuccessPage';
+
+import { AdminLayout } from './components/admin/AdminLayout';
+import { AdminHome } from './components/admin/AdminHome';
+import { UsersTable } from './components/admin/UsersTable';
 
 let toastNotification = <ToastNotification />;
 
@@ -23,11 +17,33 @@ function App() {
           {toastNotification}
           <div className=''>
             <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/reward' element={<Rewards />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/register' element={<Register />} />
               <Route
+                path='/'
+                element={
+                  <AdminLayout>
+                    <AdminHome />
+                  </AdminLayout>
+                }
+              />
+              <Route
+                path='/admin-home'
+                element={
+                  <AdminLayout>
+                    <AdminHome />
+                  </AdminLayout>
+                }
+              />
+              <Route
+                path='/admin-users'
+                element={
+                  <AdminLayout>
+                    <UsersTable />
+                  </AdminLayout>
+                }
+              />
+              {/* <Route path='/login' element={<Login />} /> */}
+              {/* <Route path='/register' element={<Register />} /> */}
+              {/* <Route
                 path='/module/:id'
                 element={
                   <Layout>
@@ -50,7 +66,7 @@ function App() {
                     <SuccessPage />
                   </Layout>
                 }
-              />
+              /> */}
             </Routes>
           </div>
         </BrowserRouter>

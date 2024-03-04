@@ -1,3 +1,5 @@
+import { FaUsers } from 'react-icons/fa';
+
 export const navbarButtons = [
   {
     id: 1,
@@ -152,5 +154,13 @@ export const dashboardAccordionList = [
       metaverse: 'https://www.voxels.com/spaces/e8baf729-786c-4a35-98d6-19d0fe7429d2/play',
       path: '/module/9',
     },
+  },
+];
+
+export const AdminSideMenu = [
+  {
+    title: 'Users',
+    icon: <FaUsers />,
+    path: '/admin-users',
   },
 ];

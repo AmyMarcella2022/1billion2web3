@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, setDoc, collection, addDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, collection, addDoc, getDoc, getDocs } from 'firebase/firestore';
 import {
   getAuth,
   signOut,
@@ -97,6 +97,16 @@ const addNewDocument = async (collectionName, data) => {
   return docData.id;
 };
 
+const getAllDocuments = async (collectionName) => {
+  const querySnapshot = await getDocs(collection(db, collectionName));
+  let documents = [];
+  querySnapshot.forEach((document) => {
+    documents.push({ ...document.data(), id: document.id });
+  });
+
+  return documents;
+};
+
 const addProgress = async (email, progressData) => {
   await setDoc(doc(db, 'progress', email), progressData);
 };
@@ -125,4 +135,5 @@ export {
   auth,
   addProgress,
   getProgress,
+  getAllDocuments,
 };
