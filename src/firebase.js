@@ -1,6 +1,17 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, setDoc, collection, addDoc, getDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  collection,
+  addDoc,
+  getDoc,
+  query,
+  where,
+  getDocs,
+  updateDoc
+} from 'firebase/firestore';
 import {
   getAuth,
   signOut,
@@ -88,6 +99,18 @@ const logout = () => {
   });
 };
 
+const getUserId = async (email) => {
+  var user = {}
+  const q = query(collection(db, 'users'), where('email', '==', email));
+  const snapshot = await getDocs(q);
+  snapshot.forEach((doc) => {
+    user.userId = doc.id
+    user.userData = doc.data()
+  });
+  console.log(user)
+  return user
+};
+
 const addDocumentWithID = async (collectionName, docID, data) => {
   await setDoc(doc(db, collectionName, docID), data);
 };
@@ -98,6 +121,12 @@ const addNewDocument = async (collectionName, data) => {
 };
 
 const addProgress = async (email, progressData) => {
+  const user = await getUserId(email)
+  var id = user.userId
+  const userRef = doc(db, "users", id);
+  await updateDoc(userRef, {
+    progress: progressData.moduleNumber
+  })
   await setDoc(doc(db, 'progress', email), progressData);
 };
 
@@ -125,4 +154,5 @@ export {
   auth,
   addProgress,
   getProgress,
+  getUserId
 };
