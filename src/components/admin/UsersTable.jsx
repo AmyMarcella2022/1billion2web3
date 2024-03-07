@@ -48,7 +48,7 @@ const UsersTable = () => {
   return (
     <div className='mt-5'>
       <h4 className='text-center font-bold text-2xl'>Users</h4>
-      <div className='mt-5 p-4'>
+      <div className='mt-5 p-4 overflow-x-auto'>
         <div className='table table-xs'>
           {tableHead}
           {tableBody}
