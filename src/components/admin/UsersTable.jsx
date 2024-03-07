@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { getAllDocuments } from '../../firebase';
+import { FaCheck } from 'react-icons/fa';
+import { IoClose } from 'react-icons/io5';
 
 const UsersTable = () => {
   const [users, setUsers] = useState([]);
@@ -36,7 +38,7 @@ const UsersTable = () => {
           <td>{user.name}</td>
           <td>{user.email}</td>
           <td>{user.progress}</td>
-          <td>{user.certificate}</td>
+          <td>{user.certificate ? <FaCheck /> : <IoClose />}</td>
           <td>{user.walletAddress}</td>
         </tr>
       ))}
