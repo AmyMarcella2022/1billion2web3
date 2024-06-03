@@ -34,7 +34,8 @@ const Home = () => {
     setTimeout(() => {
       signInWithEmailAndPassword(auth, email, password)
         .then((user) => {
-          console.log(user);
+          localStorage.setItem('userEmail', user.user.email);
+          localStorage.setItem('authenticated', true);
           navigate('/dashboard');
         })
         .catch((error) => {
@@ -45,7 +46,7 @@ const Home = () => {
         .finally(() => {
           setLoading(false);
         });
-    }, 1000);
+    }, 500);
   };
 
   return (

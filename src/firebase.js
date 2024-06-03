@@ -10,7 +10,7 @@ import {
   query,
   where,
   getDocs,
-  updateDoc
+  updateDoc,
 } from 'firebase/firestore';
 import {
   getAuth,
@@ -100,15 +100,15 @@ const logout = () => {
 };
 
 const getUserId = async (email) => {
-  var user = {}
+  var user = {};
   const q = query(collection(db, 'users'), where('email', '==', email));
   const snapshot = await getDocs(q);
   snapshot.forEach((doc) => {
-    user.userId = doc.id
-    user.userData = doc.data()
+    user.userId = doc.id;
+    user.userData = doc.data();
   });
-  console.log(user)
-  return user
+  console.log(user);
+  return user;
 };
 
 const addDocumentWithID = async (collectionName, docID, data) => {
@@ -121,21 +121,21 @@ const addNewDocument = async (collectionName, data) => {
 };
 
 const addProgress = async (email, progressData) => {
-  const user = await getUserId(email)
-  var id = user.userId
-  const userRef = doc(db, "users", id);
+  const user = await getUserId(email);
+  var id = user.userId;
+  const userRef = doc(db, 'users', id);
   await updateDoc(userRef, {
-    progress: progressData.moduleNumber
-  })
+    progress: progressData.moduleNumber,
+  });
   await setDoc(doc(db, 'progress', email), progressData);
 };
 
 const getProgress = async (email) => {
   const docRef = doc(db, 'progress', email);
   const docSnap = await getDoc(docRef);
-  if (!docSnap.exists()) {
+  if (docSnap.exists()) {
     const progress = docSnap.data();
-    const moduleNumber = progress.module;
+    const moduleNumber = progress.moduleNumber;
     return moduleNumber;
   } else {
     const moduleNumber = 0;
@@ -154,5 +154,5 @@ export {
   auth,
   addProgress,
   getProgress,
-  getUserId
+  getUserId,
 };

@@ -23,7 +23,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className='w-full flex py-3 mb-5 justify-between items-center navbar fixed top-0 z-50 bg-black'>
+    <nav className='w-full flex py-3 mb-5 justify-between items-center navbar fixed top-0 z-10 bg-base-200'>
       <h1 className='font-signature text-3xl text-white h-[20px] w-[50px]'>
         1Billion2Web3Initiative
       </h1>

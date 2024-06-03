@@ -19,7 +19,7 @@ const ToastNotification = () => {
 
   return (
     <div
-      className='toast toast-top toast-end cursor-pointer z-10'
+      className='toast toast-top toast-end cursor-pointer z-50'
       onClick={() => setToastOpen(false)}
     >
       <div className={`alert ${toastVariant}`}>
