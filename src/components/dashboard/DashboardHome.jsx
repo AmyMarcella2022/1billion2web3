@@ -6,7 +6,8 @@ import { AppContext } from '../../context/AppContext';
 import { addProgress, getProgress } from '../../firebase';
 import { BsLockFill } from 'react-icons/bs';
 import Loader from '../common/Loader';
-import { addNewDocument } from '../../firebase';
+import { addDocumentWithID, db } from '../../firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 const DashboardHome = () => {
   const { setToastContent, setToastVariant, setToastOpen } = useContext(AppContext);
@@ -80,16 +81,27 @@ const DashboardHome = () => {
       // get email from local storage
       var email = localStorage.getItem('userEmail');
 
-      const payload = {
-        email,
-        received: false,
-      };
+      const docRef = doc(db, 'certificate-requests', email)
+      const docSnap = await getDoc(docRef)
 
-      await addNewDocument('certificate-requests', payload);
+      if(docSnap.exists()) {
+        setToastContent(`Request already sent`);
+        setToastVariant('alert');
+        setToastOpen(true);
+        return;
+      } else {
+        const payload = {
+          email,
+          received: false,
+        };
+  
+        await addDocumentWithID('certificate-requests', email, payload)
+  
+        setToastContent(`Request Sent Successfully`);
+        setToastVariant('alert-success');
+        setToastOpen(true);
+      }
 
-      setToastContent(`Request Sent Successfully`);
-      setToastVariant('alert-success');
-      setToastOpen(true);
     } catch (error) {
       setToastContent(`Error making Request..`);
       setToastVariant('alert-error');
