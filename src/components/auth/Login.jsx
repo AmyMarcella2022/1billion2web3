@@ -32,7 +32,7 @@ const Login = () => {
         localStorage.setItem('authenticated', true);
       })
       .then(() => {
-        navigate('/dashboard');
+        navigate('/admin-home');
       })
       .catch((error) => {
         setToastVariant('alert-error');

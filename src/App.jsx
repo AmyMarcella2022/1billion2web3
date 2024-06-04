@@ -6,6 +6,7 @@ import ToastNotification from './components/utils/ToastNotification';
 import { AdminLayout } from './components/admin/AdminLayout';
 import { AdminHome } from './components/admin/AdminHome';
 import { UsersTable } from './components/admin/UsersTable';
+import Login from './components/auth/Login';
 
 let toastNotification = <ToastNotification />;
 
@@ -20,9 +21,7 @@ function App() {
               <Route
                 path='/'
                 element={
-                  <AdminLayout>
-                    <AdminHome />
-                  </AdminLayout>
+                  <Login />
                 }
               />
               <Route
