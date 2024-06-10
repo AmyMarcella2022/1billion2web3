@@ -20,14 +20,14 @@ const UsersTable = () => {
   }, [getUsers]);
 
   const renderModules = (count) => {
-    const modules = []
+    const modules = [];
 
-    for(let i = 0; i < 9; i++){
-      modules.push(i < count)
+    for (let i = 0; i < 9; i++) {
+      modules.push(i < count);
     }
 
     return modules;
-  }
+  };
 
   let tableHead = (
     <thead>
@@ -60,11 +60,15 @@ const UsersTable = () => {
               <th>9</th>
             </tr>
             <tr>
-              {
-                renderModules(user.progress).map((completed, index) => (
-                  <td key={index}>{completed ? <input type='checkbox' checked className='bg-green-700' /> : <IoClose className='text-red-700 text-lg' />}</td>
-                ))
-              }
+              {renderModules(user.progress).map((completed, index) => (
+                <td key={index}>
+                  {completed ? (
+                    <input type='checkbox' checked className='bg-green-700' />
+                  ) : (
+                    <IoClose className='text-red-700 text-lg' />
+                  )}
+                </td>
+              ))}
             </tr>
           </td>
           <td>{user.certificate ? <FaCheck /> : <IoClose className='text-red-700 text-lg' />}</td>

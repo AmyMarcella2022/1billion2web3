@@ -25,6 +25,9 @@ const Login = () => {
 
     setLoading(true);
 
+    // allowed emails
+    const allowedEmails = ['teknnuku@gmail.com'];
+
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Add user to local storage and update state
@@ -32,7 +35,15 @@ const Login = () => {
         localStorage.setItem('authenticated', true);
       })
       .then(() => {
-        navigate('/admin-home');
+        // check if email is allowed
+        if (allowedEmails.includes(localStorage.getItem('userEmail'))) {
+          navigate('/admin-home');
+        } else {
+          setToastVariant('alert-error');
+          setToastContent('User Not Authorised');
+          setToastOpen(true);
+          return;
+        }
       })
       .catch((error) => {
         setToastVariant('alert-error');
@@ -46,7 +57,7 @@ const Login = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className='bg-black h-screen'>
         <div className='flex flex-col flex-1 items-center'>
           <h1 className='font-poppins text-3xl text-white text-center h-[20px] py-24'>LOGIN</h1>

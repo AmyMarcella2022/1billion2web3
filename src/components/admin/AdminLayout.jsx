@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react';
 import SideBar from './components/SideBar';
 import Navbar from './components/Navbar';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 const AdminLayout = ({ children }) => {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-
-  const authenticated = localStorage.getItem('authenticated')
+  const authenticated = localStorage.getItem('authenticated');
 
   useEffect(() => {
-    if(authenticated !== 'true'){
-      navigate('/')
+    if (authenticated !== 'true') {
+      navigate('/');
     }
-  }, [])
+  }, []);
 
   return (
     <div>

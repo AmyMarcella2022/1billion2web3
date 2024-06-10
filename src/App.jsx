@@ -18,12 +18,7 @@ function App() {
           {toastNotification}
           <div className=''>
             <Routes>
-              <Route
-                path='/'
-                element={
-                  <Login />
-                }
-              />
+              <Route path='/' element={<Login />} />
               <Route
                 path='/admin-home'
                 element={
