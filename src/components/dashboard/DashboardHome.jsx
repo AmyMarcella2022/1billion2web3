@@ -81,10 +81,10 @@ const DashboardHome = () => {
       // get email from local storage
       var email = localStorage.getItem('userEmail');
 
-      const docRef = doc(db, 'certificate-requests', email)
-      const docSnap = await getDoc(docRef)
+      const docRef = doc(db, 'certificate-requests', email);
+      const docSnap = await getDoc(docRef);
 
-      if(docSnap.exists()) {
+      if (docSnap.exists()) {
         setToastContent(`Request already sent`);
         setToastVariant('alert');
         setToastOpen(true);
@@ -94,14 +94,13 @@ const DashboardHome = () => {
           email,
           received: false,
         };
-  
-        await addDocumentWithID('certificate-requests', email, payload)
-  
+
+        await addDocumentWithID('certificate-requests', email, payload);
+
         setToastContent(`Request Sent Successfully`);
         setToastVariant('alert-success');
         setToastOpen(true);
       }
-
     } catch (error) {
       setToastContent(`Error making Request..`);
       setToastVariant('alert-error');
