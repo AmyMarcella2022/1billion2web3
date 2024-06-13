@@ -1,39 +1,56 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AppContext } from '../../context/AppContext';
 // import { getCurrentUser, db } from '../../firebase';
 // import { setDoc, doc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import { addProgress } from '../../firebase'
+import Loader from './Loader';
 
 const SuccessPage = () => {
-  const { moduleNumber } = useContext(AppContext);
+  const { moduleNumber, setToastContent, setToastOpen, setToastVariant, } = useContext(AppContext);
 
-  // const user = getCurrentUser();
+  const [buttonLoading, setButtonLoading] = useState(false)
 
   const navigate = useNavigate();
 
   // const [walletAddress, setWalletAddress] = useState('');
 
-  const submit = () => {
-    // setDoc(doc(db, `module${moduleNumber}Addresses`, `${user.email}`), {
-    //   email: user?.email,
-    //   evmAddress: walletAddress,
-    // })
-    //   .then(() => {
-    //     window.open(metaLink);
-    //   })
-    //   .catch((error) => {
-    //     setToastContent('Server error. Try again later.');
-    //     setToastVariant('alert-error');
-    //     setToastOpen(true);
-    //   });
+  const saveProgress = async (module) => {
+    setButtonLoading(true)
 
-    navigate('/dashboard');
+    var email = localStorage.getItem('userEmail');
+
+    const progress = {
+      email,
+      moduleNumber: module,
+    };
+
+    try {
+      await addProgress(email, progress);
+      setToastContent('Progress updated');
+      setToastVariant('alert-success');
+      setToastOpen(true);
+    } catch (error) {
+      setToastContent('Error updating progress');
+      setToastVariant('alert-error');
+      setToastOpen(true);
+    }
   };
 
-  const proceed = (e) => {
+
+
+  const proceed = async (e) => {
     e.preventDefault();
 
-    submit();
+    try {
+      await saveProgress(moduleNumber)
+    navigate('/dashboard');
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setButtonLoading(false)
+    }
+    
   };
 
   return (
@@ -59,7 +76,9 @@ const SuccessPage = () => {
 
           <div className='card-actions'>
             <button className='btn btn-success' onClick={proceed}>
-              Proceed to Next Module
+              {
+                buttonLoading ? (<Loader />) : 'Proceed to Next Module'
+              }
             </button>
           </div>
         </div>

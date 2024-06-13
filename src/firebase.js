@@ -107,7 +107,7 @@ const getUserId = async (email) => {
     user.userId = doc.id;
     user.userData = doc.data();
   });
-  console.log(user);
+  
   return user;
 };
 
