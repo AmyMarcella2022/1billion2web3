@@ -3,20 +3,20 @@ import { AppContext } from '../../context/AppContext';
 // import { getCurrentUser, db } from '../../firebase';
 // import { setDoc, doc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import { addProgress } from '../../firebase'
+import { addProgress } from '../../firebase';
 import Loader from './Loader';
 
 const SuccessPage = () => {
-  const { moduleNumber, setToastContent, setToastOpen, setToastVariant, } = useContext(AppContext);
+  const { moduleNumber, setToastContent, setToastOpen, setToastVariant } = useContext(AppContext);
 
-  const [buttonLoading, setButtonLoading] = useState(false)
+  const [buttonLoading, setButtonLoading] = useState(false);
 
   const navigate = useNavigate();
 
   // const [walletAddress, setWalletAddress] = useState('');
 
   const saveProgress = async (module) => {
-    setButtonLoading(true)
+    setButtonLoading(true);
 
     var email = localStorage.getItem('userEmail');
 
@@ -37,20 +37,17 @@ const SuccessPage = () => {
     }
   };
 
-
-
   const proceed = async (e) => {
     e.preventDefault();
 
     try {
-      await saveProgress(moduleNumber)
-    navigate('/dashboard');
+      await saveProgress(moduleNumber);
+      navigate('/dashboard');
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      setButtonLoading(false)
+      setButtonLoading(false);
     }
-    
   };
 
   return (
@@ -76,9 +73,7 @@ const SuccessPage = () => {
 
           <div className='card-actions'>
             <button className='btn btn-success' onClick={proceed}>
-              {
-                buttonLoading ? (<Loader />) : 'Proceed to Next Module'
-              }
+              {buttonLoading ? <Loader /> : 'Proceed to Next Module'}
             </button>
           </div>
         </div>

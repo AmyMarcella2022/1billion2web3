@@ -54,7 +54,7 @@ const DashboardHome = () => {
       var email = localStorage.getItem('userEmail');
 
       const moduleNumber = await getProgress(email);
-      
+
       setModuleNumber(moduleNumber);
       setClassProgress(moduleNumber);
       setMetaProgress(moduleNumber);
