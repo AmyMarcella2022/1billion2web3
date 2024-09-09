@@ -47,7 +47,7 @@ const Game = () => {
   const saveProgress = async (module) => {
     setLoading(true);
 
-    var email = localStorage.getItem('userEmail');
+    var email = localStorage.getItem('userEmail') ?? ''
 
     const progress = {
       email,
