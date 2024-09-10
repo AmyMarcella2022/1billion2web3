@@ -44,7 +44,7 @@ const DashboardHome = () => {
     setMetaProgress((prev) => prev + 1);
     setClassProgress((prev) => prev + 1);
     window.open(link, '_blank');
-    saveProgress(index + 1);
+    saveProgress(progress + 1);
   };
 
   const getPlayerProgress = useCallback(async () => {
