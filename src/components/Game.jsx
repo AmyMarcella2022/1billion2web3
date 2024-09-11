@@ -63,7 +63,7 @@ const Game = () => {
       setToastOpen(true);
     } catch (error) {
       console.log('Error - ' + error)
-      setToastContent('Error updating progress');
+      setToastContent('Error Updating User Progress');
       setToastVariant('alert-error');
       setToastOpen(true);
     }
