@@ -57,7 +57,7 @@ const Game = () => {
 
     try {
       // await addProgress(email, progress);
-      await setDoc(doc(db, 'progress', email), progress);
+      await setDoc(doc(db, 'progress', `${email}`), progress);
       setToastContent('Progress updated');
       setToastVariant('alert-success');
       setToastOpen(true);

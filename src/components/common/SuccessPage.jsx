@@ -31,7 +31,7 @@ const SuccessPage = () => {
       setToastVariant('alert-success');
       setToastOpen(true);
     } catch (error) {
-      setToastContent('Error updating progress');
+      setToastContent('Error Uppdating progress');
       setToastVariant('alert-error');
       setToastOpen(true);
     }
