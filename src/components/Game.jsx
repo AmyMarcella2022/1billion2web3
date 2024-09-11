@@ -47,14 +47,12 @@ const Game = () => {
   const saveProgress = async (module) => {
     setLoading(true);
 
-    var email = localStorage.getItem('userEmail') ?? ''
+    var email = localStorage.getItem('userEmail')
 
     const progress = {
       email,
       moduleNumber: module,
     };
-
-    console.log(progress)
 
     try {
       await addProgress(email, progress);
