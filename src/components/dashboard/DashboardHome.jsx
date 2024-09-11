@@ -44,7 +44,7 @@ const DashboardHome = () => {
   //   }
   // };
 
-  const openMetaverse = (link, progress) => {
+  const openMetaverse = (link) => {
     setMetaProgress((prev) => prev + 1);
     setClassProgress((prev) => prev + 1);
     window.open(link, '_blank');
@@ -137,7 +137,7 @@ const DashboardHome = () => {
                   >
                     <p
                       className='cursor-pointer'
-                      onClick={() => openMetaverse(module.content.metaverse, index)}
+                      onClick={() => openMetaverse(module.content.metaverse)}
                     >
                       Take Metaverse Class
                     </p>
