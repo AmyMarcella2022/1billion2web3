@@ -10,7 +10,7 @@ import {
   query,
   where,
   getDocs,
-  updateDoc,
+  // updateDoc,
 } from 'firebase/firestore';
 import {
   getAuth,
@@ -121,12 +121,12 @@ const addNewDocument = async (collectionName, data) => {
 };
 
 const addProgress = async (email, progressData) => {
-  const user = await getUserId(email);
-  var id = user.userId;
-  const userRef = doc(db, 'users', id);
-  await updateDoc(userRef, {
-    progress: progressData.moduleNumber,
-  });
+  // const user = await getUserId(email);
+  // var id = user.userId;
+  // const userRef = doc(db, 'users', id);
+  // await updateDoc(userRef, {
+  //   progress: progressData.moduleNumber,
+  // });
   await setDoc(doc(db, 'progress', email), progressData);
 };
 
