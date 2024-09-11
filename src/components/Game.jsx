@@ -12,13 +12,14 @@ import {
 } from '../utils';
 import styles from '../styles';
 // import { getCurrentUser } from '../firebase';
-// import { setDoc, doc } from 'firebase/firestore';
+import { setDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase';
 import { useNavigate, useParams } from 'react-router-dom';
 // import useAlertModal from '../hooks/useAlertModal';
 import Loader from './common/Loader';
 import { AppContext } from '../context/AppContext';
 import logo from '../assets/1billweb3logo.png';
-import { addProgress } from '../firebase';
+// import { addProgress } from '../firebase';
 
 const Game = () => {
   const { setToastContent, setToastOpen, setToastVariant, setModuleNumber, setMetaLink } =
@@ -55,7 +56,8 @@ const Game = () => {
     };
 
     try {
-      await addProgress(email, progress);
+      // await addProgress(email, progress);
+      await setDoc(doc(db, 'progress', email), progress);
       setToastContent('Progress updated');
       setToastVariant('alert-success');
       setToastOpen(true);
