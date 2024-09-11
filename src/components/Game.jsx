@@ -54,13 +54,15 @@ const Game = () => {
       moduleNumber: module,
     };
 
+    console.log(progress)
+
     try {
       await addProgress(email, progress);
       setToastContent('Progress updated');
       setToastVariant('alert-success');
       setToastOpen(true);
     } catch (error) {
-      console.log(error)
+      console.log('Error - ' + error)
       setToastContent('Error updating progress');
       setToastVariant('alert-error');
       setToastOpen(true);
