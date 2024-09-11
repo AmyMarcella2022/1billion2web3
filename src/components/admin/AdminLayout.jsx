@@ -21,11 +21,11 @@ const AdminLayout = ({ children }) => {
         {children}
       </div>
       <div className='hidden lg:block'>
-        <div className='grid grid-cols-3'>
+        <div className='grid grid-cols-4'>
           <div className='col-span-1'>
             <SideBar />
           </div>
-          <div className='col-span-2'>{children}</div>
+          <div className='col-span-3'>{children}</div>
         </div>
       </div>
     </div>
