@@ -3,7 +3,10 @@ import { dashboardAccordionList } from '../utils/constants';
 import { Link } from 'react-router-dom';
 // import { getDoc, doc, setDoc } from 'firebase/firestore';
 import { AppContext } from '../../context/AppContext';
-import { addProgress, getProgress } from '../../firebase';
+import { 
+  // addProgress,
+   getProgress
+   } from '../../firebase';
 import { BsLockFill } from 'react-icons/bs';
 import Loader from '../common/Loader';
 import { addDocumentWithID, db } from '../../firebase';
@@ -20,32 +23,32 @@ const DashboardHome = () => {
   const [loading, setLoading] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
 
-  const saveProgress = async (module) => {
-    var email = localStorage.getItem('userEmail');
+  // const saveProgress = async (module) => {
+  //   var email = localStorage.getItem('userEmail');
 
-    const progress = {
-      email,
-      moduleNumber: module,
-    };
+  //   const progress = {
+  //     email,
+  //     moduleNumber: module,
+  //   };
 
-    try {
-      await addProgress(email, progress);
-      setToastContent('Progress updated');
-      setToastVariant('alert-success');
-      setToastOpen(true);
-    } catch (error) {
-      console.log(error)
-      setToastContent('Error updating progress');
-      setToastVariant('alert-error');
-      setToastOpen(true);
-    }
-  };
+  //   try {
+  //     await addProgress(email, progress);
+  //     setToastContent('Progress updated');
+  //     setToastVariant('alert-success');
+  //     setToastOpen(true);
+  //   } catch (error) {
+  //     console.log(error)
+  //     setToastContent('Error updating progress');
+  //     setToastVariant('alert-error');
+  //     setToastOpen(true);
+  //   }
+  // };
 
   const openMetaverse = (link, progress) => {
     setMetaProgress((prev) => prev + 1);
     setClassProgress((prev) => prev + 1);
     window.open(link, '_blank');
-    saveProgress(progress + 1);
+    // saveProgress(progress + 1);
   };
 
   const getPlayerProgress = useCallback(async () => {

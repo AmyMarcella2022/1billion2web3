@@ -73,55 +73,55 @@ const Game = () => {
     try {
       switch (moduleNumber) {
         case 1:
-          saveProgress(1);
+          await saveProgress(1);
           setModuleNumber(1);
           setMetaLink('https://www.voxels.com/spaces/e4de4917-6a2c-4312-bb52-340c02c328d2/play');
           navigate('/success');
           return;
         case 2:
-          saveProgress(2);
+          await saveProgress(2);
           setModuleNumber(2);
           setMetaLink('https://www.voxels.com/spaces/e4de4917-6a2c-4312-bb52-340c02c328d2/play');
           navigate('/success');
           return;
         case 3:
-          saveProgress(3);
+          await saveProgress(3);
           setModuleNumber(3);
           setMetaLink('https://www.voxels.com/spaces/1af3ad5b-6d3e-458d-b8e6-19ee1d984fb0/play');
           navigate('/success');
           return;
         case 4:
-          saveProgress(4);
+          await saveProgress(4);
           setModuleNumber(4);
           setMetaLink('https://www.voxels.com/spaces/1af3ad5b-6d3e-458d-b8e6-19ee1d984fb0/play');
           navigate('/success');
           return;
         case 5:
-          saveProgress(5);
+          await saveProgress(5);
           setModuleNumber(5);
           setMetaLink('https://www.voxels.com/spaces/d2adfb7c-8059-4e22-aff4-794b48d6283e/play');
           navigate('/success');
           return;
         case 6:
-          saveProgress(6);
+          await saveProgress(6);
           setModuleNumber(6);
           setMetaLink('https://www.voxels.com/spaces/d2adfb7c-8059-4e22-aff4-794b48d6283e/play');
           navigate('/success');
           return;
         case 7:
-          saveProgress(7);
+          await saveProgress(7);
           setModuleNumber(7);
           setMetaLink('https://www.voxels.com/spaces/e8baf729-786c-4a35-98d6-19d0fe7429d2/play');
           navigate('/success');
           return;
         case 8:
-          saveProgress(8);
+          await saveProgress(8);
           setModuleNumber(8);
           setMetaLink('https://www.voxels.com/spaces/e8baf729-786c-4a35-98d6-19d0fe7429d2/play');
           navigate('/success');
           return;
         case 9:
-          saveProgress(9);
+          await saveProgress(9);
           setModuleNumber(9);
           setMetaLink('');
           navigate('/success');
