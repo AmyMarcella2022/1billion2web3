@@ -19,7 +19,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Loader from './common/Loader';
 import { AppContext } from '../context/AppContext';
 import logo from '../assets/1billweb3logo.png';
-// import { addProgress } from '../firebase';
+import { updateProgress } from '../firebase';
 
 const Game = () => {
   const { setToastContent, setToastOpen, setToastVariant, setModuleNumber, setMetaLink } =
@@ -28,6 +28,7 @@ const Game = () => {
   // const alertModal = useAlertModal();
 
   // const user = getCurrentUser();
+
 
   const { id } = useParams();
 
@@ -51,22 +52,11 @@ const Game = () => {
     var email = localStorage.getItem('userEmail')
 
     const progress = {
-      email,
+      email: email,
       moduleNumber: module,
     };
 
-    try {
-      // await addProgress(email, progress);
-      await setDoc(doc(db, 'progress', `${email}`), progress);
-      setToastContent('Progress updated');
-      setToastVariant('alert-success');
-      setToastOpen(true);
-    } catch (error) {
-      console.log('Error - ' + error)
-      setToastContent('Error Updating User Progress');
-      setToastVariant('alert-error');
-      setToastOpen(true);
-    }
+    await updateProgress(progress)
   };
 
   const submitScore = async () => {

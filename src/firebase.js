@@ -19,6 +19,7 @@ import {
   signInWithEmailAndPassword,
   // onAuthStateChanged
 } from 'firebase/auth';
+import { toast } from 'react-toastify';
 
 //Firebase configuration
 const firebaseProdConfig = {
@@ -120,14 +121,13 @@ const addNewDocument = async (collectionName, data) => {
   return docData.id;
 };
 
-const addProgress = async (email, progressData) => {
-  // const user = await getUserId(email);
-  // var id = user.userId;
-  // const userRef = doc(db, 'users', id);
-  // await updateDoc(userRef, {
-  //   progress: progressData.moduleNumber,
-  // });
-  await setDoc(doc(db, 'progress', email), progressData);
+const updateProgress = async (progressData) => {
+  try {
+    await setDoc(doc(db, 'progress', progressData.email), progressData);
+    toast.success('Progress Updated');
+  } catch (error) {
+    toast.error('Error updating progress');
+  }
 };
 
 const getProgress = async (email) => {
@@ -152,7 +152,7 @@ export {
   addNewDocument,
   addDocumentWithID,
   auth,
-  addProgress,
+  updateProgress,
   getProgress,
   getUserId,
 };

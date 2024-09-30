@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import Rewards from './components/Rewards';
 import Home from './components/Home';
 import Game from './components/Game';
@@ -13,11 +14,14 @@ import Layout from './components/dashboard/Layout';
 import DashboardHome from './components/dashboard/DashboardHome';
 import { SuccessPage } from './components/common/SuccessPage';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 let toastNotification = <ToastNotification />;
 
 function App() {
   return (
     <AppProvider>
+      <ToastContainer />
       <div className='w-full h-full overflow-hidden'>
         <BrowserRouter>
           {toastNotification}
