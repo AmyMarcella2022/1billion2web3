@@ -3,10 +3,10 @@ import { dashboardAccordionList } from '../utils/constants';
 import { Link } from 'react-router-dom';
 // import { getDoc, doc, setDoc } from 'firebase/firestore';
 import { AppContext } from '../../context/AppContext';
-import { 
+import {
   // addProgress,
-   getProgress
-   } from '../../firebase';
+  getProgress,
+} from '../../firebase';
 import { BsLockFill } from 'react-icons/bs';
 import Loader from '../common/Loader';
 import { addDocumentWithID, db } from '../../firebase';
