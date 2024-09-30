@@ -12,8 +12,8 @@ import {
 } from '../utils';
 import styles from '../styles';
 // import { getCurrentUser } from '../firebase';
-import { setDoc, doc } from 'firebase/firestore';
-import { db } from '../firebase';
+// import { setDoc, doc } from 'firebase/firestore';
+// import { db } from '../firebase';
 import { useNavigate, useParams } from 'react-router-dom';
 // import useAlertModal from '../hooks/useAlertModal';
 import Loader from './common/Loader';
