@@ -35,32 +35,6 @@ function App() {
                   </AdminLayout>
                 }
               />
-              {/* <Route path='/login' element={<Login />} /> */}
-              {/* <Route path='/register' element={<Register />} /> */}
-              {/* <Route
-                path='/module/:id'
-                element={
-                  <Layout>
-                    <Game />
-                  </Layout>
-                }
-              />
-              <Route
-                path='/dashboard'
-                element={
-                  <Layout>
-                    <DashboardHome />
-                  </Layout>
-                }
-              />
-              <Route
-                path='/success'
-                element={
-                  <Layout>
-                    <SuccessPage />
-                  </Layout>
-                }
-              /> */}
             </Routes>
           </div>
         </BrowserRouter>
