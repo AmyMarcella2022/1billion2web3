@@ -1,13 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../../context/AppContext';
-// import { getCurrentUser, db } from '../../firebase';
-// import { setDoc, doc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import { addProgress } from '../../firebase';
+import { updateProgress } from '../../firebase';
 import Loader from './Loader';
 
 const SuccessPage = () => {
-  const { moduleNumber, setToastContent, setToastOpen, setToastVariant } = useContext(AppContext);
+  const { moduleNumber } = useContext(AppContext);
 
   const [buttonLoading, setButtonLoading] = useState(false);
 
@@ -25,16 +23,7 @@ const SuccessPage = () => {
       moduleNumber: module,
     };
 
-    try {
-      await addProgress(email, progress);
-      setToastContent('Progress updated');
-      setToastVariant('alert-success');
-      setToastOpen(true);
-    } catch (error) {
-      setToastContent('Error Uppdating progress');
-      setToastVariant('alert-error');
-      setToastOpen(true);
-    }
+    await updateProgress(progress);
   };
 
   const proceed = async (e) => {
