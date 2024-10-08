@@ -19,7 +19,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Loader from './common/Loader';
 import { AppContext } from '../context/AppContext';
 import logo from '../assets/1billweb3logo.png';
-import { updateProgress } from '../firebase';
+import { getUserId, updateProgress, updateUserProgress } from '../firebase';
 
 const Game = () => {
   const { setToastContent, setToastOpen, setToastVariant, setModuleNumber, setMetaLink } =
@@ -55,7 +55,10 @@ const Game = () => {
       moduleNumber: module,
     };
 
+    const user = await getUserId(email)
+
     await updateProgress(progress);
+    await updateUserProgress(user.userId, progress.moduleNumber);
   };
 
   const submitScore = () => {

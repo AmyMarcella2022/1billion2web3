@@ -112,6 +112,24 @@ const getUserId = async (email) => {
   return user;
 };
 
+const updateUserProgress = async (documentID, data) => {
+  const docRef = doc(db, 'users', documentID);
+
+  setDoc(
+    docRef,
+    {
+      progress: data,
+    },
+    { merge: true }
+  )
+    .then(() => {
+      toast.success('User updated');
+    })
+    .catch(() => {
+      toast.error('Error updating user');
+    });
+};
+
 const addDocumentWithID = async (collectionName, docID, data) => {
   await setDoc(doc(db, collectionName, docID), data);
 };
@@ -155,4 +173,5 @@ export {
   updateProgress,
   getProgress,
   getUserId,
+  updateUserProgress,
 };
