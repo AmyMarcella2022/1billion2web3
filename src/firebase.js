@@ -140,7 +140,10 @@ const addNewDocument = async (collectionName, data) => {
 };
 
 const updateProgress = async (progressData) => {
+  const user = await getUserId(progressData.email);
+  
   try {
+    await updateUserProgress(user.userId, progressData.moduleNumber);
     await setDoc(doc(db, 'progress', progressData.email), progressData);
     toast.success('Progress Updated');
   } catch (error) {
