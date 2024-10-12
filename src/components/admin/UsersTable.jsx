@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { getAllDocuments } from '../../firebase';
+import { getUsersData } from '../../firebase';
 import { FaCheck } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
+
 
 const UsersTable = () => {
   const [users, setUsers] = useState([]);
 
   const getUsers = useCallback(async () => {
     try {
-      const data = await getAllDocuments('users');
+      const data = await getUsersData()
       setUsers(data);
     } catch (error) {
       console.log(error);
@@ -60,7 +61,7 @@ const UsersTable = () => {
               <th>9</th>
             </tr>
             <tr>
-              {renderModules(user.progress).map((completed, index) => (
+              {renderModules(user.moduleNumber).map((completed, index) => (
                 <td key={index}>
                   {completed ? (
                     <input type='checkbox' checked className='bg-green-700' />

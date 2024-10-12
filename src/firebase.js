@@ -36,6 +36,8 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
+
+
 const getCurrentUser = () => {
   const user = auth.currentUser;
   // var name = user.displayName
@@ -124,6 +126,26 @@ const getProgress = async (email) => {
   }
 };
 
+const getUsersData = async () => {
+  const usersSnapshot = await getDocs(collection(db, 'users'));
+  const progressSnapshot = await getDocs(collection(db, 'progress'));
+
+  const combinedDataList = []
+
+  usersSnapshot.forEach((userDoc) => {
+    const userData = userDoc.data();
+    progressSnapshot.forEach((progressDoc) => {
+      if (progressDoc.id === userData.email) {
+        const progressData = progressDoc.data();
+        combinedDataList.push({ ...userData, ...progressData });
+      }
+    })
+  });
+
+  return combinedDataList
+}
+
+
 export {
   db,
   getCurrentUser,
@@ -136,4 +158,5 @@ export {
   addProgress,
   getProgress,
   getAllDocuments,
+  getUsersData
 };
