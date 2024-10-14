@@ -15,7 +15,6 @@ import { doc, getDoc } from 'firebase/firestore';
 const DashboardHome = () => {
   const { setToastContent, setToastVariant, setToastOpen } = useContext(AppContext);
 
-
   const [metaProgress, setMetaProgress] = useState(0);
   const [classProgress, setClassProgress] = useState(0);
   const [moduleNumber, setModuleNumber] = useState(0);
