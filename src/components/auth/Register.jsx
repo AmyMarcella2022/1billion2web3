@@ -56,10 +56,11 @@ const Register = () => {
   return (
     <>
       <Navbar />
-      <div className='flex items-center justify-center bg-black h-screen overflow-y-scroll'>
-        <div className='card bg-base-200 mt-80 lg:mt-36'>
-          <div className='card-body text-center'>
-            <h1 className='card-title font-poppins text-2xl text-white'>REGISTER</h1>
+      <div className='bg-black h-screen overflow-y-scroll'>
+        <div className='flex flex-col flex-1 items-center'>
+      <h1 className='card-title font-poppins text-2xl text-white my-20'>REGISTER</h1>
+        <div className='card bg-base-200 lg:mt-10'>
+          <div className='card-body'>
             <div className='flex justify-center'>
               <div className='avatar'>
                 <div className='w-24 rounded-full'>
@@ -143,6 +144,7 @@ const Register = () => {
               </fieldset>
             </form>
           </div>
+        </div>
         </div>
       </div>
     </>
