@@ -85,7 +85,7 @@ export const dashboardAccordionList = [
     id: 1,
     title: 'Module 1',
     content: {
-      metaverse: 'https://www.voxels.com/spaces/21012e4a-4c02-491e-b71a-13481a56eb66/play',
+      metaverse: 'https://youtu.be/iuP93zkmTkA?si=RGHTfkj3E3Xg3puh',
       path: '/module/1',
     },
   },
@@ -93,7 +93,7 @@ export const dashboardAccordionList = [
     id: 2,
     title: 'Module 2',
     content: {
-      metaverse: 'https://www.voxels.com/spaces/e4de4917-6a2c-4312-bb52-340c02c328d2/play',
+      metaverse: 'https://youtu.be/BegnuVHCFg8?si=3Rk13RtJYekoNu2z',
       path: '/module/2',
     },
   },
@@ -101,7 +101,7 @@ export const dashboardAccordionList = [
     id: 3,
     title: 'Module 3',
     content: {
-      metaverse: 'https://www.voxels.com/spaces/e4de4917-6a2c-4312-bb52-340c02c328d2/play',
+      metaverse: 'https://youtu.be/dGzAVuXBXfA?si=D9J5SdVfkP8RD4wi',
       path: '/module/3',
     },
   },
@@ -109,7 +109,7 @@ export const dashboardAccordionList = [
     id: 4,
     title: 'Module 4',
     content: {
-      metaverse: 'https://www.voxels.com/spaces/1af3ad5b-6d3e-458d-b8e6-19ee1d984fb0/play',
+      metaverse: 'https://youtu.be/XbDpdzvHEEs?si=TEcfgJXOkWAWjzcy',
       path: '/module/4',
     },
   },
@@ -117,7 +117,7 @@ export const dashboardAccordionList = [
     id: 5,
     title: 'Module 5',
     content: {
-      metaverse: 'https://www.voxels.com/spaces/1af3ad5b-6d3e-458d-b8e6-19ee1d984fb0/play',
+      metaverse: 'https://youtu.be/CiRSR3rN6PE?si=S0DcmJ5gFI8mkkM4',
       path: '/module/5',
     },
   },
@@ -125,7 +125,7 @@ export const dashboardAccordionList = [
     id: 6,
     title: 'Module 6',
     content: {
-      metaverse: 'https://www.voxels.com/spaces/d2adfb7c-8059-4e22-aff4-794b48d6283e/play',
+      metaverse: 'https://youtu.be/Cudj1pjk2DM?si=o1JuBnc20nuaQKoQ',
       path: '/module/6',
     },
   },
@@ -133,7 +133,7 @@ export const dashboardAccordionList = [
     id: 7,
     title: 'Module 7',
     content: {
-      metaverse: 'https://www.voxels.com/spaces/d2adfb7c-8059-4e22-aff4-794b48d6283e/play',
+      metaverse: 'https://youtu.be/jdbKPgZngd8?si=Cb0CC-xgmckUNHdx',
       path: '/module/7',
     },
   },
@@ -141,7 +141,7 @@ export const dashboardAccordionList = [
     id: 8,
     title: 'Module 8',
     content: {
-      metaverse: 'https://www.voxels.com/spaces/e8baf729-786c-4a35-98d6-19d0fe7429d2/play',
+      metaverse: 'https://youtu.be/1iNp9k0xSkw?si=p3IhYrnAnZviW4Dk',
       path: '/module/8',
     },
   },
@@ -149,7 +149,7 @@ export const dashboardAccordionList = [
     id: 9,
     title: 'Module 9',
     content: {
-      metaverse: 'https://www.voxels.com/spaces/e8baf729-786c-4a35-98d6-19d0fe7429d2/play',
+      metaverse: 'https://youtu.be/vU2SZp1xjlg?si=snJT5YJVY7__enp_',
       path: '/module/9',
     },
   },
