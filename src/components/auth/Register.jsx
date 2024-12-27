@@ -1,52 +1,56 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { auth, addNewDocument } from '../../firebase';
 import { Link, useNavigate } from 'react-router-dom';
-import { AppContext } from '../../context/AppContext';
 import Loader from '../common/Loader';
 import Navbar from '../common/Navbar';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import lotus from '../../assets/lotus-small.jpeg';
+import { ROLES } from '../utils/constants';
+import { toast } from 'react-toastify';
 
 const Register = () => {
-  const { setToastContent, setToastOpen, setToastVariant } = useContext(AppContext);
 
   const navigate = useNavigate();
+
+  const authCode = 'Lotusglobalalliancebrings1billion2web3'.toLowerCase()
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [walletAddress, setWalletAddress] = useState('');
+  const [role, setRole] = useState('');
+  const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
 
   const createUser = async (e) => {
     e.preventDefault();
 
     if (password.length < 6) {
-      setToastContent('Please enter a password with at least six characters.');
-      setToastVariant('alert-info');
-      setToastOpen(true);
+      toast.error('Please enter a password with at least six characters.')
       return;
+    }
+
+    if(code.toLowerCase() != authCode){
+      toast.error('Invalid authorization code')
+      return
     }
 
     const userData = {
       name,
       email,
-      walletAddress,
+      role
     };
 
     setLoading(true);
 
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        addNewDocument('users', userData);
+        addNewDocument('admin-users', userData);
       })
       .then(() => {
         navigate('/login');
       })
       .catch((error) => {
-        setToastVariant('alert-error');
-        setToastContent(`${error}`);
-        setToastOpen(true);
+        toast.error(error)
       })
       .finally(() => {
         setLoading(false);
@@ -59,7 +63,7 @@ const Register = () => {
       <div className='flex items-center justify-center bg-black h-screen overflow-y-scroll'>
         <div className='card bg-base-200 mt-80 lg:mt-36'>
           <div className='card-body text-center'>
-            <h1 className='card-title font-poppins text-2xl text-white'>REGISTER</h1>
+            {/* <h1 className='card-title font-poppins text-2xl text-white'>REGISTER</h1> */}
             <div className='flex justify-center'>
               <div className='avatar'>
                 <div className='w-24 rounded-full'>
@@ -97,14 +101,16 @@ const Register = () => {
                 </div>
                 <div className='form-control'>
                   <label className='label'>
-                    <span className='label-text'>Wallet Address</span>
+                    <span className='label-text'>Role</span>
                   </label>
-                  <input
-                    type='text'
-                    value={walletAddress}
-                    onChange={(e) => setWalletAddress(e.target.value)}
-                    className='input input-bordered'
-                  />
+                  <select className='select select-bordered' value={role} onChange={(e) => setRole(e.target.value)}>
+                    <option value="">-</option>
+                    {
+                      ROLES.map((role) => (
+                        <option value={role.value} key={role.id}>{role.label}</option>
+                      ))
+                    }
+                  </select>
                 </div>
                 <div className='form-control'>
                   <label className='label'>
@@ -114,6 +120,18 @@ const Register = () => {
                     type='password'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className='input input-bordered'
+                    required
+                  />
+                </div>
+                <div className='form-control'>
+                  <label className='label'>
+                    <span className='label-text'>Authorization Code</span>
+                  </label>
+                  <input
+                    type='password'
+                    value={code}
+                    onChange={(e) => setCode(e.target.value)}
                     className='input input-bordered'
                     required
                   />

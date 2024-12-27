@@ -164,3 +164,22 @@ export const AdminSideMenu = [
     path: '/admin-users',
   },
 ];
+
+
+export const ROLES = [
+  {
+    id: 1,
+    label: 'User',
+    value: 'user'
+  },
+  {
+    id: 2,
+    label: 'Support',
+    value: 'support'
+  },
+  {
+    id: 3,
+    label: 'Admin',
+    value: 'admin'
+  }
+]
