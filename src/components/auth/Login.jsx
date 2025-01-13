@@ -3,13 +3,14 @@ import { auth } from '../../firebase';
 import { useNavigate, Link } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext';
 import Loader from '../common/Loader';
-import Navbar from '../common/Navbar';
+// import Navbar from '../common/Navbar';
 import {
   signInWithEmailAndPassword,
   // setPersistence,
   // browserSessionPersistence,
 } from 'firebase/auth';
-import lotus from '../../assets/lotus-small.jpeg';
+// import lotus from '../../assets/lotus-small.jpeg';
+import web3 from '../../assets/1b2web3.jpg'
 
 const Login = () => {
   const { setToastContent, setToastOpen, setToastVariant } = useContext(AppContext);
@@ -67,7 +68,7 @@ const Login = () => {
                 <div className='flex justify-center'>
                   <div className='avatar'>
                     <div className='w-24 rounded-full'>
-                      <img src={lotus} alt='Lotus' />
+                      <img src={web3} alt='1Billion2Web3' />
                     </div>
                   </div>
                 </div>
