@@ -9,7 +9,8 @@ import {
   // setPersistence,
   // browserSessionPersistence,
 } from 'firebase/auth';
-import lotus from '../../assets/lotus-small.jpeg';
+// import lotus from '../../assets/lotus-small.jpeg';
+import web3 from '../../assets/1b2web3.jpg';
 
 const Login = () => {
   const { setToastContent, setToastOpen, setToastVariant } = useContext(AppContext);
@@ -56,7 +57,7 @@ const Login = () => {
                 <div className='flex justify-center'>
                   <div className='avatar'>
                     <div className='w-24 rounded-full'>
-                      <img src={lotus} alt='Lotus' />
+                      <img src={web3} alt='1Billion2Web3' />
                     </div>
                   </div>
                 </div>

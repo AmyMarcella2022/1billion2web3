@@ -7,7 +7,8 @@ import Navbar from './common/Navbar';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import Loader from './common/Loader';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
-import lotus from '../assets/lotus-small.jpeg';
+// import lotus from '../assets/lotus-small.jpeg';
+import web3 from '../assets/1b2web3.jpg';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -70,8 +71,8 @@ const Home = () => {
                 <form onSubmit={signin}>
                   <div className='flex justify-center'>
                     <div className='avatar'>
-                      <div className='w-24 rounded-full'>
-                        <img src={lotus} alt='Lotus' />
+                      <div className='rounded-full w-28'>
+                        <img src={web3} alt='1Billion2Web3' />
                       </div>
                     </div>
                   </div>
