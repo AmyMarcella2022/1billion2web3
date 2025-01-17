@@ -85,7 +85,8 @@ export const dashboardAccordionList = [
     id: 1,
     title: 'Module 1',
     content: {
-      metaverse: 'https://youtu.be/iuP93zkmTkA?si=RGHTfkj3E3Xg3puh',
+      metaverse:
+        'https://www.youtube.com/watch?v=BegnuVHCFg8&list=PLV_36W1RtZdr4Gz4EtmnCf4_zgRiA8TFv&index=2&ab_channel=KBOTUNIVERSE',
       path: '/module/1',
     },
   },
@@ -93,7 +94,8 @@ export const dashboardAccordionList = [
     id: 2,
     title: 'Module 2',
     content: {
-      metaverse: 'https://youtu.be/BegnuVHCFg8?si=3Rk13RtJYekoNu2z',
+      metaverse:
+        'https://www.youtube.com/watch?v=XbDpdzvHEEs&list=PLV_36W1RtZdr4Gz4EtmnCf4_zgRiA8TFv&index=4&ab_channel=KBOTUNIVERSE',
       path: '/module/2',
     },
   },
@@ -101,7 +103,8 @@ export const dashboardAccordionList = [
     id: 3,
     title: 'Module 3',
     content: {
-      metaverse: 'https://youtu.be/dGzAVuXBXfA?si=D9J5SdVfkP8RD4wi',
+      metaverse:
+        'https://www.youtube.com/watch?v=1iNp9k0xSkw&list=PLV_36W1RtZdr4Gz4EtmnCf4_zgRiA8TFv&index=8&ab_channel=KBOTUNIVERSE',
       path: '/module/3',
     },
   },
@@ -109,7 +112,8 @@ export const dashboardAccordionList = [
     id: 4,
     title: 'Module 4',
     content: {
-      metaverse: 'https://youtu.be/XbDpdzvHEEs?si=TEcfgJXOkWAWjzcy',
+      metaverse:
+        'https://www.youtube.com/watch?v=CiRSR3rN6PE&list=PLV_36W1RtZdr4Gz4EtmnCf4_zgRiA8TFv&index=5&ab_channel=KBOTUNIVERSE',
       path: '/module/4',
     },
   },
@@ -117,7 +121,8 @@ export const dashboardAccordionList = [
     id: 5,
     title: 'Module 5',
     content: {
-      metaverse: 'https://youtu.be/CiRSR3rN6PE?si=S0DcmJ5gFI8mkkM4',
+      metaverse:
+        'https://www.youtube.com/watch?v=Cudj1pjk2DM&list=PLV_36W1RtZdr4Gz4EtmnCf4_zgRiA8TFv&index=6&ab_channel=KBOTUNIVERSE',
       path: '/module/5',
     },
   },
@@ -125,7 +130,8 @@ export const dashboardAccordionList = [
     id: 6,
     title: 'Module 6',
     content: {
-      metaverse: 'https://youtu.be/Cudj1pjk2DM?si=o1JuBnc20nuaQKoQ',
+      metaverse:
+        'https://www.youtube.com/watch?v=dGzAVuXBXfA&list=PLV_36W1RtZdr4Gz4EtmnCf4_zgRiA8TFv&index=3&ab_channel=KBOTUNIVERSE',
       path: '/module/6',
     },
   },
@@ -133,7 +139,8 @@ export const dashboardAccordionList = [
     id: 7,
     title: 'Module 7',
     content: {
-      metaverse: 'https://youtu.be/jdbKPgZngd8?si=Cb0CC-xgmckUNHdx',
+      metaverse:
+        'https://www.youtube.com/watch?v=vU2SZp1xjlg&list=PLV_36W1RtZdr4Gz4EtmnCf4_zgRiA8TFv&index=9&ab_channel=KBOTUNIVERSE',
       path: '/module/7',
     },
   },
@@ -141,7 +148,8 @@ export const dashboardAccordionList = [
     id: 8,
     title: 'Module 8',
     content: {
-      metaverse: 'https://youtu.be/1iNp9k0xSkw?si=p3IhYrnAnZviW4Dk',
+      metaverse:
+        'https://www.youtube.com/watch?v=iuP93zkmTkA&list=PLV_36W1RtZdr4Gz4EtmnCf4_zgRiA8TFv&index=1&ab_channel=KBOTUNIVERSE',
       path: '/module/8',
     },
   },
@@ -149,7 +157,8 @@ export const dashboardAccordionList = [
     id: 9,
     title: 'Module 9',
     content: {
-      metaverse: 'https://youtu.be/vU2SZp1xjlg?si=snJT5YJVY7__enp_',
+      metaverse:
+        'https://www.youtube.com/watch?v=jdbKPgZngd8&list=PLV_36W1RtZdr4Gz4EtmnCf4_zgRiA8TFv&index=7&ab_channel=KBOTUNIVERSE',
       path: '/module/9',
     },
   },
