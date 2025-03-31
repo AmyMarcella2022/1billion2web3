@@ -86,7 +86,7 @@ export const dashboardAccordionList = [
     title: 'Module 1',
     content: {
       metaverse:
-        'https://youtu.be/BegnuVHCFg8?si=zi7aRo_-8MGWXeH2',
+        'https://drive.google.com/file/d/1Qz3c8VcrzRkFLD55UX5qxSRrycY8u_bo/view?usp=drivesdk',
       path: '/module/1',
     },
   },
@@ -95,7 +95,7 @@ export const dashboardAccordionList = [
     title: 'Module 2',
     content: {
       metaverse:
-        'https://youtu.be/XbDpdzvHEEs?si=FCyc0gKAq5WAkT4x',
+        'https://drive.google.com/file/d/1R18AAQtvX9G_8j_vxF7zNiOn3v9pYj16/view?usp=drivesdk',
       path: '/module/2',
     },
   },
@@ -104,7 +104,7 @@ export const dashboardAccordionList = [
     title: 'Module 3',
     content: {
       metaverse:
-        'https://youtu.be/1iNp9k0xSkw?si=rFcAxY42Ei4P7hKx',
+        'https://drive.google.com/file/d/1ROvWmEe91lfFFN6pxSaYpfMu0wga7SUd/view?usp=drivesdk',
       path: '/module/3',
     },
   },
@@ -113,7 +113,7 @@ export const dashboardAccordionList = [
     title: 'Module 4',
     content: {
       metaverse:
-        'https://youtu.be/CiRSR3rN6PE?si=R1Xc8BPDyQQe0RaP',
+        'https://drive.google.com/file/d/1R1vERncdxZfyBFhUek5pWalgNm7qUHM7/view?usp=drivesdk',
       path: '/module/4',
     },
   },
@@ -122,7 +122,7 @@ export const dashboardAccordionList = [
     title: 'Module 5',
     content: {
       metaverse:
-        'https://youtu.be/Cudj1pjk2DM?si=ewTT_qjlJzYfISqz',
+        'https://drive.google.com/file/d/1R2KmCEawJe3aRobvGtRysYIZ__-foG0J/view?usp=drivesdk',
       path: '/module/5',
     },
   },
@@ -131,7 +131,7 @@ export const dashboardAccordionList = [
     title: 'Module 6',
     content: {
       metaverse:
-        'https://youtu.be/dGzAVuXBXfA?si=MZ3gyrdHQjPMh5B2',
+        'https://drive.google.com/file/d/1R0i2_x1GRYa1Xzy2opunP7TfUFYfQ95t/view?usp=drivesdk',
       path: '/module/6',
     },
   },
@@ -140,7 +140,7 @@ export const dashboardAccordionList = [
     title: 'Module 7',
     content: {
       metaverse:
-        'https://youtu.be/vU2SZp1xjlg?si=6uQsSx_l-zEshHfG',
+        'https://drive.google.com/file/d/1RRU5e5k1sdXIWxCdbzA-ckxhVo2hq539/view?usp=drivesdk',
       path: '/module/7',
     },
   },
@@ -149,7 +149,7 @@ export const dashboardAccordionList = [
     title: 'Module 8',
     content: {
       metaverse:
-        'https://youtu.be/iuP93zkmTkA?si=vjbY1ciiT8e5zlgm',
+        'https://drive.google.com/file/d/1RUXiyIj3KCqZ7v3VrN0IQtLNIXYWPtEE/view?usp=drivesdk',
       path: '/module/8',
     },
   },
@@ -158,7 +158,7 @@ export const dashboardAccordionList = [
     title: 'Module 9',
     content: {
       metaverse:
-        'https://youtu.be/jdbKPgZngd8?si=n5FEb97ewSDx7llz',
+        'https://drive.google.com/file/d/1R8mgkXrlnX1qE6lDtCP1qGuBDamZ8L3L/view?usp=drivesdk',
       path: '/module/9',
     },
   },
