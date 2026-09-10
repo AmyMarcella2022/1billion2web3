@@ -32,18 +32,6 @@ const firebaseConfig = {
   measurementId: "G-TYKXCFWXB0",
 };
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBi9PF8pQlBFz8_KwnQckDboS62HNgiaLA",
-  authDomain: "billion2web3.firebaseapp.com",
-  projectId: "billion2web3",
-  storageBucket: "billion2web3.firebasestorage.app",
-  messagingSenderId: "79163528871",
-  appId: "1:79163528871:web:150c9ed7e560253b4f2d82",
-  measurementId: "G-TYKXCFWXB0"
-};
-
-const firebaseConfig = import.meta.env.PROD ? firebaseProdConfig : firebaseDevConfig;
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
