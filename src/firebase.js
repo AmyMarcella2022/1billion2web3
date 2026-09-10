@@ -22,14 +22,14 @@ import {
 import { toast } from 'react-toastify';
 
 //Firebase configuration
-const firebaseProdConfig = {
-  apiKey: 'AIzaSyAx_1ZG2J5WWgc5OUtdqwWmWt8w78kZoNU',
-  authDomain: 'web3-quest-journey.firebaseapp.com',
-  projectId: 'web3-quest-journey',
-  storageBucket: 'web3-quest-journey.appspot.com',
-  messagingSenderId: '213342267048',
-  appId: '1:213342267048:web:d1ac5a80d69d4b4adc849d',
-  measurementId: 'G-CMGC112PPR',
+const firebaseConfig = {
+  apiKey: "AIzaSyBi9PF8pQlBFz8_KwnQckDboS62HNgiaLA",
+  authDomain: "billion2web3.firebaseapp.com",
+  projectId: "billion2web3",
+  storageBucket: "billion2web3.firebasestorage.app",
+  messagingSenderId: "79163528871",
+  appId: "1:79163528871:web:150c9ed7e560253b4f2d82",
+  measurementId: "G-TYKXCFWXB0",
 };
 
 const firebaseDevConfig = {
