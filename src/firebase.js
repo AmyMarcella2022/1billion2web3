@@ -154,6 +154,7 @@ const getProgress = async (email) => {
 };
 
 export {
+  app,
   db,
   getCurrentUser,
   logout,
