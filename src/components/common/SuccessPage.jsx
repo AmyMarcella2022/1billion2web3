@@ -1,11 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../../context/AppContext';
 import { useNavigate } from 'react-router-dom';
-import { updateProgress } from '../../firebase';
+import { getFunctions, httpsCallable } from 'firebase/functions';
+import { app } from '../../firebase';
 import Loader from './Loader';
 
+const submitQuizResult = httpsCallable(getFunctions(app), 'submitQuizResult');
+
 const SuccessPage = () => {
-  const { moduleNumber } = useContext(AppContext);
+  const { moduleNumber, setToastContent, setToastOpen, setToastVariant } =
+    useContext(AppContext);
 
   const [buttonLoading, setButtonLoading] = useState(false);
 
@@ -13,27 +17,27 @@ const SuccessPage = () => {
 
   // const [walletAddress, setWalletAddress] = useState('');
 
-  const saveProgress = async (module) => {
-    setButtonLoading(true);
-
-    var email = localStorage.getItem('userEmail');
-
-    const progress = {
-      email,
-      moduleNumber: module,
-    };
-
-    await updateProgress(progress);
+  const showMessage = (message) => {
+    setToastContent(message || 'Something went wrong. Please try again.');
+    setToastVariant('alert-error');
+    setToastOpen(true);
   };
 
   const proceed = async (e) => {
     e.preventDefault();
 
+    setButtonLoading(true);
+
     try {
-      await saveProgress(moduleNumber);
-      navigate('/dashboard');
+      const { data } = await submitQuizResult({ moduleNumber });
+
+      if (data.passed) {
+        navigate(data.nextModule ? `/module/${data.nextModule}` : '/dashboard');
+      } else {
+        showMessage(data.message || 'Score below passing threshold.');
+      }
     } catch (error) {
-      console.log(error);
+      showMessage(error.message);
     } finally {
       setButtonLoading(false);
     }
