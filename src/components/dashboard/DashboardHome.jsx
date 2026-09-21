@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { dashboardAccordionList } from '../utils/constants';
 import { Link } from 'react-router-dom';
-// import { getDoc, doc, setDoc } from 'firebase/firestore';
 import { AppContext } from '../../context/AppContext';
 import {
   // addProgress,
@@ -9,8 +8,11 @@ import {
 } from '../../firebase';
 import { BsLockFill } from 'react-icons/bs';
 import Loader from '../common/Loader';
-import { addDocumentWithID, db } from '../../firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import VideoModal from '../common/VideoModal';
+import { getFunctions, httpsCallable } from 'firebase/functions';
+import { app } from '../../firebase';
+
+const triggerMintAll = httpsCallable(getFunctions(app), 'triggerMintAll');
 
 const DashboardHome = () => {
   const { setToastContent, setToastVariant, setToastOpen } = useContext(AppContext);
@@ -20,6 +22,7 @@ const DashboardHome = () => {
   const [moduleNumber, setModuleNumber] = useState(0);
   const [loading, setLoading] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
+  const [activeVideo, setActiveVideo] = useState(null);
 
   // const saveProgress = async (module) => {
   //   var email = localStorage.getItem('userEmail');
@@ -42,10 +45,10 @@ const DashboardHome = () => {
   //   }
   // };
 
-  const openMetaverse = (link) => {
+  const openMetaverse = (link, title) => {
     setMetaProgress((prev) => prev + 1);
     setClassProgress((prev) => prev + 1);
-    window.open(link, '_blank');
+    setActiveVideo({ title, url: link });
     // saveProgress(progress + 1);
   };
 
@@ -78,33 +81,17 @@ const DashboardHome = () => {
     setToastVariant('alert-info');
     setToastOpen(true);
 
-    // try-catch making request to firebase
+    // try-catch making request to the callable function
     try {
-      // get email from local storage
-      var email = localStorage.getItem('userEmail');
+      const { data } = await triggerMintAll();
 
-      const docRef = doc(db, 'certificate-requests', email);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setToastContent(`Request already sent`);
-        setToastVariant('alert');
-        setToastOpen(true);
-        return;
-      } else {
-        const payload = {
-          email,
-          received: false,
-        };
-
-        await addDocumentWithID('certificate-requests', email, payload);
-
-        setToastContent(`Request Sent Successfully`);
-        setToastVariant('alert-success');
-        setToastOpen(true);
-      }
+      setToastContent(
+        data?.message || 'Mint queue populated: 9 module NFTs + 1 certificate.'
+      );
+      setToastVariant('alert-success');
+      setToastOpen(true);
     } catch (error) {
-      setToastContent(`Error making Request..`);
+      setToastContent(error.message || 'Error making Request..');
       setToastVariant('alert-error');
       setToastOpen(true);
     } finally {
@@ -135,7 +122,12 @@ const DashboardHome = () => {
                   >
                     <p
                       className='cursor-pointer'
-                      onClick={() => openMetaverse(module.content.metaverse)}
+                      onClick={() =>
+                        openMetaverse(
+                          module.content.metaverse,
+                          module.content.videoTitle || module.title
+                        )
+                      }
                     >
                       Take Metaverse Class
                     </p>
@@ -188,6 +180,13 @@ const DashboardHome = () => {
           {buttonLoading ? <Loader /> : 'Request Completion Certificate'}
         </button>
       </div>
+
+      <VideoModal
+        isOpen={!!activeVideo}
+        onClose={() => setActiveVideo(null)}
+        title={activeVideo?.title}
+        src={activeVideo?.url}
+      />
     </div>
   );
 };
