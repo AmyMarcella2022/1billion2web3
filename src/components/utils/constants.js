@@ -86,7 +86,7 @@ export const dashboardAccordionList = [
     title: 'Module 1',
     content: {
       metaverse:
-        'https://drive.google.com/file/d/1Qz3c8VcrzRkFLD55UX5qxSRrycY8u_bo/view?usp=drivesdk',
+        'https://coral-fantastic-worm-816.mypinata.cloud/ipfs/bafybeihb3vo3evqpbnbxhyyuei77c6si5bpw3dhi2i5pr45lmhxs5zjci4',
       path: '/module/1',
     },
   },
@@ -95,7 +95,7 @@ export const dashboardAccordionList = [
     title: 'Module 2',
     content: {
       metaverse:
-        'https://drive.google.com/file/d/1R18AAQtvX9G_8j_vxF7zNiOn3v9pYj16/view?usp=drivesdk',
+        'https://coral-fantastic-worm-816.mypinata.cloud/ipfs/bafybeif7agoiqsifrc5cgdp7sf5eyeaf4vj5ofb7jpciu3fwx7awqkp6by',
       path: '/module/2',
     },
   },
@@ -104,7 +104,7 @@ export const dashboardAccordionList = [
     title: 'Module 3',
     content: {
       metaverse:
-        'https://drive.google.com/file/d/1ROvWmEe91lfFFN6pxSaYpfMu0wga7SUd/view?usp=drivesdk',
+        'https://coral-fantastic-worm-816.mypinata.cloud/ipfs/bafybeih2zsot7oxw3xo53ea2ikgmjkrogdcgvqodc2wbihclwmzxy5phyy',
       path: '/module/3',
     },
   },
@@ -113,7 +113,7 @@ export const dashboardAccordionList = [
     title: 'Module 4',
     content: {
       metaverse:
-        'https://drive.google.com/file/d/1R1vERncdxZfyBFhUek5pWalgNm7qUHM7/view?usp=drivesdk',
+        'https://coral-fantastic-worm-816.mypinata.cloud/ipfs/bafybeie2tapwlehknlfk44ix632bnkjq6f6f43jcrryvpmzvfj32cmcd5y',
       path: '/module/4',
     },
   },
@@ -122,7 +122,7 @@ export const dashboardAccordionList = [
     title: 'Module 5',
     content: {
       metaverse:
-        'https://drive.google.com/file/d/1R2KmCEawJe3aRobvGtRysYIZ__-foG0J/view?usp=drivesdk',
+        'https://coral-fantastic-worm-816.mypinata.cloud/ipfs/bafybeihc64v2r3nquhlesrlmao3vzttvufhiqjz6yb5ihenmu745lk3anm',
       path: '/module/5',
     },
   },
@@ -131,7 +131,7 @@ export const dashboardAccordionList = [
     title: 'Module 6',
     content: {
       metaverse:
-        'https://drive.google.com/file/d/1R0i2_x1GRYa1Xzy2opunP7TfUFYfQ95t/view?usp=drivesdk',
+        'https://coral-fantastic-worm-816.mypinata.cloud/ipfs/bafybeibd4c3ljpelpqal3a5kzqo6d3ghnsuz6sislsdvbjogkhqmjlieae',
       path: '/module/6',
     },
   },
@@ -140,7 +140,7 @@ export const dashboardAccordionList = [
     title: 'Module 7',
     content: {
       metaverse:
-        'https://drive.google.com/file/d/1RRU5e5k1sdXIWxCdbzA-ckxhVo2hq539/view?usp=drivesdk',
+        'https://coral-fantastic-worm-816.mypinata.cloud/ipfs/bafybeiaycphwurmy7a4ro5rzljl5umbjwg7qermi5m4kwjrjk4ef5tksia',
       path: '/module/7',
     },
   },
@@ -149,7 +149,7 @@ export const dashboardAccordionList = [
     title: 'Module 8',
     content: {
       metaverse:
-        'https://drive.google.com/file/d/1RUXiyIj3KCqZ7v3VrN0IQtLNIXYWPtEE/view?usp=drivesdk',
+        'https://coral-fantastic-worm-816.mypinata.cloud/ipfs/bafybeib63kftgtjtouar2lo7kjwx2cliopalsgubj2pgfb7oqlr4lpqhby',
       path: '/module/8',
     },
   },
@@ -158,7 +158,7 @@ export const dashboardAccordionList = [
     title: 'Module 9',
     content: {
       metaverse:
-        'https://drive.google.com/file/d/1R8mgkXrlnX1qE6lDtCP1qGuBDamZ8L3L/view?usp=drivesdk',
+        'https://coral-fantastic-worm-816.mypinata.cloud/ipfs/bafybeiae7gjkyp4jx6t5ktdzrgrefwow2s3evdteeedcgqxwz5h3zbtphe',
       path: '/module/9',
     },
   },
