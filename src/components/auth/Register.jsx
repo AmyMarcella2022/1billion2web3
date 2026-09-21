@@ -29,15 +29,17 @@ const Register = () => {
       return;
     }
 
+    const normalizedEmail = email.trim().toLowerCase();
+
     const userData = {
       name,
-      email,
-      walletAddress,
+      email: normalizedEmail,
+      walletAddress: walletAddress.trim(),
     };
 
     setLoading(true);
 
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, normalizedEmail, password)
       .then(() => {
         addNewDocument('users', userData);
       })
