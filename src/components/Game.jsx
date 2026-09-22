@@ -19,7 +19,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Loader from './common/Loader';
 import { AppContext } from '../context/AppContext';
 import logo from '../assets/1billweb3logo.png';
-import { updateProgress } from '../firebase';
+import { updateProgress, getProgress } from '../firebase';
+import { dashboardAccordionList } from './utils/constants';
+import VideoModal from './common/VideoModal';
+import { AiOutlinePlayCircle } from 'react-icons/ai';
 
 const Game = () => {
   const { setToastContent, setToastOpen, setToastVariant, setModuleNumber, setMetaLink } =
@@ -42,6 +45,9 @@ const Game = () => {
   const [Qanswer, setAnswer] = useState('');
   const [loading, setLoading] = useState(false);
   const [player, setPlayer] = useState({ name: name, score: 0 });
+  const [showVideo, setShowVideo] = useState(false);
+
+  const moduleContent = dashboardAccordionList.find((m) => m.id === moduleNumber)?.content;
 
   const questionLength = questions.length;
 
@@ -171,6 +177,39 @@ const Game = () => {
   };
 
   useEffect(() => {
+    const guardAccess = async () => {
+      try {
+        const email = localStorage.getItem('userEmail');
+        const progress = (await getProgress(email)) || 0;
+
+        if (moduleNumber > progress + 1) {
+          setToastContent('Please complete the previous modules first.');
+          setToastVariant('alert-error');
+          setToastOpen(true);
+          navigate('/dashboard');
+          return;
+        }
+
+        if (moduleNumber === progress + 1) {
+          const videoOpened = sessionStorage.getItem(`module_${moduleNumber}_video_opened`);
+          if (!videoOpened) {
+            setToastContent('Please watch the module video before taking the quiz.');
+            setToastVariant('alert-error');
+            setToastOpen(true);
+            navigate('/dashboard');
+          }
+        }
+      } catch (error) {
+        // If progress can't be checked, don't block the learner on a network hiccup.
+        console.log(error);
+      }
+    };
+
+    guardAccess();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     switch (moduleNumber) {
       case 1:
         setQuestions(module1);
@@ -212,6 +251,20 @@ const Game = () => {
       </div>
 
       <h2 className='text-center font-bold text-2xl my-4'>Module {moduleNumber}</h2>
+
+      {moduleContent?.metaverse && (
+        <div className='flex justify-center mb-2'>
+          <button
+            type='button'
+            onClick={() => setShowVideo(true)}
+            className='flex items-center gap-1 text-xs text-gray-500 hover:text-blue-600'
+          >
+            <AiOutlinePlayCircle className='text-sm' />
+            Rewatch module video
+          </button>
+        </div>
+      )}
+
       <div className='card card-compact text-black overflow-y-scroll'>
         <div className='card-body'>
           <div className='card-title'>
@@ -261,6 +314,13 @@ const Game = () => {
           </div>
         </div>
       </div>
+
+      <VideoModal
+        isOpen={showVideo}
+        onClose={() => setShowVideo(false)}
+        title={moduleContent?.videoTitle}
+        src={moduleContent?.metaverse}
+      />
     </div>
   );
 };
