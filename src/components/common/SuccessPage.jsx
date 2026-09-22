@@ -32,7 +32,7 @@ const SuccessPage = () => {
       const { data } = await submitQuizResult({ moduleNumber });
 
       if (data.passed) {
-        navigate(data.nextModule ? `/module/${data.nextModule}` : '/dashboard');
+        navigate('/dashboard');
       } else {
         showMessage(data.message || 'Score below passing threshold.');
       }
