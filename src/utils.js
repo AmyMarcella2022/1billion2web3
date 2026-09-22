@@ -520,7 +520,7 @@ export const module6 = [
     options: [
       'NFTs used to represent voting rights in an organization',
       'NFTs used to represent membership in an organization',
-      'FTs used to represent virtual real estate',
+      'NFTs used to represent virtual real estate',
       'None of the above',
     ],
     answer: 'NFTs used to represent membership in an organization',
