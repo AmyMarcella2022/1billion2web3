@@ -5,6 +5,7 @@ import { AppContext } from '../../context/AppContext';
 import {
   // addProgress,
   getProgress,
+  getCurrentUser,
 } from '../../firebase';
 import { BsLockFill } from 'react-icons/bs';
 import Loader from '../common/Loader';
@@ -45,10 +46,11 @@ const DashboardHome = () => {
   //   }
   // };
 
-  const openMetaverse = (link, title) => {
+  const openMetaverse = (link, title, id) => {
     setMetaProgress((prev) => prev + 1);
     setClassProgress((prev) => prev + 1);
     setActiveVideo({ title, url: link });
+    sessionStorage.setItem(`module_${id}_video_opened`, '1');
     // saveProgress(progress + 1);
   };
 
@@ -83,7 +85,10 @@ const DashboardHome = () => {
 
     // try-catch making request to the callable function
     try {
-      const { data } = await triggerMintAll();
+      const currentUser = getCurrentUser();
+      const email = currentUser?.email || '';
+
+      const { data } = await triggerMintAll({ email });
 
       setToastContent(
         data?.message || 'Mint queue populated: 9 module NFTs + 1 certificate.'
@@ -125,7 +130,8 @@ const DashboardHome = () => {
                       onClick={() =>
                         openMetaverse(
                           module.content.metaverse,
-                          module.content.videoTitle || module.title
+                          module.content.videoTitle || module.title,
+                          module.id
                         )
                       }
                     >
