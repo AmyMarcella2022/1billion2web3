@@ -60,8 +60,7 @@ const Home = () => {
               <br className='sm:block hidden' /> <span className='text-gradient'>Web3 Quest</span>{' '}
             </h1>
             <p className={`${styles.paragraph} mb-5`}>
-              Welcome to the 1Billion2Web3Initiative quiz. Watch short videos in the metaverse and
-              answer questions. Get a free token at the end.
+              Welcome to the 1Billion2Web3Initiative quest. Watch short video and answer questions. Get a free token and NFT at the end.
             </p>
           </div>
 
