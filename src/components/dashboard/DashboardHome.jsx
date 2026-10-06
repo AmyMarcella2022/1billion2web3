@@ -135,7 +135,7 @@ const DashboardHome = () => {
                         )
                       }
                     >
-                      Watch Module Video
+                      Take Metaverse Class
                     </p>
                     {metaProgress < index ? (
                       <BsLockFill />
