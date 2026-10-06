@@ -7,6 +7,8 @@ import Navbar from '../common/Navbar';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 // import lotus from '../../assets/lotus-small.jpeg';
 import web3 from '../../assets/1b2web3.jpg';
+import WalletGuideModal from '../common/WalletGuideModal';
+import { AiOutlineInfoCircle } from 'react-icons/ai';
 
 const Register = () => {
   const { setToastContent, setToastOpen, setToastVariant } = useContext(AppContext);
@@ -18,6 +20,14 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [walletAddress, setWalletAddress] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showWalletGuide, setShowWalletGuide] = useState(false);
+
+  const openWalletGuideOnce = () => {
+    if (!sessionStorage.getItem('wallet_guide_seen')) {
+      sessionStorage.setItem('wallet_guide_seen', '1');
+      setShowWalletGuide(true);
+    }
+  };
 
   const createUser = async (e) => {
     e.preventDefault();
@@ -102,13 +112,28 @@ const Register = () => {
                   <div className='form-control'>
                     <label className='label'>
                       <span className='label-text'>Wallet Address</span>
+                      <button
+                        type='button'
+                        onClick={() => setShowWalletGuide(true)}
+                        className='label-text-alt flex items-center gap-1 link link-hover font-semibold'
+                      >
+                        <AiOutlineInfoCircle /> Need a wallet?
+                      </button>
                     </label>
                     <input
                       type='text'
                       value={walletAddress}
                       onChange={(e) => setWalletAddress(e.target.value)}
+                      onFocus={openWalletGuideOnce}
                       className='input input-bordered'
+                      placeholder='0x...'
                     />
+                    <label className='label'>
+                      <span className='label-text-alt text-gray-400'>
+                        Must be on the Optimism Sepolia network — this is where your NFTs
+                        will be sent.
+                      </span>
+                    </label>
                   </div>
                   <div className='form-control'>
                     <label className='label'>
@@ -150,6 +175,8 @@ const Register = () => {
           </div>
         </div>
       </div>
+
+      <WalletGuideModal isOpen={showWalletGuide} onClose={() => setShowWalletGuide(false)} />
     </>
   );
 };
