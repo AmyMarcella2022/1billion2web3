@@ -13,6 +13,9 @@ import ToastNotification from './components/utils/ToastNotification';
 import Layout from './components/dashboard/Layout';
 import DashboardHome from './components/dashboard/DashboardHome';
 import { SuccessPage } from './components/common/SuccessPage';
+import DisclaimerModal from './components/common/DisclaimerModal';
+import ChatAssistant from './components/assistant/ChatAssistant';
+import AdminPage from './components/admin/AdminPage';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -22,6 +25,7 @@ function App() {
   return (
     <AppProvider>
       <ToastContainer />
+      <DisclaimerModal />
       <div className='w-full h-full overflow-hidden'>
         <BrowserRouter>
           {toastNotification}
@@ -31,6 +35,7 @@ function App() {
               <Route path='/reward' element={<Rewards />} />
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />
+              <Route path='/admin' element={<AdminPage />} />
               <Route
                 path='/module/:id'
                 element={
@@ -57,6 +62,8 @@ function App() {
               />
             </Routes>
           </div>
+          {/* Only renders on /dashboard and /success — never on quiz (/module/:id) screens */}
+          <ChatAssistant />
         </BrowserRouter>
       </div>
     </AppProvider>
