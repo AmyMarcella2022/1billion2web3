@@ -45,6 +45,7 @@ const Register = () => {
       name,
       email: normalizedEmail,
       walletAddress: walletAddress.trim(),
+      createdAt: new Date(),
     };
 
     setLoading(true);
