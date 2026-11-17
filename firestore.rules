@@ -1,0 +1,61 @@
+rules_version = '2';
+// RECOMMENDED rules for the new features. Merge with any rules you already rely on
+// (e.g. for collections used by your Cloud Functions) before publishing.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function me() { return request.auth.token.email.lower(); }
+    function isAdmin() { return signedIn() && exists(/databases/$(database)/documents/admins/$(me())); }
+
+    // admins: only admins can read/manage. Create your FIRST admin by hand in the console.
+    match /admins/{email} {
+      allow read: if signedIn() && (isAdmin() || email == me());
+      allow write: if isAdmin();
+    }
+
+    match /users/{id} {
+      allow create: if signedIn() && request.resource.data.email == me();
+      allow read: if isAdmin() || (signedIn() && resource.data.email == me());
+      allow update: if isAdmin() || (signedIn() && resource.data.email == me()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['progress', 'lastSeenAt', 'botWelcomedAt', 'feedbackGiven']));
+      allow delete: if isAdmin();
+    }
+
+    match /progress/{email} {
+      allow read, write: if isAdmin() || (signedIn() && email == me());
+    }
+
+    match /supportRequests/{id} {
+      allow create: if signedIn() && request.resource.data.email == me() && request.resource.data.status == 'open';
+      allow read: if isAdmin() || (signedIn() && resource.data.email == me());
+      // learners may only flip "seenByUser"; admins can do everything
+      allow update: if isAdmin() || (signedIn() && resource.data.email == me()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['seenByUser']));
+      allow delete: if isAdmin();
+    }
+
+    match /feedback/{email} {
+      allow create: if signedIn() && email == me() && request.resource.data.email == me()
+        && request.resource.data.rating is int && request.resource.data.rating >= 1 && request.resource.data.rating <= 5;
+      allow read: if isAdmin() || (signedIn() && email == me());
+      allow update, delete: if isAdmin();
+    }
+
+    // AI knowledge + settings: learners' sessions (and the /api/chat function using their token) read; only admins write
+    match /botKnowledge/{id} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+    }
+    match /botSettings/{id} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+    }
+
+    match /botFaqs/{id} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+    }
+  }
+}
