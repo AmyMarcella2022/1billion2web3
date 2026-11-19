@@ -46,7 +46,7 @@ const DisclaimerModal = () => {
           </p>
           <p>
             Nothing here is financial, investment, or legal advice. The NFTs, tokens and
-            certificates are part of a learning program and run on a test network (OP
+            certificates are part of a learning program and run decentralized on a Blockchain network (OP
             Sepolia), so they carry no guaranteed monetary value.
           </p>
           <p>Never share your wallet recovery phrase with anyone — we will never ask for it.</p>
