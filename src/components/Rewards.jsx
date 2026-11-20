@@ -53,29 +53,29 @@ const Rewards = ({}) => {
 
   return (
     <div>
-      <h2 className={`${styles.paragraph} text-center text-dimWhite`}>
+      <h2 className={`${styles.paragraph} text-center px-4`}>
         Please submit your email address below to get your certificate & also your wallet address to
         receive your reward.
       </h2>
       <div className='flex flex-col justify-center items-center mt-10'>
         <div>
-          <label className='block text-white text-sm font-bold mb-2'>Email Address</label>
+          <label className='block text-base-content text-sm font-bold mb-2'>Email Address</label>
           <input
             type='text'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            className='shadow appearance-none border border-base-300 rounded w-full py-3 px-3 bg-base-100 text-base-content leading-tight focus:outline-none focus:shadow-outline'
           />
         </div>
         <div>
-          <label className='block text-white text-sm font-bold mb-2'>
+          <label className='block text-base-content text-sm font-bold mb-2'>
             Evm Wallet Address (Optional)
           </label>
           <input
             type='text'
             value={walletAddress}
             onChange={(e) => SetWalletAddress(e.target.value)}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            className='shadow appearance-none border border-base-300 rounded w-full py-3 px-3 bg-base-100 text-base-content leading-tight focus:outline-none focus:shadow-outline'
           />
         </div>
       </div>

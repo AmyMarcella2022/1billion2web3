@@ -245,7 +245,7 @@ const Game = () => {
   }, []);
 
   return (
-    <div className='pt-20'>
+    <div className='pt-4 px-4 sm:px-6 max-w-3xl mx-auto'>
       <div className='flex justify-center lg:hidden'>
         <img src={logo} className='h-20 w-20 rounded-full' alt='1Bill2Web3' />
       </div>
@@ -257,7 +257,7 @@ const Game = () => {
           <button
             type='button'
             onClick={() => setShowVideo(true)}
-            className='flex items-center gap-1 text-xs text-gray-500 hover:text-blue-600'
+            className='flex items-center gap-1 text-sm opacity-70 hover:opacity-100 hover:text-primary min-h-[44px] px-3'
           >
             <AiOutlinePlayCircle className='text-sm' />
             Rewatch module video
@@ -265,7 +265,7 @@ const Game = () => {
         </div>
       )}
 
-      <div className='card card-compact text-black overflow-y-scroll'>
+      <div className='card card-compact bg-base-200 text-base-content shadow-md'>
         <div className='card-body'>
           <div className='card-title'>
             {loading ? (
@@ -274,38 +274,38 @@ const Game = () => {
                 <h3 className='text-center'>Loading...</h3>
               </div>
             ) : (
-              <div className='flex flex-row justify-start gap-2'>
-                <div className={`w-10 h-10 rounded-full ${styles.flexCenter} bg-dimBlue`}>
+              <div className='flex flex-row justify-start items-start gap-3'>
+                <div className={`w-10 h-10 shrink-0 rounded-full ${styles.flexCenter} bg-dimBlue`}>
                   {questionNumber + 1}
                 </div>
-                <h4 className='font-poppins font-semibold text-black text-[20px] leading-[23px]'>
+                <h4 className='font-poppins font-semibold text-base-content text-[17px] sm:text-[20px] leading-snug'>
                   {questions[questionNumber]?.question}
                 </h4>
               </div>
             )}
           </div>
           {questions[questionNumber]?.options.map((option, index) => (
-            <label key={index} className='inline-flex items-center'>
+            <label key={index} className='flex items-center gap-3 min-h-[48px] px-3 py-2 rounded-lg border border-base-300 bg-base-100 cursor-pointer hover:border-primary active:scale-[0.99]'>
               <input
                 type='radio'
-                className='form-radio h-4 w-4'
+                className='form-radio h-5 w-5 shrink-0'
                 name='qOption'
                 checked={Qanswer === option}
                 value={option}
                 onClick={(e) => setAnswer(e.target.value)}
               />
-              <span className='ml-3 mb-2 font-poppins font-normal text-black text-[18px]'>
+              <span className='font-poppins font-normal text-base-content text-[16px] sm:text-[18px] leading-snug'>
                 {option}
               </span>
             </label>
           ))}
-          <div className='card-actions justify-end'>
+          <div className='card-actions justify-end mt-2'>
             {loading ? (
               <Loader />
             ) : (
               <button
                 onClick={checkScore}
-                className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                className='bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg w-full sm:w-auto min-h-[48px] focus:outline-none focus:ring-2 focus:ring-blue-400'
                 type='button'
               >
                 {questionNumber === questionLength - 1 ? 'Mark Module As Done' : 'Next'}
