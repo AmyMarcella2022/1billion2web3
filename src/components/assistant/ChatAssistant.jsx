@@ -253,36 +253,36 @@ const ChatAssistant = () => {
   };
 
   /* ----- UI ----- */
-  const panel = { backgroundColor: '#ffffff', color: '#111827', colorScheme: 'light' };
+  const panel = { backgroundColor: 'var(--qa-surface)', color: 'var(--qa-text)' };
 
   return (
-    <div className='fixed bottom-4 right-4 z-40 font-poppins' style={{ colorScheme: 'light' }}>
+    <div className='fixed z-40 font-poppins bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))]'>
       {open && (
         <div
-          className='mb-3 flex flex-col rounded-2xl shadow-2xl overflow-hidden w-[calc(100vw-2rem)] max-w-sm h-[72vh] max-h-[580px]'
-          style={{ ...panel, border: '1px solid #cbd5e1' }}
+          className='fixed inset-x-0 bottom-0 z-50 h-[88dvh] rounded-t-2xl pb-[env(safe-area-inset-bottom)] sm:pb-0 sm:static sm:inset-auto sm:mb-3 sm:w-[380px] sm:h-[600px] sm:max-h-[calc(100dvh-7rem)] sm:rounded-2xl flex flex-col shadow-2xl overflow-hidden'
+          style={{ ...panel, border: '1px solid var(--qa-border)' }}
           role='dialog'
           aria-label='Quest assistant'
         >
-          <div className='flex items-center justify-between px-4 py-3' style={{ backgroundColor: '#0369a1', color: '#fff' }}>
+          <div className='flex items-center justify-between px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top))] sm:pt-3' style={{ backgroundColor: 'var(--qa-primary)', color: '#fff' }}>
             <div>
               <div className='font-semibold'>Quest Assistant 🤖</div>
               <div className='text-xs' style={{ color: '#e0f2fe' }}>Platform help · no quiz answers</div>
             </div>
-            <button type='button' onClick={() => setOpen(false)} aria-label='Close assistant' className='text-2xl leading-none px-1'>
+            <button type='button' onClick={() => setOpen(false)} aria-label='Close assistant' className='text-3xl leading-none min-h-[44px] min-w-[44px]'>
               ×
             </button>
           </div>
 
-          <div className='flex-1 overflow-y-auto p-3 space-y-2' style={{ backgroundColor: '#f8fafc' }}>
+          <div className='flex-1 overflow-y-auto overscroll-contain p-3 space-y-2' style={{ backgroundColor: 'var(--qa-surface2)' }}>
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.from === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div
                   className='rounded-2xl px-3 py-2 text-sm whitespace-pre-wrap max-w-[85%]'
                   style={
                     m.from === 'user'
-                      ? { backgroundColor: '#0369a1', color: '#fff' }
-                      : { backgroundColor: '#e2e8f0', color: '#0f172a' }
+                      ? { backgroundColor: 'var(--qa-primary)', color: '#fff' }
+                      : { backgroundColor: 'var(--qa-surface3)', color: 'var(--qa-text)' }
                   }
                 >
                   {m.text}
@@ -292,23 +292,23 @@ const ChatAssistant = () => {
 
             {thinking && (
               <div className='flex justify-start'>
-                <div className='rounded-2xl px-3 py-2 text-sm' style={{ backgroundColor: '#e2e8f0', color: '#475569' }}>Thinking…</div>
+                <div className='rounded-2xl px-3 py-2 text-sm' style={{ backgroundColor: 'var(--qa-surface3)', color: 'var(--qa-muted)' }}>Thinking…</div>
               </div>
             )}
 
             {pending && mode === 'chat' && (
               <div className='flex gap-2 flex-wrap'>
-                <button type='button' onClick={() => openForm(pending)} className='rounded-full px-3 py-1.5 text-sm font-semibold' style={{ backgroundColor: '#0369a1', color: '#fff' }}>
+                <button type='button' onClick={() => openForm(pending)} className='rounded-full px-3 py-1.5 text-sm font-semibold' style={{ backgroundColor: 'var(--qa-primary)', color: '#fff' }}>
                   Send to the team
                 </button>
-                <button type='button' onClick={() => setPending(null)} className='rounded-full px-3 py-1.5 text-sm' style={{ backgroundColor: '#e2e8f0', color: '#0f172a' }}>
+                <button type='button' onClick={() => setPending(null)} className='rounded-full px-3 py-1.5 text-sm' style={{ backgroundColor: 'var(--qa-surface3)', color: 'var(--qa-text)' }}>
                   No thanks
                 </button>
               </div>
             )}
 
             {mode === 'feedback' && (
-              <form onSubmit={sendFeedback} className='rounded-xl p-3 space-y-2' style={{ backgroundColor: '#fff', border: '1px solid #cbd5e1' }}>
+              <form onSubmit={sendFeedback} className='rounded-xl p-3 space-y-2' style={{ backgroundColor: 'var(--qa-surface)', border: '1px solid var(--qa-border)' }}>
                 <div className='flex justify-center gap-1' role='radiogroup' aria-label='Rating'>
                   {[1, 2, 3, 4, 5].map((n) => (
                     <button
@@ -317,7 +317,7 @@ const ChatAssistant = () => {
                       onClick={() => setRating(n)}
                       aria-label={`${n} star${n > 1 ? 's' : ''}`}
                       className='text-3xl'
-                      style={{ color: n <= rating ? '#f59e0b' : '#cbd5e1' }}
+                      style={{ color: n <= rating ? '#f59e0b' : 'var(--qa-star-off)' }}
                     >
                       ★
                     </button>
@@ -329,13 +329,13 @@ const ChatAssistant = () => {
                   rows={3}
                   placeholder='What did you enjoy? What could be better?'
                   className='w-full rounded-lg p-2 text-sm'
-                  style={{ border: '1px solid #94a3b8', color: '#0f172a', backgroundColor: '#fff' }}
+                  style={{ border: '1px solid var(--qa-border-strong)', color: 'var(--qa-text)', backgroundColor: 'var(--qa-surface)' }}
                 />
                 <div className='flex gap-2'>
-                  <button type='submit' disabled={!rating || busy} className='flex-1 rounded-full py-2 text-sm font-semibold' style={{ backgroundColor: rating ? '#0369a1' : '#94a3b8', color: '#fff' }}>
+                  <button type='submit' disabled={!rating || busy} className='flex-1 rounded-full py-2 text-sm font-semibold' style={{ backgroundColor: rating ? 'var(--qa-primary)' : 'var(--qa-disabled)', color: '#fff' }}>
                     {busy ? 'Sending…' : 'Submit review'}
                   </button>
-                  <button type='button' onClick={laterFeedback} className='rounded-full px-3 py-2 text-sm' style={{ backgroundColor: '#e2e8f0', color: '#0f172a' }}>
+                  <button type='button' onClick={laterFeedback} className='rounded-full px-3 py-2 text-sm' style={{ backgroundColor: 'var(--qa-surface3)', color: 'var(--qa-text)' }}>
                     Later
                   </button>
                 </div>
@@ -343,14 +343,14 @@ const ChatAssistant = () => {
             )}
 
             {mode === 'form' && (
-              <form onSubmit={sendForm} className='rounded-xl p-3 space-y-2' style={{ backgroundColor: '#fff', border: '1px solid #cbd5e1' }}>
+              <form onSubmit={sendForm} className='rounded-xl p-3 space-y-2' style={{ backgroundColor: 'var(--qa-surface)', border: '1px solid var(--qa-border)' }}>
                 <div className='text-sm font-semibold'>Message the team</div>
-                <div className='text-xs' style={{ color: '#475569' }}>Replying to: {user.email}</div>
+                <div className='text-xs' style={{ color: 'var(--qa-muted)' }}>Replying to: {user.email}</div>
                 <select
                   value={form.category}
                   onChange={(e) => setForm({ ...form, category: e.target.value })}
                   className='w-full rounded-lg p-2 text-sm'
-                  style={{ border: '1px solid #94a3b8', color: '#0f172a', backgroundColor: '#fff' }}
+                  style={{ border: '1px solid var(--qa-border-strong)', color: 'var(--qa-text)', backgroundColor: 'var(--qa-surface)' }}
                 >
                   {CATEGORIES.map((c) => (
                     <option key={c}>{c}</option>
@@ -364,13 +364,13 @@ const ChatAssistant = () => {
                   minLength={5}
                   placeholder='Tell us what you need help with…'
                   className='w-full rounded-lg p-2 text-sm'
-                  style={{ border: '1px solid #94a3b8', color: '#0f172a', backgroundColor: '#fff' }}
+                  style={{ border: '1px solid var(--qa-border-strong)', color: 'var(--qa-text)', backgroundColor: 'var(--qa-surface)' }}
                 />
                 <div className='flex gap-2'>
-                  <button type='submit' disabled={busy} className='flex-1 rounded-full py-2 text-sm font-semibold' style={{ backgroundColor: '#0369a1', color: '#fff' }}>
+                  <button type='submit' disabled={busy} className='flex-1 rounded-full py-2 text-sm font-semibold' style={{ backgroundColor: 'var(--qa-primary)', color: '#fff' }}>
                     {busy ? 'Sending…' : 'Send'}
                   </button>
-                  <button type='button' onClick={() => setMode('chat')} className='rounded-full px-3 py-2 text-sm' style={{ backgroundColor: '#e2e8f0', color: '#0f172a' }}>
+                  <button type='button' onClick={() => setMode('chat')} className='rounded-full px-3 py-2 text-sm' style={{ backgroundColor: 'var(--qa-surface3)', color: 'var(--qa-text)' }}>
                     Cancel
                   </button>
                 </div>
@@ -380,14 +380,14 @@ const ChatAssistant = () => {
           </div>
 
           {mode === 'chat' && (
-            <div style={{ borderTop: '1px solid #e2e8f0' }}>
+            <div style={{ borderTop: '1px solid var(--qa-border)' }}>
               <div className='flex gap-1.5 overflow-x-auto px-3 pt-2'>
                 {QUICK_CHIPS.map((c) => (
-                  <button key={c} type='button' onClick={() => handleSend(c)} className='whitespace-nowrap rounded-full px-3 py-1 text-xs' style={{ backgroundColor: '#e0f2fe', color: '#075985' }}>
+                  <button key={c} type='button' onClick={() => handleSend(c)} className='whitespace-nowrap rounded-full px-3 py-1 text-xs' style={{ backgroundColor: 'var(--qa-accent-soft)', color: 'var(--qa-accent-text)' }}>
                     {c}
                   </button>
                 ))}
-                <button type='button' onClick={() => openForm('')} className='whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold' style={{ backgroundColor: '#fef3c7', color: '#78350f' }}>
+                <button type='button' onClick={() => openForm('')} className='whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold' style={{ backgroundColor: 'var(--qa-warn-bg)', color: 'var(--qa-warn-text)' }}>
                   Contact the team
                 </button>
               </div>
@@ -403,9 +403,9 @@ const ChatAssistant = () => {
                   onChange={(e) => setInput(e.target.value)}
                   placeholder='Ask about the platform…'
                   className='flex-1 rounded-full px-4 py-2 text-sm'
-                  style={{ border: '1px solid #94a3b8', color: '#0f172a', backgroundColor: '#fff' }}
+                  style={{ border: '1px solid var(--qa-border-strong)', color: 'var(--qa-text)', backgroundColor: 'var(--qa-surface)' }}
                 />
-                <button type='submit' className='rounded-full px-4 py-2 text-sm font-semibold' style={{ backgroundColor: '#0369a1', color: '#fff' }}>
+                <button type='submit' className='rounded-full px-4 py-2 text-sm font-semibold' style={{ backgroundColor: 'var(--qa-primary)', color: '#fff' }}>
                   Send
                 </button>
               </form>
@@ -419,8 +419,8 @@ const ChatAssistant = () => {
           type='button'
           onClick={() => setOpen((o) => !o)}
           aria-label={open ? 'Close assistant' : 'Open assistant'}
-          className='relative rounded-full shadow-xl w-14 h-14 text-2xl'
-          style={{ backgroundColor: '#0369a1', color: '#fff' }}
+          className={`relative rounded-full shadow-xl w-14 h-14 text-2xl ${open ? 'hidden sm:block' : ''}`}
+          style={{ backgroundColor: 'var(--qa-primary)', color: '#fff' }}
         >
           {open ? '×' : '💬'}
           {unread && !open && (
