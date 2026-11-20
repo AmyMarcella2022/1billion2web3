@@ -28,4 +28,6 @@ module.exports = {
     },
   },
   plugins: [require('daisyui')],
+  // data-theme on <html> (set by src/theme.js) picks the theme; no OS-media auto switching
+  daisyui: { themes: ['light', 'dark'], darkTheme: 'dark' },
 };

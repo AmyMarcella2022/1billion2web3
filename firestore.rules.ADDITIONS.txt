@@ -1,0 +1,46 @@
+// =============================================================================
+// ADD these blocks to your EXISTING firestore.rules — do NOT replace the file.
+// Paste them inside:  match /databases/{database}/documents { ... }
+// (Your current rules for users, progress, userProgress, scoreboards, lotusRewards
+//  stay exactly as they are; your test/firestoreRules.test.js keeps passing.)
+// =============================================================================
+
+    // helpers (names are prefixed so they can't clash with yours)
+    function qaSignedIn() { return request.auth != null; }
+    function qaEmail() { return request.auth.token.email.lower(); }
+    // the SAME custom claim your Cloud Functions already require (context.auth.token.admin)
+    function qaIsAdmin() { return qaSignedIn() && request.auth.token.admin == true; }
+
+    // Admin list. Managed from the Admin page; the onAdminAdded/onAdminRemoved functions sync the claim.
+    // Create your FIRST admin by hand in the console (doc id = your email, lowercase).
+    match /admins/{adminEmail} {
+      allow read: if qaIsAdmin() || (qaSignedIn() && adminEmail == qaEmail());
+      allow write: if qaIsAdmin();
+    }
+
+    // Lets the admin page SHOW real server-side progress (read only; writes stay blocked by your rule).
+    match /userProgress/{qaAnyId} {
+      allow read: if qaIsAdmin();
+    }
+
+    // Learner support requests -> admin inbox
+    match /supportRequests/{reqId} {
+      allow create: if qaSignedIn() && request.resource.data.email == qaEmail() && request.resource.data.status == 'open';
+      allow read: if qaIsAdmin() || (qaSignedIn() && resource.data.email == qaEmail());
+      allow update: if qaIsAdmin() || (qaSignedIn() && resource.data.email == qaEmail()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['seenByUser']));
+      allow delete: if qaIsAdmin();
+    }
+
+    // Post-course feedback
+    match /feedback/{fbEmail} {
+      allow create: if qaSignedIn() && fbEmail == qaEmail() && request.resource.data.email == qaEmail()
+        && request.resource.data.rating is int && request.resource.data.rating >= 1 && request.resource.data.rating <= 5;
+      allow read: if qaIsAdmin() || (qaSignedIn() && fbEmail == qaEmail());
+      allow update, delete: if qaIsAdmin();
+    }
+
+    // Chatbot knowledge. Signed-in sessions (and /api/chat using the learner's token) read; admins write.
+    match /botKnowledge/{kId} { allow read: if qaSignedIn(); allow write: if qaIsAdmin(); }
+    match /botSettings/{sId}  { allow read: if qaSignedIn(); allow write: if qaIsAdmin(); }
+    match /botFaqs/{fId}      { allow read: if qaSignedIn(); allow write: if qaIsAdmin(); }
