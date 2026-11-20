@@ -3,7 +3,8 @@ import {
   query, where, onSnapshot, serverTimestamp,
 } from 'firebase/firestore';
 import { onAuthStateChanged, sendPasswordResetEmail } from 'firebase/auth';
-import { db, auth } from '../firebase';
+import { getFunctions, httpsCallable } from 'firebase/functions';
+import { db, auth, app } from '../firebase';
 
 export { onAuthStateChanged, serverTimestamp, onSnapshot, collection, doc, query, where };
 export { db, auth };
@@ -11,15 +12,19 @@ export { db, auth };
 export const norm = (email) => (email || '').trim().toLowerCase();
 
 /* ---------- admins ---------- */
-export const checkIsAdmin = async (email) => {
-  if (!email) return false;
+// 'admin' = has the custom claim your Cloud Functions require; 'pending' = listed in admins/ but
+// the claim has not reached this login yet (sign out and back in); 'none' = not an admin.
+export const getAdminState = async (user) => {
   try {
-    const snap = await getDoc(doc(db, 'admins', norm(email)));
-    return snap.exists();
+    const tok = await user.getIdTokenResult(true);
+    if (tok.claims && tok.claims.admin) return 'admin';
+    const snap = await getDoc(doc(db, 'admins', norm(user.email)));
+    return snap.exists() ? 'pending' : 'none';
   } catch (e) {
-    return false;
+    return 'none';
   }
 };
+export const callAdmin = (name, data = {}) => httpsCallable(getFunctions(app), name)(data).then((r) => r.data);
 export const addAdmin = (email, addedBy) =>
   setDoc(doc(db, 'admins', norm(email)), { email: norm(email), addedBy, addedAt: serverTimestamp() });
 export const removeAdmin = (email) => deleteDoc(doc(db, 'admins', norm(email)));
@@ -36,20 +41,6 @@ export const findUserDoc = async (email) => {
 };
 export const touchUser = (id, data) => updateDoc(doc(db, 'users', id), data);
 
-export const setUserProgress = async (userDocId, email, moduleNumber) => {
-  const n = Math.max(0, Math.min(9, parseInt(moduleNumber, 10) || 0));
-  await setDoc(doc(db, 'users', userDocId), { progress: n }, { merge: true });
-  await setDoc(doc(db, 'progress', norm(email)), { email: norm(email), moduleNumber: n }, { merge: true });
-  return n;
-};
-export const deleteUserRecords = async (userDocId, email) => {
-  await deleteDoc(doc(db, 'users', userDocId));
-  try {
-    await deleteDoc(doc(db, 'progress', norm(email)));
-  } catch (e) {
-    /* progress doc may not exist */
-  }
-};
 export const sendReset = (email) => sendPasswordResetEmail(auth, norm(email));
 
 /* ---------- support requests ---------- */
