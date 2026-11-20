@@ -48,10 +48,10 @@ const Login = () => {
   return (
     <>
       <Navbar />
-      <div className='bg-black h-screen'>
+      <div className='bg-base-200 min-h-[100dvh] px-4 pb-10'>
         <div className='flex flex-col flex-1 items-center'>
-          <h1 className='font-poppins text-3xl text-white text-center h-[20px] py-24'>LOGIN</h1>
-          <div className='card flex-shrink-0 w-96 shadow-2xl bg-base-100'>
+          <h1 className='font-poppins text-3xl text-base-content text-center pt-24 pb-6'>LOGIN</h1>
+          <div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
             <div className='card-body'>
               <form onSubmit={signin}>
                 <div className='flex justify-center'>

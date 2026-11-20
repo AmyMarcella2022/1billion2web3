@@ -70,10 +70,10 @@ const Register = () => {
   return (
     <>
       <Navbar />
-      <div className='bg-black h-screen overflow-y-scroll'>
+      <div className='bg-base-200 min-h-[100dvh] px-4 pb-10'>
         <div className='flex flex-col flex-1 items-center'>
-          <h1 className='card-title font-poppins text-2xl text-white my-20'>REGISTER</h1>
-          <div className='card bg-base-200 lg:mt-10'>
+          <h1 className='card-title font-poppins text-2xl text-base-content mt-24 mb-6 justify-center'>REGISTER</h1>
+          <div className='card bg-base-100 w-full max-w-md shadow-2xl'>
             <div className='card-body'>
               <div className='flex justify-center'>
                 <div className='avatar'>
@@ -130,7 +130,7 @@ const Register = () => {
                       placeholder='0x...'
                     />
                     <label className='label'>
-                      <span className='label-text-alt text-gray-400'>
+                      <span className='label-text-alt text-base-content/60'>
                         Must be on the Optimism Sepolia network — this is where your NFTs
                         will be sent.
                       </span>
