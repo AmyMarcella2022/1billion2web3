@@ -141,3 +141,88 @@
     background: rgba(255, 255, 255, 0.6);
     filter: blur(750px);
   }
+
+/* =====================================================================
+   Theme tokens used by the chatbot, admin page and modals (--qa-*)
+   ===================================================================== */
+:root,
+:root[data-theme='light'] {
+  --qa-page: #f1f5f9;
+  --qa-surface: #ffffff;
+  --qa-surface2: #f1f5f9;
+  --qa-surface3: #e2e8f0;
+  --qa-text: #0f172a;
+  --qa-muted: #475569;
+  --qa-border: #cbd5e1;
+  --qa-border-strong: #94a3b8;
+  --qa-primary: #0369a1;
+  --qa-header: #0c4a6e;
+  --qa-accent-soft: #e0f2fe;
+  --qa-accent-text: #075985;
+  --qa-warn-bg: #fef3c7;
+  --qa-warn-text: #78350f;
+  --qa-warn-border: #fcd34d;
+  --qa-danger: #b91c1c;
+  --qa-danger-text: #b91c1c;
+  --qa-link: #1d4ed8;
+  --qa-disabled: #94a3b8;
+  --qa-ok: #15803d;
+  --qa-pending: #a16207;
+  --qa-star-off: #cbd5e1;
+}
+:root[data-theme='dark'] {
+  --qa-page: #0b1220;
+  --qa-surface: #111a2c;
+  --qa-surface2: #0d1626;
+  --qa-surface3: #1e2a3f;
+  --qa-text: #e6edf6;
+  --qa-muted: #9fb0c6;
+  --qa-border: #27364d;
+  --qa-border-strong: #3f5272;
+  --qa-primary: #0284c7;
+  --qa-header: #082f49;
+  --qa-accent-soft: #0c2a43;
+  --qa-accent-text: #7dd3fc;
+  --qa-warn-bg: #3a2a08;
+  --qa-warn-text: #fde68a;
+  --qa-warn-border: #92400e;
+  --qa-danger: #dc2626;
+  --qa-danger-text: #f87171;
+  --qa-link: #7dd3fc;
+  --qa-disabled: #475569;
+  --qa-ok: #4ade80;
+  --qa-pending: #fbbf24;
+  --qa-star-off: #3f5272;
+}
+
+/* =====================================================================
+   Mobile / touch / cross-device
+   ===================================================================== */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  -webkit-font-smoothing: antialiased;
+}
+img, video, svg { max-width: 100%; }
+/* comfortable touch targets */
+.btn, button, [role='button'], summary, select { touch-action: manipulation; }
+.btn { min-height: 44px; }
+/* iOS Safari zooms into inputs smaller than 16px — keep them at 16px on phones/tablets */
+@media (max-width: 1059px) {
+  input, select, textarea { font-size: 16px !important; }
+}
+/* never let a wide card/table force sideways scrolling on a phone */
+.card { max-width: 100%; }
+/* respect notches / home-indicator */
+.safe-top { padding-top: env(safe-area-inset-top); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
