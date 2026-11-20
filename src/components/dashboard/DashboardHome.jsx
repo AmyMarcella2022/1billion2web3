@@ -109,24 +109,25 @@ const DashboardHome = () => {
   }, [getPlayerProgress]);
 
   return (
-    <div className='p-5'>
+    <div className='p-4 sm:p-5'>
       {loading ? (
         <Loader />
       ) : (
-        <div>
+        <div className='grid gap-3 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-start'>
           {dashboardAccordionList.map((module, index) => (
-            <div key={module.id} className='collapse collapse-arrow bg-base-200 my-2 md:w-[500px]'>
+            <div key={module.id} className='collapse collapse-arrow bg-base-200 w-full'>
               <input type='radio' name='my-accordion-3' />
-              <div className='collapse-title text-xl font-medium'>{module.title}</div>
-              <div className='collapse-content bg-white'>
+              <div className='collapse-title text-lg sm:text-xl font-medium min-h-[52px]'>{module.title}</div>
+              <div className='collapse-content bg-base-100'>
                 <ul>
                   <li
-                    className={`m-2 rounded-lg p-2 hover:bg-base-300 flex justify-between ${
+                    className={`m-2 rounded-lg p-2 hover:bg-base-300 flex items-center justify-between gap-3 min-h-[44px] ${
                       metaProgress < index ? 'pointer-events-none opacity-70' : ''
                     }`}
                   >
                     <p
-                      className='cursor-pointer'
+                      role='button'
+                      className='cursor-pointer flex-1 py-2'
                       onClick={() =>
                         openMetaverse(
                           module.content.metaverse,
@@ -149,7 +150,7 @@ const DashboardHome = () => {
                     )}
                   </li>
                   <li
-                    className={`m-2 rounded-lg p-2 hover:bg-base-300 flex justify-between ${
+                    className={`m-2 rounded-lg p-2 hover:bg-base-300 flex items-center justify-between gap-3 min-h-[44px] ${
                       classProgress < index
                         ? 'pointer-events-none opacity-70'
                         : classProgress === index
@@ -157,7 +158,9 @@ const DashboardHome = () => {
                         : ''
                     }`}
                   >
-                    <Link to={module.content.path}>Take Module Quiz</Link>
+                    <Link to={module.content.path} className='flex-1 py-2'>
+                      Take Module Quiz
+                    </Link>
                     {classProgress < index ? (
                       <BsLockFill />
                     ) : classProgress === index ? (
@@ -178,7 +181,7 @@ const DashboardHome = () => {
         </div>
       )}
 
-      <div className='mt-4'>
+      <div className='mt-6 max-w-xl'>
         <button
           onClick={requestCertificate}
           className={`btn btn-success ${moduleNumber === 9 ? '' : 'btn-disabled'} btn-block`}

@@ -6,7 +6,7 @@ const DashboardHeader = ({ user }) => {
     <div className='flex flex-col justify-center items-center'>
       <div className='avatar'>
         <div className='w-14 rounded-full mt-5'>
-          <BiUserCircle size='3rem' color='#000' />
+          <BiUserCircle size='3rem' color='currentColor' />
         </div>
       </div>
       <div className='text-center font-bold'>{user?.email}</div>
