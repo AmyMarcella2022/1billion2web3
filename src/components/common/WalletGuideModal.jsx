@@ -13,13 +13,13 @@ const NETWORK = {
 // Colours are set explicitly (not via the daisyUI theme) and the modal opts out of
 // browser "force dark" / OS dark mode, so the text is always dark-on-white and readable.
 const S = {
-  card: { backgroundColor: '#ffffff', color: '#111827', colorScheme: 'light' },
-  header: { backgroundColor: '#e0f2fe', color: '#0c4a6e', borderBottom: '1px solid #bae6fd' },
-  body: { color: '#1f2937' },
-  strong: { color: '#000000' },
-  box: { backgroundColor: '#f1f5f9', color: '#0f172a', border: '1px solid #cbd5e1' },
-  link: { color: '#1d4ed8', textDecoration: 'underline', fontWeight: 600 },
-  note: { color: '#374151' },
+  card: { backgroundColor: 'var(--qa-surface)', color: 'var(--qa-text)' },
+  header: { backgroundColor: 'var(--qa-accent-soft)', color: 'var(--qa-accent-text)', borderBottom: '1px solid var(--qa-border)' },
+  body: { color: 'var(--qa-text)' },
+  strong: { color: 'var(--qa-text)' },
+  box: { backgroundColor: 'var(--qa-surface2)', color: 'var(--qa-text)', border: '1px solid var(--qa-border)' },
+  link: { color: 'var(--qa-link)', textDecoration: 'underline', fontWeight: 600 },
+  note: { color: 'var(--qa-muted)' },
 };
 
 const WalletGuideModal = ({ isOpen, onClose }) => {
@@ -45,7 +45,7 @@ const WalletGuideModal = ({ isOpen, onClose }) => {
           <button
             onClick={onClose}
             className='text-2xl'
-            style={{ color: '#0c4a6e' }}
+            style={{ color: 'var(--qa-accent-text)' }}
             aria-label='Close'
             type='button'
           >
@@ -133,7 +133,7 @@ const WalletGuideModal = ({ isOpen, onClose }) => {
             type='button'
             onClick={onClose}
             className='w-full rounded-full py-3 font-semibold'
-            style={{ backgroundColor: '#0369a1', color: '#ffffff' }}
+            style={{ backgroundColor: 'var(--qa-primary)', color: '#ffffff' }}
           >
             Got it
           </button>

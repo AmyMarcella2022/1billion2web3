@@ -33,10 +33,10 @@ const DisclaimerModal = () => {
     >
       <div
         className='w-full max-w-md rounded-xl shadow-2xl overflow-hidden'
-        style={{ backgroundColor: '#ffffff', color: '#111827', colorScheme: 'light' }}
+        style={{ backgroundColor: 'var(--qa-surface)', color: 'var(--qa-text)' }}
       >
-        <div className='px-5 py-4' style={{ backgroundColor: '#fef3c7', borderBottom: '1px solid #fcd34d' }}>
-          <h2 id='disclaimer-title' className='font-poppins font-bold text-lg' style={{ color: '#78350f' }}>
+        <div className='px-5 py-4' style={{ backgroundColor: 'var(--qa-warn-bg)', borderBottom: '1px solid var(--qa-warn-border)' }}>
+          <h2 id='disclaimer-title' className='font-poppins font-bold text-lg' style={{ color: 'var(--qa-warn-text)' }}>
             ⚠️ Disclaimer
           </h2>
         </div>
@@ -46,7 +46,7 @@ const DisclaimerModal = () => {
           </p>
           <p>
             Nothing here is financial, investment, or legal advice. The NFTs, tokens and
-            certificates are part of a learning program and run decentralized on a Blockchain network (OP
+            certificates are part of a learning program and run on a test network (OP
             Sepolia), so they carry no guaranteed monetary value.
           </p>
           <p>Never share your wallet recovery phrase with anyone — we will never ask for it.</p>
@@ -54,7 +54,7 @@ const DisclaimerModal = () => {
             type='button'
             onClick={accept}
             className='w-full rounded-full py-3 font-semibold mt-2'
-            style={{ backgroundColor: '#0369a1', color: '#ffffff' }}
+            style={{ backgroundColor: 'var(--qa-primary)', color: '#ffffff' }}
           >
             I Understand
           </button>

@@ -44,8 +44,8 @@ const SuccessPage = () => {
   };
 
   return (
-    <div className=''>
-      <div className='card card-normal lg:w-[500px] bg-base-100 shadow-xl'>
+    <div className='px-4 sm:px-6'>
+      <div className='card card-normal w-full max-w-[500px] mx-auto bg-base-200 shadow-xl'>
         <div className='card-body items-center text-center'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
