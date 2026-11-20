@@ -2,23 +2,24 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useAuthUser from '../../hooks/useAuthUser';
+import ThemeToggle from '../common/ThemeToggle';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
 import {
-  db, collection, onSnapshot, checkIsAdmin, addAdmin, removeAdmin, setUserProgress,
-  deleteUserRecords, sendReset, updateSupportRequest, deleteSupportRequest, addFaq, deleteFaq,
-  touchUser, fmtDate, tsToDate, norm, saveKnowledge, deleteKnowledge, saveBotSettings,
+  db, collection, onSnapshot, getAdminState, callAdmin, addAdmin, removeAdmin,
+  sendReset, updateSupportRequest, deleteSupportRequest, addFaq, deleteFaq,
+  fmtDate, tsToDate, norm, saveKnowledge, deleteKnowledge, saveBotSettings,
 } from '../../services/platform';
 import { askAI } from '../../services/ai';
 
 const C = { // fixed light palette so the admin area is readable regardless of device dark mode
-  page: { backgroundColor: '#f1f5f9', color: '#0f172a', colorScheme: 'light', minHeight: '100vh' },
-  card: { backgroundColor: '#ffffff', border: '1px solid #cbd5e1', borderRadius: 12 },
-  input: { backgroundColor: '#ffffff', color: '#0f172a', border: '1px solid #94a3b8', borderRadius: 8, padding: '8px 10px', width: '100%' },
-  btn: { backgroundColor: '#0369a1', color: '#fff', borderRadius: 8, padding: '8px 14px', fontWeight: 600 },
-  btnGhost: { backgroundColor: '#e2e8f0', color: '#0f172a', borderRadius: 8, padding: '8px 14px' },
-  btnDanger: { backgroundColor: '#b91c1c', color: '#fff', borderRadius: 8, padding: '8px 14px', fontWeight: 600 },
-  muted: { color: '#475569' },
+  page: { backgroundColor: 'var(--qa-page)', color: 'var(--qa-text)', minHeight: '100dvh' },
+  card: { backgroundColor: 'var(--qa-surface)', border: '1px solid var(--qa-border)', borderRadius: 12 },
+  input: { backgroundColor: 'var(--qa-surface)', color: 'var(--qa-text)', border: '1px solid var(--qa-border-strong)', borderRadius: 8, padding: '10px 12px', width: '100%', minHeight: 44 },
+  btn: { backgroundColor: 'var(--qa-primary)', color: '#fff', borderRadius: 8, padding: '8px 14px', fontWeight: 600, minHeight: 44, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' },
+  btnGhost: { backgroundColor: 'var(--qa-surface3)', color: 'var(--qa-text)', borderRadius: 8, padding: '8px 14px', minHeight: 44, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' },
+  btnDanger: { backgroundColor: 'var(--qa-danger)', color: '#fff', borderRadius: 8, padding: '8px 14px', fontWeight: 600, minHeight: 44, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' },
+  muted: { color: 'var(--qa-muted)' },
 };
 
 const csvDownload = (name, rows) => {
@@ -87,8 +88,8 @@ const Overview = ({ users, requests, feedback }) => {
         {dist.map((n, i) => (
           <div key={i} className='flex items-center gap-2 mb-1 text-sm'>
             <div className='w-20' style={C.muted}>{i === 0 ? 'Not started' : i === 9 ? 'All 9 ✅' : `${i} done`}</div>
-            <div className='flex-1 rounded' style={{ backgroundColor: '#e2e8f0', height: 14 }}>
-              <div style={{ width: `${(n / max) * 100}%`, backgroundColor: '#0369a1', height: 14, borderRadius: 4 }} />
+            <div className='flex-1 rounded' style={{ backgroundColor: 'var(--qa-surface3)', height: 14 }}>
+              <div style={{ width: `${(n / max) * 100}%`, backgroundColor: 'var(--qa-primary)', height: 14, borderRadius: 4 }} />
             </div>
             <div className='w-8 text-right'>{n}</div>
           </div>
@@ -106,62 +107,68 @@ const Overview = ({ users, requests, feedback }) => {
 };
 
 /* ===================== Users ===================== */
+const Pre = ({ data }) => (
+  <pre className='text-xs p-2 rounded overflow-auto' style={{ backgroundColor: 'var(--qa-surface2)', maxHeight: 220 }}>{JSON.stringify(data, null, 2)}</pre>
+);
+
 const UserEditor = ({ u, onClose }) => {
-  const [name, setName] = useState(u.name || '');
   const [wallet, setWallet] = useState(u.walletAddress || '');
-  const [prog, setProg] = useState(Number(u.progress) || 0);
   const [busy, setBusy] = useState(false);
+  const [info, setInfo] = useState(null);
+  const sec = (u.up && u.up.section) || {};
 
   const run = async (fn, okMsg) => {
     setBusy(true);
     try {
       await fn();
-      toast.success(okMsg);
+      if (okMsg) toast.success(okMsg);
     } catch (e) {
       console.log(e);
-      toast.error(e.code || e.message || 'Action failed');
+      toast.error(e.message || e.code || 'Action failed');
     } finally {
       setBusy(false);
     }
   };
+  const call = (name, label, confirmMsg) => {
+    if (confirmMsg && !window.confirm(confirmMsg)) return;
+    run(async () => setInfo({ label, data: await callAdmin(name, { email: u.email }) }), `${label}: done`);
+  };
 
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center p-4' style={{ backgroundColor: 'rgba(0,0,0,0.6)' }} onClick={onClose}>
-      <div className='w-full max-w-lg max-h-[90vh] overflow-y-auto p-5 space-y-3' style={{ ...C.card, colorScheme: 'light' }} onClick={(e) => e.stopPropagation()}>
+      <div className='w-full max-w-lg max-h-[90dvh] overflow-y-auto p-5 space-y-3' style={{ ...C.card }} onClick={(e) => e.stopPropagation()}>
         <div className='flex justify-between items-start'>
           <div>
-            <h3 className='text-lg font-bold'>{u.email}</h3>
+            <h3 className='text-lg font-bold'>{u.name || '(no name)'}</h3>
+            <div className='text-sm'>{u.email}</div>
             <div className='text-xs' style={C.muted}>Joined {fmtDate(u.createdAt)} · Last seen {fmtDate(u.lastSeenAt)}</div>
           </div>
           <button type='button' onClick={onClose} className='text-2xl leading-none'>×</button>
         </div>
-        <label className='block text-sm font-semibold'>Name<input style={C.input} value={name} onChange={(e) => setName(e.target.value)} /></label>
-        <label className='block text-sm font-semibold'>Wallet address (OP Sepolia)<input style={C.input} value={wallet} onChange={(e) => setWallet(e.target.value)} placeholder='0x…' /></label>
-        <button type='button' disabled={busy} style={C.btn} onClick={() => run(() => touchUser(u.id, { name: name.trim(), walletAddress: wallet.trim() }), 'Profile saved')}>Save profile</button>
-        <hr />
-        <label className='block text-sm font-semibold'>Modules completed: {prog} / 9
-          <input type='range' min='0' max='9' value={prog} onChange={(e) => setProg(Number(e.target.value))} style={{ width: '100%' }} />
+
+        <div className='p-2 rounded text-sm space-y-0.5' style={{ backgroundColor: 'var(--qa-surface2)' }}>
+          <div><b>Modules completed (server record):</b> {(sec.completedModules || []).length}/9 {sec.completedModules && sec.completedModules.length ? `(${sec.completedModules.join(', ')})` : ''}</div>
+          <div>All completed: {sec.allCompleted ? 'yes' : 'no'} · “Mint All” pressed: {sec.mintStarted ? 'yes' : 'no'} · Certificate minted: {sec.certificateMinted ? 'yes' : 'no'} · All minted: {sec.allMinted ? 'yes' : 'no'}</div>
+          {!u.up && <div style={C.muted}>No server progress record yet (hasn’t finished a module).</div>}
+          <div className='text-xs' style={C.muted}>Progress is read-only here: it is written only by the quiz → scoreboard → minting pipeline, so it can’t be edited by hand.</div>
+        </div>
+
+        <label className='block text-sm font-semibold'>Wallet address (OP Sepolia)
+          <input style={C.input} value={wallet} onChange={(e) => setWallet(e.target.value)} placeholder='0x…' />
         </label>
-        <div className='flex gap-2 flex-wrap'>
-          <button type='button' disabled={busy} style={C.btn} onClick={() => run(() => setUserProgress(u.id, u.email, prog), 'Progress updated')}>Set progress</button>
-          <button type='button' disabled={busy} style={C.btnGhost} onClick={() => window.confirm('Reset this user to 0 modules?') && (setProg(0), run(() => setUserProgress(u.id, u.email, 0), 'Progress reset'))}>Reset to 0</button>
-        </div>
+        <button type='button' disabled={busy} style={C.btn} onClick={() => run(() => callAdmin('adminSetWallet', { email: u.email, walletAddress: wallet.trim() }), 'Wallet updated')}>Save wallet (validated)</button>
         <hr />
+        <div className='text-sm font-semibold'>Minting & rewards</div>
         <div className='flex gap-2 flex-wrap'>
-          <button type='button' disabled={busy} style={C.btnGhost} onClick={() => run(() => sendReset(u.email), 'Password reset email sent')}>Send password reset email</button>
-          <button
-            type='button'
-            disabled={busy}
-            style={C.btnDanger}
-            onClick={() =>
-              window.confirm(`Delete ${u.email}'s profile and progress records? (Their login account stays in Firebase Auth.)`) &&
-              run(async () => { await deleteUserRecords(u.id, u.email); onClose(); }, 'User records deleted')
-            }
-          >
-            Delete records
-          </button>
+          <button type='button' disabled={busy} style={C.btnGhost} onClick={() => call('getUserProgressAdmin', 'Full status')}>Full status</button>
+          <button type='button' disabled={busy} style={C.btnGhost} onClick={() => call('getLotusRewardStatus', 'LOTUS status')}>LOTUS status</button>
+          <button type='button' disabled={busy} style={C.btnGhost} onClick={() => call('resetMintStarted', 'Reset “Mint All” lock', `Let ${u.email} press “Mint All” again?`)}>Reset “Mint All” lock</button>
+          <button type='button' disabled={busy} style={C.btnGhost} onClick={() => call('retryLotusReward', 'Retry LOTUS', `Retry the LOTUS reward for ${u.email}?`)}>Retry LOTUS</button>
+          <button type='button' disabled={busy} style={C.btnDanger} onClick={() => call('manuallyTriggerMint', 'Manual mint', `Queue ON-CHAIN minting of NFTs + certificate for ${u.email}? It uses the wallet shown above.`)}>Manually trigger mint</button>
         </div>
-        <p className='text-xs' style={C.muted}>Deleting removes the Firestore profile + progress only. To remove the sign-in account itself, use Firebase Console → Authentication.</p>
+        {info && <div><div className='text-xs font-semibold mb-1'>{info.label}</div><Pre data={info.data} /></div>}
+        <hr />
+        <button type='button' disabled={busy} style={C.btnGhost} onClick={() => run(() => sendReset(u.email), 'Password reset email sent')}>Send password reset email</button>
       </div>
     </div>
   );
@@ -198,18 +205,19 @@ const Users = ({ users }) => {
       </div>
       <div style={C.card} className='overflow-x-auto'>
         <table className='w-full text-sm'>
-          <thead><tr style={{ backgroundColor: '#e2e8f0' }}>{['Name', 'Email', 'Wallet', 'Progress', 'Joined'].map((h) => <th key={h} className='text-left p-2'>{h}</th>)}</tr></thead>
+          <thead><tr style={{ backgroundColor: 'var(--qa-surface3)' }}>{['Name', 'Email', 'Wallet', 'Progress', 'Minted', 'Joined'].map((h) => <th key={h} className='text-left p-2'>{h}</th>)}</tr></thead>
           <tbody>
             {rows.map((u) => (
-              <tr key={u.id} onClick={() => setSel(u.id)} className='cursor-pointer' style={{ borderTop: '1px solid #e2e8f0' }}>
+              <tr key={u.id} onClick={() => setSel(u.id)} className='cursor-pointer' style={{ borderTop: '1px solid var(--qa-border)' }}>
                 <td className='p-2'>{u.name || '—'}</td>
                 <td className='p-2'>{u.email}</td>
-                <td className='p-2 font-mono text-xs'>{u.walletAddress ? `${u.walletAddress.slice(0, 8)}…${u.walletAddress.slice(-4)}` : <span style={{ color: '#b91c1c' }}>missing</span>}</td>
+                <td className='p-2 font-mono text-xs'>{u.walletAddress ? `${u.walletAddress.slice(0, 8)}…${u.walletAddress.slice(-4)}` : <span style={{ color: 'var(--qa-danger-text)' }}>missing</span>}</td>
                 <td className='p-2'>{Number(u.progress) || 0}/9</td>
+                <td className='p-2'>{u.up && u.up.section && u.up.section.allMinted ? '✅' : u.up && u.up.section && u.up.section.mintStarted ? '⏳' : '—'}</td>
                 <td className='p-2'>{fmtDate(u.createdAt)}</td>
               </tr>
             ))}
-            {rows.length === 0 && <tr><td className='p-4' colSpan={5} style={C.muted}>No users match.</td></tr>}
+            {rows.length === 0 && <tr><td className='p-4' colSpan={6} style={C.muted}>No users match.</td></tr>}
           </tbody>
         </table>
       </div>
@@ -249,11 +257,11 @@ const Support = ({ requests }) => {
         </select>
         {list.length === 0 && <div style={C.muted}>Nothing here 🎉</div>}
         {list.map((x) => (
-          <button key={x.id} type='button' onClick={() => pick(x)} className='w-full text-left p-3' style={{ ...C.card, borderColor: sel === x.id ? '#0369a1' : '#cbd5e1', borderWidth: sel === x.id ? 2 : 1 }}>
+          <button key={x.id} type='button' onClick={() => pick(x)} className='w-full text-left p-3' style={{ ...C.card, borderColor: sel === x.id ? 'var(--qa-primary)' : 'var(--qa-border)', borderWidth: sel === x.id ? 2 : 1 }}>
             <div className='flex justify-between text-xs' style={C.muted}><span>{x.category}</span><span>{fmtDate(x.createdAt)}</span></div>
             <div className='font-semibold text-sm'>{x.name || x.email}</div>
             <div className='text-sm truncate'>{x.message}</div>
-            <div className='text-xs mt-1' style={{ color: x.status === 'open' ? '#b91c1c' : x.status === 'resolved' ? '#15803d' : '#a16207' }}>● {x.status}</div>
+            <div className='text-xs mt-1' style={{ color: x.status === 'open' ? 'var(--qa-danger-text)' : x.status === 'resolved' ? 'var(--qa-ok)' : 'var(--qa-pending)' }}>● {x.status}</div>
           </button>
         ))}
       </div>
@@ -261,7 +269,7 @@ const Support = ({ requests }) => {
         <div style={C.card} className='p-4 space-y-2 self-start'>
           <div className='text-sm'><b>{r.name || '—'}</b> · {r.email}</div>
           <div className='text-xs' style={C.muted}>{r.category} · from {r.page} · {r.progress ?? 0}/9 modules done · {fmtDate(r.createdAt)}</div>
-          <p className='text-sm whitespace-pre-wrap p-2 rounded' style={{ backgroundColor: '#f1f5f9' }}>{r.message}</p>
+          <p className='text-sm whitespace-pre-wrap p-2 rounded' style={{ backgroundColor: 'var(--qa-surface2)' }}>{r.message}</p>
           <label className='block text-sm font-semibold'>Reply (shown to the user in the assistant next time they visit)
             <textarea rows={4} style={C.input} value={reply} onChange={(e) => setReply(e.target.value)} />
           </label>
@@ -287,7 +295,7 @@ const Feedback = ({ feedback }) => {
       {list.length === 0 && <div style={C.muted}>No reviews yet. They appear after learners finish all 9 modules.</div>}
       {list.map((f) => (
         <div key={f.id} style={C.card} className='p-3'>
-          <div className='flex justify-between text-sm'><b>{f.name || f.email}</b><span style={{ color: '#f59e0b' }}>{'★'.repeat(f.rating || 0)}<span style={{ color: '#cbd5e1' }}>{'★'.repeat(5 - (f.rating || 0))}</span></span></div>
+          <div className='flex justify-between text-sm'><b>{f.name || f.email}</b><span style={{ color: '#f59e0b' }}>{'★'.repeat(f.rating || 0)}<span style={{ color: 'var(--qa-star-off)' }}>{'★'.repeat(5 - (f.rating || 0))}</span></span></div>
           <div className='text-sm whitespace-pre-wrap'>{f.comment || <i style={C.muted}>(no comment)</i>}</div>
           <div className='text-xs' style={C.muted}>{f.email} · {fmtDate(f.createdAt)}</div>
         </div>
@@ -409,11 +417,11 @@ const AIKnowledge = ({ entries, settingsDocs }) => {
       <div style={C.card} className='p-4 space-y-2'>
         <div className='flex justify-between text-sm'>
           <h3 className='font-semibold'>Knowledge entries ({entries.length})</h3>
-          <span style={{ color: total > KNOWLEDGE_LIMIT ? '#b91c1c' : '#475569' }}>{total.toLocaleString()} / {KNOWLEDGE_LIMIT.toLocaleString()} characters{total > KNOWLEDGE_LIMIT ? ' — extra text is ignored' : ''}</span>
+          <span style={{ color: total > KNOWLEDGE_LIMIT ? 'var(--qa-danger-text)' : 'var(--qa-muted)' }}>{total.toLocaleString()} / {KNOWLEDGE_LIMIT.toLocaleString()} characters{total > KNOWLEDGE_LIMIT ? ' — extra text is ignored' : ''}</span>
         </div>
         {entries.length === 0 && <div style={C.muted}>Nothing yet — until you add knowledge, the AI says it has no answer and learners are offered the “contact the team” form.</div>}
         {entries.map((e) => (
-          <div key={e.id} className='p-2 rounded flex justify-between gap-2' style={{ backgroundColor: '#f1f5f9' }}>
+          <div key={e.id} className='p-2 rounded flex justify-between gap-2' style={{ backgroundColor: 'var(--qa-surface2)' }}>
             <div className='min-w-0'>
               <div className='font-semibold text-sm'>{e.title}</div>
               <div className='text-xs truncate' style={C.muted}>{(e.content || '').slice(0, 140)}</div>
@@ -433,8 +441,72 @@ const AIKnowledge = ({ entries, settingsDocs }) => {
           <input style={C.input} placeholder='Ask something a learner might ask…' value={testQ} onChange={(e) => setTestQ(e.target.value)} required />
           <button type='submit' disabled={testing} style={C.btn}>{testing ? '…' : 'Ask'}</button>
         </div>
-        {testA && <p className='text-sm whitespace-pre-wrap p-2 rounded' style={{ backgroundColor: '#f1f5f9' }}>{testA}</p>}
+        {testA && <p className='text-sm whitespace-pre-wrap p-2 rounded' style={{ backgroundColor: 'var(--qa-surface2)' }}>{testA}</p>}
       </form>
+    </div>
+  );
+};
+
+
+/* ===================== Minting & LOTUS (uses your existing admin callables) ===================== */
+const Minting = () => {
+  const [q, setQ] = useState(null);
+  const [lotus, setLotus] = useState(null);
+  const [busy, setBusy] = useState(false);
+
+  const load = async () => {
+    setBusy(true);
+    try { setQ(await callAdmin('getMintQueueStatus')); } catch (e) { toast.error(`Mint queue: ${e.message}`); }
+    try { setLotus(await callAdmin('getLotusStats')); } catch (e) { toast.error(`LOTUS stats: ${e.message}`); }
+    setBusy(false);
+  };
+  useEffect(() => { load(); }, []);
+
+  const act = async (name, confirmMsg) => {
+    if (!window.confirm(confirmMsg)) return;
+    try {
+      const r = await callAdmin(name);
+      toast.success(`Retried ${r.retriedCount ?? 0} item(s)`);
+      load();
+    } catch (e) { toast.error(e.message); }
+  };
+  const sum = (q && q.summary) || {};
+  const lotusRows = lotus ? Object.entries(lotus).filter(([k]) => k !== 'success') : [];
+
+  return (
+    <div className='space-y-4'>
+      <div className='flex gap-2 flex-wrap'>
+        <button type='button' style={C.btn} disabled={busy} onClick={load}>{busy ? 'Loading…' : 'Refresh'}</button>
+        <button type='button' style={C.btn} onClick={() => act('requeueStalledMints', 'Restart mint jobs that got stuck after a failed attempt? They will be minted again with the current code.')}>Restart stalled jobs</button>
+        <button type='button' style={C.btnGhost} onClick={() => act('retryFailedMints', 'Reset ALL failed mint jobs to pending so they are retried?')}>Retry all failed mints</button>
+        <button type='button' style={C.btnGhost} onClick={() => act('retryFailedLotusRewards', 'Reset ALL failed LOTUS rewards to pending so they are retried?')}>Retry all failed LOTUS</button>
+      </div>
+      <div className='grid grid-cols-2 md:grid-cols-5 gap-3'>
+        {['pending', 'processing', 'failed', 'success', 'total'].map((k) => <Stat key={k} label={`Mint jobs: ${k}`} value={sum[k] ?? '—'} />)}
+      </div>
+      <div style={C.card} className='p-4'>
+        <h3 className='font-semibold mb-2'>Failed mint jobs</h3>
+        {!q || !(q.failedJobs || []).length ? <div style={C.muted}>None 🎉</div> : (
+          <div className='overflow-x-auto'>
+            <table className='w-full text-sm'>
+              <thead><tr style={{ backgroundColor: 'var(--qa-surface3)' }}>{['Email', 'Type', 'Module', 'Attempts', 'Error'].map((h) => <th key={h} className='text-left p-2'>{h}</th>)}</tr></thead>
+              <tbody>{q.failedJobs.map((j) => (
+                <tr key={j.id} style={{ borderTop: '1px solid var(--qa-border)' }}>
+                  <td className='p-2'>{j.email}</td><td className='p-2'>{j.type}</td><td className='p-2'>{j.moduleNumber ?? '—'}</td><td className='p-2'>{j.attempts}</td>
+                  <td className='p-2 text-xs' style={{ color: 'var(--qa-danger-text)' }}>{String(j.error || '').slice(0, 160)}</td>
+                </tr>))}</tbody>
+            </table>
+          </div>
+        )}
+      </div>
+      <div style={C.card} className='p-4'>
+        <h3 className='font-semibold mb-2'>LOTUS rewards</h3>
+        {!lotus ? <div style={C.muted}>—</div> : lotusRows.map(([k, v]) => (
+          <div key={k} className='text-sm flex justify-between gap-3 py-0.5' style={{ borderTop: '1px solid var(--qa-surface3)' }}>
+            <span style={C.muted}>{k}</span><span className='font-mono text-xs text-right break-all'>{typeof v === 'object' ? JSON.stringify(v) : String(v)}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -462,21 +534,25 @@ const Admins = ({ admins, me }) => {
 const AdminPage = () => {
   const navigate = useNavigate();
   const { user, ready } = useAuthUser();
-  const [allowed, setAllowed] = useState(null);
+  const [access, setAccess] = useState(null); // null | 'admin' | 'pending' | 'none'
   const [tab, setTab] = useState('overview');
 
   useEffect(() => {
     if (!ready) return;
     if (!user) { navigate('/login'); return; }
-    checkIsAdmin(user.email).then(setAllowed);
+    getAdminState(user).then(setAccess);
   }, [ready, user, navigate]);
 
-  if (!ready || allowed === null) return <div style={{ ...C.page, padding: 24 }}>Checking access…</div>;
-  if (!allowed) {
+  if (!ready || access === null) return <div style={{ ...C.page, padding: 24 }}>Checking access…</div>;
+  if (access !== 'admin') {
     return (
       <div style={{ ...C.page, padding: 24 }}>
-        <h2 className='text-xl font-bold mb-2'>Admins only</h2>
-        <p className='mb-3'>Your account doesn’t have admin access.</p>
+        <h2 className='text-xl font-bold mb-2'>{access === 'pending' ? 'Almost there' : 'Admins only'}</h2>
+        <p className='mb-3'>
+          {access === 'pending'
+            ? 'You are on the admin list, but your admin permission hasn’t reached this login yet. Log out, log back in, and open /admin again. (If it still fails, the onAdminAdded function may not be deployed.)'
+            : 'Your account doesn’t have admin access.'}
+        </p>
         <Link to='/dashboard' style={C.btn}>Back to dashboard</Link>
       </div>
     );
@@ -485,7 +561,17 @@ const AdminPage = () => {
 };
 
 const AdminInner = ({ me, tab, setTab, navigate }) => {
-  const [users, usersLoaded] = useCollection('users');
+  const [rawUsers, usersLoaded] = useCollection('users');
+  const [userProgress] = useCollection('userProgress');
+  const users = useMemo(() => {
+    const m = {};
+    userProgress.forEach((p) => { m[norm(p.id)] = p; });
+    return rawUsers.map((u) => {
+      const up = m[norm(u.email)];
+      const done = up && up.section && Array.isArray(up.section.completedModules) ? up.section.completedModules.length : Number(u.progress) || 0;
+      return { ...u, up, progress: done, walletAddress: (up && up.walletAddress) || u.walletAddress };
+    });
+  }, [rawUsers, userProgress]);
   const [requests] = useCollection('supportRequests', (r) => {
     if (r.status === 'open') toast.info(`🔔 New support request from ${r.name || r.email}: ${(r.message || '').slice(0, 60)}`, { autoClose: 8000 });
   });
@@ -502,14 +588,15 @@ const AdminInner = ({ me, tab, setTab, navigate }) => {
 
   const tabs = [
     ['overview', 'Overview'], ['users', `Users (${users.length})`], ['support', `Support${openCount ? ` 🔴${openCount}` : ''}`],
-    ['feedback', `Feedback (${feedback.length})`], ['ai', 'AI knowledge'], ['bot', 'Saved answers'], ['admins', 'Admins'],
+    ['feedback', `Feedback (${feedback.length})`], ['minting', 'Minting & LOTUS'], ['ai', 'AI knowledge'], ['bot', 'Saved answers'], ['admins', 'Admins'],
   ];
   return (
     <div style={C.page}>
-      <div className='flex flex-wrap items-center justify-between gap-2 px-4 py-3' style={{ backgroundColor: '#0c4a6e', color: '#fff' }}>
+      <div className='flex flex-wrap items-center justify-between gap-2 px-4 pb-3' style={{ backgroundColor: 'var(--qa-header)', color: '#fff', paddingTop: 'max(0.75rem, env(safe-area-inset-top))' }}>
         <h1 className='font-bold text-lg'>1Billion2Web3 · Admin</h1>
         <div className='flex items-center gap-2 text-sm'>
-          <span>{me}</span>
+          <span className='hidden sm:inline truncate max-w-[220px]'>{me}</span>
+          <ThemeToggle className='text-white' />
           <Link to='/dashboard' style={{ ...C.btnGhost, padding: '4px 10px' }}>Learner view</Link>
           <button type='button' style={{ ...C.btnGhost, padding: '4px 10px' }} onClick={() => signOut(auth).then(() => navigate('/'))}>Logout</button>
         </div>
@@ -525,6 +612,7 @@ const AdminInner = ({ me, tab, setTab, navigate }) => {
         {tab === 'users' && <Users users={users} />}
         {tab === 'support' && <Support requests={requests} />}
         {tab === 'feedback' && <Feedback feedback={feedback} />}
+        {tab === 'minting' && <Minting />}
         {tab === 'ai' && <AIKnowledge entries={knowledge} settingsDocs={botSettings} />}
         {tab === 'bot' && <BotAnswers faqs={faqs} />}
         {tab === 'admins' && <Admins admins={admins} me={me} />}
